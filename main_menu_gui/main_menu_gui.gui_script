@@ -1,0 +1,54 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	self.buttons =  { "start", "quit" }
+
+	
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed == true then
+		local x = action.x
+		local y = action.y
+
+		for i, n in ipairs(self.buttons) do
+			if gui.pick_node(gui.get_node(n .. "/button" ), x, y) then
+				self.pushed_button = n
+				if self.pushed_button == "quit" then
+					quit()
+					break
+				end
+				msg.post("/sound#click", "play_sound")
+				msg.post("/loader#proxy-" .. n , "load")
+			end
+		end
+	end	
+end
+
+function quit()
+	sys.exit(0)
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

@@ -1,0 +1,51 @@
+script: "/main_menu_gui/main_menu_gui.gui_script"
+nodes {
+  position {
+    x: 313.0
+    y: 675.0
+  }
+  type: TYPE_TEMPLATE
+  id: "start"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "start/button"
+  parent: "start"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Start"
+  id: "start/text"
+  parent: "start"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 314.0
+    y: 585.0
+  }
+  type: TYPE_TEMPLATE
+  id: "quit"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "quit/button"
+  parent: "quit"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Quit"
+  id: "quit/text"
+  parent: "quit"
+  overridden_fields: 8
+  template_node_child: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
