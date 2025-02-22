@@ -39,3 +39,7 @@ luac.out
 *.x86_64
 *.hex
 
+#defold editor
+/.editor_settings
+/.internal
+/build
