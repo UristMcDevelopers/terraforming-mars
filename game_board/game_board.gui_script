@@ -1,8 +1,7 @@
 function init(self)
-	print("asd")
 	self.buttons = {"skip_turn", "action"}
 	msg.post(".", "acquire_input_focus")
-	self.player_list = { { end_his_round = false, avalibale_actions = {false, false} } }
+	self.player_list = { { end_his_round = false, avalibale_actions = {true, true} } }
 	self.current_player_index = 1;
 end
 
@@ -12,24 +11,25 @@ function on_input(self, action_id, action)
 			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
 				print("button pressed ", button_name)
 				if button_name == ("action") then 
-					local player = self.player_list[self.current_player_index]
-					local player_actions = self.player_list[self.current_player_index]["avalibale_actions"]
-					if player_actions[0] == false and player_actions[1] == false then
-						self.player_list[self.current_player_index]["end_his_round"] = 1
-					end
-					
-					for i, player in ipairs(self.player_list) do 
-						for name, propertie in pairs(player) do 
-							print(name)
-							print(propertie)
-						end
-						print("actions: ")
-						for i, action in ipairs(player["avalibale_actions"]) do
-							print(action)
-						end 
-					end
+					update_current_player_actions(self)
 				end
 			end
 		end
 	end	
 end
+
+function update_current_player_actions(self)
+	local player = self.player_list[self.current_player_index]
+	local player_actions = self.player_list[self.current_player_index]["avalibale_actions"]
+
+	-- Player has only 2 actions per turn
+	-- if player skips turn without doing at least 1 action, he will skip turns until next round
+	if player_actions[1] == false and player_actions[2] == false then
+		error("player played action but he doesn't have one")
+	elseif player_actions[1] == false and player_actions[2] == true then
+		self.player_list[self.current_player_index]["avalibale_actions"][2] = false
+	else 
+		self.player_list[self.current_player_index]["avalibale_actions"][1] = false
+	end
+end
+
