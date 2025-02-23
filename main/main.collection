@@ -1,6 +1,6 @@
 name: "main"
 collection_instances {
-  id: "main_menu_gui"
+  id: "main_menu"
   collection: "/main_menu_gui/main_menu_gui.collection"
 }
 scale_along_z: 0

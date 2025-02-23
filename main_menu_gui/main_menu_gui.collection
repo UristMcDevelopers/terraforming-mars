@@ -1,10 +1,29 @@
-name: "main_menu_gui"
+name: "main_menu_collection"
 scale_along_z: 0
 embedded_instances {
   id: "main_menu"
   data: "components {\n"
   "  id: \"main_menu\"\n"
-  "  component: \"/main_menu_gui/main_menu.gui\"\n"
+  "  component: \"/main_menu_gui/main_menu_gui.gui\"\n"
   "}\n"
   ""
+}
+embedded_instances {
+  id: "proxy_loader"
+  data: "components {\n"
+  "  id: \"loader\"\n"
+  "  component: \"/main_menu_gui/loader.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"start\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/game_board/game_board.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  scale3 {
+    x: 0.659334
+    y: 0.659334
+    z: 0.659334
+  }
 }

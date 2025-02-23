@@ -1,0 +1,51 @@
+script: "/game_board/game_board.gui_script"
+nodes {
+  position {
+    x: 478.0
+    y: 1044.0
+  }
+  type: TYPE_TEMPLATE
+  id: "skip_turn"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "skip_turn/button"
+  parent: "skip_turn"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "skip turn"
+  id: "skip_turn/text"
+  parent: "skip_turn"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 479.0
+    y: 964.0
+  }
+  type: TYPE_TEMPLATE
+  id: "action"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "action/button"
+  parent: "action"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "do action"
+  id: "action/text"
+  parent: "action"
+  overridden_fields: 8
+  template_node_child: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

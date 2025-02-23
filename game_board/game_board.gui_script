@@ -1,0 +1,35 @@
+function init(self)
+	print("asd")
+	self.buttons = {"skip_turn", "action"}
+	msg.post(".", "acquire_input_focus")
+	self.player_list = { { end_his_round = false, avalibale_actions = {false, false} } }
+	self.current_player_index = 1;
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed == true then
+		for i, button_name in ipairs(self.buttons) do
+			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
+				print("button pressed ", button_name)
+				if button_name == ("action") then 
+					local player = self.player_list[self.current_player_index]
+					local player_actions = self.player_list[self.current_player_index]["avalibale_actions"]
+					if player_actions[0] == false and player_actions[1] == false then
+						self.player_list[self.current_player_index]["end_his_round"] = 1
+					end
+					
+					for i, player in ipairs(self.player_list) do 
+						for name, propertie in pairs(player) do 
+							print(name)
+							print(propertie)
+						end
+						print("actions: ")
+						for i, action in ipairs(player["avalibale_actions"]) do
+							print(action)
+						end 
+					end
+				end
+			end
+		end
+	end	
+end

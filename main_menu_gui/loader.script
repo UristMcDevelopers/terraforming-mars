@@ -1,0 +1,6 @@
+function init(self)
+	print("loader is loaded")
+	-- The loader game object that holds the collection proxy needs to acquire input
+	-- for objects in the loaded collection to receive input.
+	msg.post(".", "acquire_input_focus")
+end
