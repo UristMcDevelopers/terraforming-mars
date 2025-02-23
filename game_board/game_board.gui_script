@@ -1,24 +1,12 @@
 function init(self)
 	self.buttons = {"skip_turn", "action"}
 	msg.post(".", "acquire_input_focus")
+	self.round = 1
 	self.player_list = { { end_his_round = false, avalibale_actions = {true, true} } }
 	self.current_player_index = 1;
 end
 
-function on_input(self, action_id, action)
-	if action_id == hash("touch") and action.pressed == true then
-		for i, button_name in ipairs(self.buttons) do
-			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
-				print("button pressed ", button_name)
-				if button_name == ("action") then 
-					update_current_player_actions(self)
-				end
-			end
-		end
-	end	
-end
-
-function update_current_player_actions(self)
+local function update_current_player_actions(self)
 	local player = self.player_list[self.current_player_index]
 	local player_actions = self.player_list[self.current_player_index]["avalibale_actions"]
 
@@ -31,5 +19,42 @@ function update_current_player_actions(self)
 	else 
 		self.player_list[self.current_player_index]["avalibale_actions"][1] = false
 	end
+end
+
+local function reset_current_player_actions(self)
+	self.player_list[self.current_player_index]["avalibale_actions"][1] = true
+	self.player_list[self.current_player_index]["avalibale_actions"][2] = true
+end
+
+local function choose_next_player(self)
+	self.current_player_index = self.current_player_index + 1
+	local player = self.player_list[self.current_player_index]
+	if player == nil then
+		self.current_player_index = 1
+	end
+end
+
+local function next_round(self)
+	self.round = self.round + 1
+	print("round " .. self.round)
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed == true then
+		for i, button_name in ipairs(self.buttons) do
+			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
+				print("button pressed ", button_name)
+				if button_name == ("action") then 
+					update_current_player_actions(self)
+				elseif button_name == ("skip_turn") then
+					reset_current_player_actions(self)
+					choose_next_player(self)
+					if self.current_player_index == 1 then
+						next_round(self)
+					end
+				end
+			end
+		end
+	end	
 end
 
