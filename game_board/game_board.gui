@@ -29,21 +29,21 @@ nodes {
     y: 964.0
   }
   type: TYPE_TEMPLATE
-  id: "action"
+  id: "spend_action"
   inherit_alpha: true
   template: "/main_menu_gui/button.gui"
 }
 nodes {
   type: TYPE_BOX
-  id: "action/button"
-  parent: "action"
+  id: "spend_action/button"
+  parent: "spend_action"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   text: "do action"
-  id: "action/text"
-  parent: "action"
+  id: "spend_action/text"
+  parent: "spend_action"
   overridden_fields: 8
   template_node_child: true
 }
