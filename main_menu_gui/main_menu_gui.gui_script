@@ -2,7 +2,6 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	self.buttons =  { "start", "quit" }
-
 	
 end
 
