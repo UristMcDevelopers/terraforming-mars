@@ -4,24 +4,6 @@ fonts {
   font: "/builtins/fonts/default.font"
 }
 nodes {
-  size {
-    x: 640.0
-    y: 1136.0
-  }
-  color {
-    x: 0.702
-    y: 0.102
-    z: 0.102
-  }
-  type: TYPE_BOX
-  id: "box"
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_SW
-  inherit_alpha: true
-  alpha: 0.1
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
   position {
     x: 320.0
     y: 1136.0
@@ -33,7 +15,6 @@ nodes {
   type: TYPE_BOX
   id: "content"
   pivot: PIVOT_N
-  parent: "box"
 }
 nodes {
   position {
