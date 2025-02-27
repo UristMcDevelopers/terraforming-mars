@@ -1,0 +1,79 @@
+script: "/planet_global_parameters/planet_global_parameters.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 165.0
+    y: 1043.0
+  }
+  size {
+    x: 300.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -100.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "0"
+  font: "default"
+  id: "oxygen"
+  xanchor: XANCHOR_LEFT
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "-30"
+  font: "default"
+  id: "temperature"
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 100.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "9"
+  font: "default"
+  id: "oceans"
+  parent: "box"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

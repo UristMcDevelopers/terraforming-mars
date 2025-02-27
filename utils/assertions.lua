@@ -10,5 +10,10 @@ function M.type_number(value)
 	assert(value_type == "number", "expected number got " .. value_type)
 end
 
+function M.positive_number(value)
+	M.assert(value)
+	M.type_number(value)
+	assert(value > 0, "expected positive number")
+end
 
 return M

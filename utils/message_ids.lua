@@ -7,6 +7,11 @@ M.RECOURCE_LEAF = "leaf"
 M.RECOURCE_ELECTRICITY = "electricity"
 M.RECOURCE_HEAT = "heat"
 
+M.PLANET_OXYGEN = "oxygen"
+M.PLANET_TEMPERATURE = "temperature"
+M.PLANET_OCEANS = "oceans"
+M.PLANET_PARAMETER_CHANGED = "planet_parameter_changed"
+
 M.PLAYER_INCOME_CHANGED = "income_changed"
 M.PLAYER_RECOURCES_CHANGED = "recources_changed"
 M.PLAYER_SPEND_ACTION = "spend_action"

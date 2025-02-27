@@ -1,0 +1,27 @@
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+function init(self)
+	self.nodes = { [C.PLANET_OXYGEN] = 0, [C.PLANET_TEMPERATURE] = -30, [C.PLANET_OCEANS] = 0}
+end
+
+local function update_ui(self)
+	for key, value in pairs(self.nodes) do
+		gui.set_text(gui.get_node(key), value)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLANET_PARAMETER_CHANGED) then
+		print(C.PLANET_PARAMETER_CHANGED .. " gui event handlig")
+		for key, value in pairs(message) do
+			ASSERTS.positive_number(value)
+			assert(self.nodes[key], "unexpected planet parameter " .. key)
+			if key == C.PLANET_TEMPERATURE then
+				assert(value % 2 == 0, "unexpected temperature change (always should be even number")
+			end
+			self.nodes[key] = self.nodes[key] + value
+		end
+		update_ui(self)
+	end
+end
