@@ -47,6 +47,7 @@ function on_input(self, action_id, action)
 			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
 				print("button pressed ", button_name)
 				if button_name == (C.PLAYER_SPEND_ACTION) then
+					msg.post("#top_bar", C.PLAYER_INCOME_CHANGED, {[C.RECOURCE_GOLD] = 2} );
 					update_current_player_actions(self)
 				elseif button_name == (C.PLAYER_SKIP_TURN) then
 					reset_current_player_actions(self)

@@ -8,9 +8,15 @@ local ASSERT = require "utils.assertions"
 
 
 local function update_ui(self)
-	for _, key in ipairs(self.nodes) do
-		gui.set_text(gui.get_node(key), string.format('%d(+%d)', self.recources[key], self.income[key]))
+	for _, node_name in ipairs(self.nodes) do
+		gui.set_text(gui.get_node(node_name), string.format('%d(+%d)', self.recources[node_name], self.income[node_name]))
 	end
+end
+
+local function update_values_in_map(map, key, value)
+	ASSERT.type_number(value)
+	assert(map[key], "unsupported key" .. key)
+	map[key] = map[key] + value
 end
 
 
@@ -35,18 +41,20 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash(C.PLAYER_INCOME_FULL) then
+	if message_id == hash(C.PLAYER_INCOME_CHANGED) then
 		print("income update")
 		for key, value in pairs(message) do
-			ASSERT.type_number(value)
-			self.income[key] = self.income[key] + value
+			update_values_in_map(self.income, key, value)
 		end
 		update_ui(self)
-	elseif message_id == hash(C.PLAYER_RECOURCES_FULL) then
+	elseif message_id == hash(C.PLAYER_RECOURCES_CHANGED) then
 		print("recources update")
 		for key, value in pairs(message) do
-			self.recources[key] = self.recources[key] + value
+			update_values_in_map(self.recources, key, value)
 		end
 		update_ui(self)
 	end
 end
+
+
+
