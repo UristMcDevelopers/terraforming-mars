@@ -1,5 +1,7 @@
+local C = require "utils.message_ids"
+
 function init(self)
-	self.buttons = {"skip_turn", "action"}
+	self.buttons = {C.PLAYER_SKIP_TURN, C.PLAYER_SPEND_ACTION}
 	msg.post(".", "acquire_input_focus")
 	self.round = 1
 	self.player_list = { { end_his_round = false, avalibale_actions = {true, true} } }
@@ -44,9 +46,9 @@ function on_input(self, action_id, action)
 		for i, button_name in ipairs(self.buttons) do
 			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
 				print("button pressed ", button_name)
-				if button_name == ("action") then 
+				if button_name == (C.PLAYER_SPEND_ACTION) then
 					update_current_player_actions(self)
-				elseif button_name == ("skip_turn") then
+				elseif button_name == (C.PLAYER_SKIP_TURN) then
 					reset_current_player_actions(self)
 					choose_next_player(self)
 					if self.current_player_index == 1 then

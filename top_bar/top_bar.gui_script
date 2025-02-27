@@ -1,0 +1,52 @@
+--TODO add dynamic text placement
+--TODO add on_touch or drug_down event. Show all players income and values 
+--  how to implement: 1. increase hight or create duplicates of box/text above 2. move gui down to show full table
+
+
+local C = require "utils.message_ids"
+local ASSERT = require "utils.assertions"
+
+
+local function update_ui(self)
+	for _, key in ipairs(self.nodes) do
+		gui.set_text(gui.get_node(key), string.format('%d(+%d)', self.recources[key], self.income[key]))
+	end
+end
+
+
+function init(self)
+	self.nodes = { C.RECOURCE_GOLD, C.RECOURCE_STEEL, C.RECOURCE_TITANIUM, C.RECOURCE_LEAF, C.RECOURCE_ELECTRICITY, C.RECOURCE_HEAT }
+	self.recources = {
+		[C.RECOURCE_GOLD] = 0,
+		[C.RECOURCE_STEEL] = 0,
+		[C.RECOURCE_TITANIUM] = 0,
+		[C.RECOURCE_LEAF] = 0,
+		[C.RECOURCE_ELECTRICITY] = 0,
+		[C.RECOURCE_HEAT] = 0,
+	}
+	self.income = {
+		[C.RECOURCE_GOLD] = 0,
+		[C.RECOURCE_STEEL] = 0,
+		[C.RECOURCE_TITANIUM] = 0,
+		[C.RECOURCE_LEAF] = 0,
+		[C.RECOURCE_ELECTRICITY] = 0,
+		[C.RECOURCE_HEAT] = 0,
+	}
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLAYER_INCOME_FULL) then
+		print("income update")
+		for key, value in pairs(message) do
+			ASSERT.type_number(value)
+			self.income[key] = self.income[key] + value
+		end
+		update_ui(self)
+	elseif message_id == hash(C.PLAYER_RECOURCES_FULL) then
+		print("recources update")
+		for key, value in pairs(message) do
+			self.recources[key] = self.recources[key] + value
+		end
+		update_ui(self)
+	end
+end
