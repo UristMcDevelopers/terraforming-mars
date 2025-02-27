@@ -10,5 +10,9 @@ embedded_instances {
   "  id: \"top_bar\"\n"
   "  component: \"/top_bar/top_bar.gui\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"planet_global_parameters\"\n"
+  "  component: \"/planet_global_parameters/planet_global_parameters.gui\"\n"
+  "}\n"
   ""
 }
