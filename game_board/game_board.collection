@@ -14,5 +14,13 @@ embedded_instances {
   "  id: \"planet_global_parameters\"\n"
   "  component: \"/planet_global_parameters/planet_global_parameters.gui\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"terrafom_rating\"\n"
+  "  component: \"/terrafom_rating/terrafom_rating.gui\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"milestones\"\n"
+  "  component: \"/milestones/milestones.gui\"\n"
+  "}\n"
   ""
 }

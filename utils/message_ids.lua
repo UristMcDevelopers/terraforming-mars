@@ -14,8 +14,21 @@ M.PLANET_PARAMETER_CHANGED = "planet_parameter_changed"
 
 M.PLAYER_INCOME_CHANGED = "income_changed"
 M.PLAYER_RECOURCES_CHANGED = "recources_changed"
+M.PLAYER_RATING_CHANGED = "rating_changed"
 M.PLAYER_SPEND_ACTION = "spend_action"
 M.PLAYER_SKIP_TURN = "skip_turn"
+
+M.TAKE_MILESTONE_OR_AWARD = "take_milestone_or_award"
+M.MILESTONE_TERRAFORMER = "milestone_terraformer"
+M.MILESTONE_MAYOR = "milestone_mayor"
+M.MILESTONE_GARDENER = "milestone_gardener"
+M.MILESTONE_BUILDER = "milestone_builder"
+M.MILESTONE_PLANNER = "milestone_planner"
+M.AWARD_LANDLORD = "award_landlord"
+M.AWARD_BANKER = "award_banker"
+M.AWARD_SCIENTIST = "award_scientist"
+M.AWARD_THERMALIST = "award_thermalist"
+M.AWARD_MINER = "award_miner"
 
 
 return M
