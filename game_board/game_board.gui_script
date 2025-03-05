@@ -47,8 +47,11 @@ function on_input(self, action_id, action)
 			if gui.pick_node(gui.get_node(button_name .. "/button" ), action.x, action.y) then
 				print("button pressed ", button_name)
 				if button_name == (C.PLAYER_SPEND_ACTION) then
+					--TEST/DEBUG events to guis
 					msg.post("#top_bar", C.PLAYER_INCOME_CHANGED, {[C.RECOURCE_GOLD] = 2} );
 					msg.post("#planet_global_parameters", C.PLANET_PARAMETER_CHANGED, {[C.PLANET_OCEANS] = 1, [C.PLANET_TEMPERATURE] = 2} );
+					msg.post("#terrafom_rating", C.PLAYER_RATING_CHANGED, {	player_id = 1, rating_changed = 1} );
+					msg.post("#milestones", C.TAKE_MILESTONE_OR_AWARD, { name = C.MILESTONE_TERRAFORMER, player_id = 1 } );
 					update_current_player_actions(self)
 				elseif button_name == (C.PLAYER_SKIP_TURN) then
 					reset_current_player_actions(self)

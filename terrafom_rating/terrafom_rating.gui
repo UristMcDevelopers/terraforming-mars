@@ -1,0 +1,177 @@
+script: "/terrafom_rating/terrafom_rating.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    y: 850.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  id: "player_box1"
+  pivot: PIVOT_NW
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 37.5
+    y: -37.5
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "20\n"
+  ""
+  font: "default"
+  id: "player1"
+  parent: "player_box1"
+}
+nodes {
+  position {
+    y: 775.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  id: "player_box2"
+  pivot: PIVOT_NW
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 37.5
+    y: -37.5
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "20\n"
+  ""
+  font: "default"
+  id: "player2"
+  parent: "player_box2"
+}
+nodes {
+  position {
+    y: 700.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  id: "player_box3"
+  pivot: PIVOT_NW
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 37.5
+    y: -37.5
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "20\n"
+  ""
+  font: "default"
+  id: "player3"
+  parent: "player_box3"
+}
+nodes {
+  position {
+    y: 625.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  id: "player_box4"
+  pivot: PIVOT_NW
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 37.5
+    y: -37.5
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "20\n"
+  ""
+  font: "default"
+  id: "player4"
+  parent: "player_box4"
+}
+nodes {
+  position {
+    y: 550.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  id: "player_box5"
+  pivot: PIVOT_NW
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 37.5
+    y: -37.5
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "20\n"
+  ""
+  font: "default"
+  id: "player5"
+  parent: "player_box5"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
