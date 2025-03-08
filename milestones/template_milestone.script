@@ -1,0 +1,31 @@
+local C = require "utils.message_ids"
+
+go.property("image_name", hash(""))
+
+-- if you wanna access it's later from outside, you must declare property here even if it's not gonna be used in factory
+go.property("height", 0)
+go.property("width", 0)
+
+
+function init(self)
+	self.height = go.get("#image", "size").y + go.get("#name_box", "size").y
+	self.width = go.get("#image", "size").x
+	sprite.play_flipbook("#image", self.image_name)
+	msg.post("#white_box", "disable")
+	msg.post("#player_id", "disable")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
+		msg.post("#white_box", "enable")
+		msg.post("#player_id", "enable")
+		label.set_text("#player_id", "P" .. message.player_id)
+	end
+	if message_id == hash("set_display_name") then
+		label.set_text("#name", message.display_name)
+	end
+end
+
+function on_input(self, action_id, action)
+
+end

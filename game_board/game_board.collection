@@ -1,7 +1,64 @@
 name: "game_board"
+instances {
+  id: "terraform_rating_bar"
+  prototype: "/terrafom_rating/terraform_rating_bar.go"
+  position {
+    y: 1000.0
+  }
+}
+instances {
+  id: "planet_parameters"
+  prototype: "/planet_parameters/planet_parameters.go"
+  position {
+    y: 1074.0
+  }
+  scale3 {
+    x: 0.125
+    y: 0.125
+  }
+}
+instances {
+  id: "skip_button"
+  prototype: "/skip_button/skip_button.go"
+  position {
+    x: 484.0
+    y: 1012.0
+  }
+  component_properties {
+    id: "skip_button"
+    properties {
+      id: "reciver_url"
+      value: "game_board:/go#game_board"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 0.25
+    y: 0.25
+  }
+}
+instances {
+  id: "milistones_awards"
+  prototype: "/milestones/milistones_awards.go"
+  position {
+    y: 300.0
+  }
+  component_properties {
+    id: "milestones_awards"
+    properties {
+      id: "reciever_url"
+      value: "game_board:/go#game_board"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "go"
+  children: "milistones_awards"
+  children: "planet_parameters"
+  children: "skip_button"
+  children: "terraform_rating_bar"
   data: "components {\n"
   "  id: \"game_board\"\n"
   "  component: \"/game_board/game_board.gui\"\n"
@@ -9,18 +66,6 @@ embedded_instances {
   "components {\n"
   "  id: \"top_bar\"\n"
   "  component: \"/top_bar/top_bar.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"planet_global_parameters\"\n"
-  "  component: \"/planet_global_parameters/planet_global_parameters.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"terrafom_rating\"\n"
-  "  component: \"/terrafom_rating/terrafom_rating.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"milestones\"\n"
-  "  component: \"/milestones/milestones.gui\"\n"
   "}\n"
   ""
 }

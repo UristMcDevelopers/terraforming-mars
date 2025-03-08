@@ -1,0 +1,47 @@
+local C = require "utils.message_ids"
+
+local players_rating_list = {}
+
+function init(self)
+
+end
+
+local function new_postition_based_on_index(scale)
+	local list_size = 0
+	local hight = nil
+	
+	for k, v in pairs(players_rating_list) do
+		list_size = list_size + 1
+		if hight == nil then
+			local instance_url = msg.url(nil, v, "terrafom_rating")
+			hight = go.get(instance_url, "default_hight")
+			print(hight)
+		end
+	end
+
+	if list_size == 0 then
+		return go.get_position()
+	else
+		local y = go.get_position().y
+		return vmath.vector3(0, y - list_size * hight * scale, 0)
+	end
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLAYER_TERRAFORM_RATING) then
+		local player_id = message.player_id
+		local tr = message.terraform_rating
+		local player_node_id = players_rating_list[player_id]
+		
+		if player_node_id == nil then
+			--scale is set to 0.1 because initial hight is 512.
+			-- TODO workaround whould be create object outside of screen, check it's hight and based on this set scale, then move to screen
+			local scale = 0.1
+			local node_id = factory.create("#rating_factory", new_postition_based_on_index(scale), nil, {player_id = player_id, value = tr}, scale) 
+			players_rating_list[player_id] = node_id
+		else
+			msg.post(player_node_id, C.PLAYER_TERRAFORM_RATING, message)
+		end
+	end
+end

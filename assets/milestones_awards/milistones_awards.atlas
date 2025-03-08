@@ -1,0 +1,34 @@
+images {
+  image: "/assets/milestones_awards/Banker.png"
+}
+images {
+  image: "/assets/milestones_awards/Builder.png"
+}
+images {
+  image: "/assets/milestones_awards/Gardener.png"
+}
+images {
+  image: "/assets/milestones_awards/Landlord.png"
+}
+images {
+  image: "/assets/milestones_awards/Mayor.png"
+}
+images {
+  image: "/assets/milestones_awards/Miner.png"
+}
+images {
+  image: "/assets/milestones_awards/Planner.png"
+}
+images {
+  image: "/assets/milestones_awards/Scientist.png"
+}
+images {
+  image: "/assets/milestones_awards/Terraformer.png"
+}
+images {
+  image: "/assets/milestones_awards/Thermalist.png"
+}
+images {
+  image: "/assets/milestones_awards/White.png"
+}
+extrude_borders: 2

@@ -1,0 +1,83 @@
+local C = require "utils.message_ids"
+
+local IMAGE_TERRAFORMER = "Terraformer"
+local IMAGE_MAYOR = "Mayor"
+local IMAGE_GARDENER = "Gardener"
+local IMAGE_BUILDER = "Builder"
+local IMAGE_PLANNER = "Planner"
+
+local IMAGE_LANDLORD = "Landlord"
+local IMAGE_BANKER = "Banker"
+local IMAGE_SCIENTIST = "Scientist"
+local IMAGE_THERMALIST = "Thermalist"
+local IMAGE_MINER = "Miner"
+
+local width_of_single_node = 0
+local height_of_single_node = 0
+
+go.property("reciever_url", hash(""))
+
+local function init_width_and_height(node_script_url)
+	if width_of_single_node == 0 then
+		width_of_single_node = go.get(node_script_url, "width")
+	end
+	if height_of_single_node == 0 then
+		height_of_single_node = go.get(node_script_url, "height")
+	end
+end
+
+local function create(table, initial_position)
+	local scale = 0.125
+	for index, milestone_award in ipairs(table) do
+		local node_id = factory.create("#template_factory", nil, nil, { image_name = hash(milestone_award.image_name)}, scale)
+		local node_script_url = msg.url(nil, node_id, "template_milestone")
+		init_width_and_height(node_script_url)
+
+		go.set_position(vmath.vector3(initial_position.x + (index - 1) * width_of_single_node * scale, initial_position.y, 0), node_id)
+		milestone_award.node = node_id
+		msg.post(node_id, "set_display_name", {display_name = milestone_award.display_name})
+	end
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.milestone_title = {node = nil} 
+	self.milestones = { 
+		{ key = C.MILESTONE_TERRAFORMER, display_name = IMAGE_TERRAFORMER, image_name = IMAGE_TERRAFORMER, node = nil, is_taken = false },
+		{ key = C.MILESTONE_MAYOR, display_name = IMAGE_MAYOR, image_name = IMAGE_MAYOR, node = nil, is_taken = false },
+		{ key = C.MILESTONE_GARDENER, display_name = IMAGE_GARDENER, image_name = IMAGE_GARDENER, node = nil, is_taken = false },
+		{ key = C.MILESTONE_BUILDER, display_name = IMAGE_BUILDER, image_name = IMAGE_BUILDER, node = nil, is_taken = false },
+		{ key = C.MILESTONE_PLANNER, display_name = IMAGE_PLANNER, image_name = IMAGE_PLANNER, node = nil, is_taken = false },
+	}
+	self.awards = { 
+		{ key = C.AWARD_LANDLORD, display_name = IMAGE_LANDLORD, image_name = IMAGE_LANDLORD, node = nil, is_taken = false },
+		{ key = C.AWARD_BANKER, display_name = IMAGE_BANKER, image_name = IMAGE_BANKER, node = nil, is_taken = false },
+		{ key = C.AWARD_SCIENTIST, display_name = IMAGE_SCIENTIST, image_name = IMAGE_SCIENTIST, node = nil, is_taken = false },
+		{ key = C.AWARD_THERMALIST, display_name = IMAGE_THERMALIST, image_name = IMAGE_THERMALIST, node = nil, is_taken = false },
+		{ key = C.AWARD_MINER, display_name = IMAGE_MINER, image_name = IMAGE_MINER, node = nil, is_taken = false },
+	}
+
+	local position = go.get_position()
+	create(self.milestones, position) --
+	local awards_position = vmath.vector3(position.x, position.y - height_of_single_node * 0.125, 0)
+	create(self.awards, awards_position)
+	
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.REGESTRY) then
+		self.reciever_url = sender
+	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
+		for i, milestones in ipairs(self.milestones) do
+			if milestones.key == message.name then
+				milestones.is_taken = true
+				msg.post(milestones.node, C.TAKE_MILESTONE_OR_AWARD, message)
+			end
+		end
+	end
+end
+
+function on_input(self, action_id, action)
+
+end
