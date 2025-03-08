@@ -1,10 +1,9 @@
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
 go.property("oxygen", 0)
 go.property("temperature", -30)
 go.property("oceans", 0)
-go.property("default_hight", 0)
-
-local C = require "utils.message_ids"
-local ASSERTS = require "utils.assertions"
 
 local function update_ui(self)
 	label.set_text("#oxygen_label", self.oxygen)
@@ -12,27 +11,22 @@ local function update_ui(self)
 	label.set_text("#ocean_label", self.oceans)
 end
 
-local function validate_and_set(self, message) 
-	local oxygen =  message[C.PLANET_OXYGEN]
-	local temperature =  message[C.PLANET_TEMPERATURE]
-	local oceans =  message[C.PLANET_OCEANS]
-
-	if oxygen ~= nil then
-		ASSERTS.type_number(oxygen)
-		self.oxygen = oxygen
-	end
-	if temperature ~= nil then
-		ASSERTS.type_number(temperature)
-		self.temperature = temperature
-	end
-	if oceans ~= nil then
-		ASSERTS.type_number(oceans)
-		self.oceans = oceans
+local function return_new_or_default(new, default)
+	if new ~= nil then
+		ASSERTS.type_number(new)
+		return new
+	else
+		return default
 	end
 end
 
+local function validate_and_set(self, message) 
+	self.oxygen = return_new_or_default(message[C.PLANET_OXYGEN], self.oxygen)
+	self.oceans = return_new_or_default(message[C.PLANET_OCEANS], self.oceans)
+	self.temperature = return_new_or_default(message[C.PLANET_TEMPERATURE], self.temperature)
+end
+
 function init(self)
-	self.default_hight = go.get("#oxygen_icon", "size").y
 	update_ui(self)
 end
 
