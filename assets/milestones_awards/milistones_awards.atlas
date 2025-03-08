@@ -29,6 +29,6 @@ images {
   image: "/assets/milestones_awards/Thermalist.png"
 }
 images {
-  image: "/assets/milestones_awards/White.png"
+  image: "/assets/global/White.png"
 }
 extrude_borders: 2
