@@ -1,29 +1,32 @@
 local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+go.property("wanted_sigle_rating_hight", 50)
 
 local players_rating_list = {}
+local single_rating_hight = 0
+local rating_hight_scale = 1
 
 function init(self)
-
+	local dummy_id = factory.create("#rating_factory", vmath.vector3(), nil, {player_id = 0, value = 0}, 0) 
+	local dummy_url = msg.url(nil, dummy_id, "terrafom_rating")
+	single_rating_hight = go.get(dummy_url, "hight")
+	rating_hight_scale = self.wanted_sigle_rating_hight / single_rating_hight 
+	print("single_rating_hight ", single_rating_hight)
+	print("rating_hight_scale ", rating_hight_scale)
 end
 
-local function new_postition_based_on_index(scale)
+local function new_postition_based_on_index()
 	local list_size = 0
-	local hight = nil
-	
 	for k, v in pairs(players_rating_list) do
 		list_size = list_size + 1
-		if hight == nil then
-			local instance_url = msg.url(nil, v, "terrafom_rating")
-			hight = go.get(instance_url, "default_hight")
-			print(hight)
-		end
 	end
 
 	if list_size == 0 then
 		return go.get_position()
 	else
 		local y = go.get_position().y
-		return vmath.vector3(0, y - list_size * hight * scale, 0)
+		return vmath.vector3(0, y - list_size * single_rating_hight * rating_hight_scale, 0)
 	end
 end
 
@@ -33,15 +36,14 @@ function on_message(self, message_id, message, sender)
 		local player_id = message.player_id
 		local tr = message.terraform_rating
 		local player_node_id = players_rating_list[player_id]
+
+		ASSERTS.positive_number(player_id) --i'm not sure if this check necessary
+		ASSERTS.positive_number(tr)
 		
 		if player_node_id == nil then
-			--scale is set to 0.1 because initial hight is 512.
-			-- TODO workaround whould be create object outside of screen, check it's hight and based on this set scale, then move to screen
-			local scale = 0.1
-			local node_id = factory.create("#rating_factory", new_postition_based_on_index(scale), nil, {player_id = player_id, value = tr}, scale) 
-			players_rating_list[player_id] = node_id
+			players_rating_list[player_id] = factory.create("#rating_factory", new_postition_based_on_index(), nil, {player_id = player_id, value = tr}, rating_hight_scale) 
 		else
-			msg.post(player_node_id, C.PLAYER_TERRAFORM_RATING, message)
+			msg.post(player_node_id, C.PLAYER_TERRAFORM_RATING, message) --updates node value
 		end
 	end
 end
