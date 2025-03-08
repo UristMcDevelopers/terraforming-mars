@@ -1,0 +1,28 @@
+go.property("value", 20)
+go.property("player_id", 1)
+go.property("default_hight", 0)
+
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+local function update_ui(self)
+	label.set_text("#box_label", self.value)
+	label.set_text("#tr_player_id", "P" .. self.player_id)
+end
+
+function init(self)
+	self.default_hight = go.get("#tr_icon", "size").y
+	update_ui(self)
+end
+ 
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLAYER_TERRAFORM_RATING) then
+		local value =  message.terraform_rating
+		local player_id =  message.player_id
+		ASSERTS.positive_number(value)
+		assert(player_id)
+		self.value = value
+		self.player_id = player_id
+		update_ui(self)
+	end
+end

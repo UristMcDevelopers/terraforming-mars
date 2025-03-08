@@ -1,0 +1,57 @@
+local C =require "utils.message_ids"
+
+go.property("reciver_url", msg.url())
+
+local SKIP_TURN = "skip_turn"
+local NEXT_ROUND = "next_round"
+local SKIP_TURN_SPRITE_URL = "#" .. SKIP_TURN
+local NEXT_ROUND_SPRITE_URL = "#" .. NEXT_ROUND
+
+local function update_ui(self)
+	if self.skip_turn_or_next_round == SKIP_TURN then
+		msg.post(SKIP_TURN_SPRITE_URL, "enable")
+		msg.post(NEXT_ROUND_SPRITE_URL, "disable")
+	else
+		msg.post(SKIP_TURN_SPRITE_URL, "disable")
+		msg.post(NEXT_ROUND_SPRITE_URL, "enable")
+	end
+end
+
+local function is_button_clicked(self, action)
+	local position = go.get_position()
+	return action.x > position.x 
+	and action.y > position.y 
+	and action.x < (position.x + self.width)
+	and action.x < (position.y + self.hight)
+end
+
+function init(self)
+	print("skip button init")
+	msg.post(".", "acquire_input_focus")
+	self.skip_turn_or_next_round = NEXT_ROUND
+	local size = go.get(SKIP_TURN_SPRITE_URL, "size")
+	local scale = go.get_scale()
+
+	self.hight = size.y * scale.y
+	self.width = size.x * scale.x
+	update_ui(self)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.SHOW_SKIP_TURN_BUTTON) then
+		self.skip_turn_or_next_round = SKIP_TURN
+		update_ui(self)
+	elseif message_id == hash(C.SHOW_NEXT_ROUND_BUTTON) then
+		self.skip_turn_or_next_round = NEXT_ROUND
+		update_ui(self)
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed == true then
+		if is_button_clicked(self, action) then
+			print("skip turn clicked, reciever " .. self.reciver_url)
+			msg.post(self.reciver_url, C.PLAYER_SKIP_TURN)
+		end
+	end
+end
