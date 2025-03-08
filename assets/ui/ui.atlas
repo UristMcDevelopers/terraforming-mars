@@ -1,0 +1,7 @@
+images {
+  image: "/assets/ui/Next_round2.png"
+}
+images {
+  image: "/assets/ui/Skip_turn.png"
+}
+extrude_borders: 2

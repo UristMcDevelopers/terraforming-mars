@@ -1,0 +1,38 @@
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+go.property("oxygen", 0)
+go.property("temperature", -30)
+go.property("oceans", 0)
+
+local function update_ui(self)
+	label.set_text("#oxygen_label", self.oxygen)
+	label.set_text("#temperature_label", self.temperature)
+	label.set_text("#ocean_label", self.oceans)
+end
+
+local function return_new_or_default(new, default)
+	if new ~= nil then
+		ASSERTS.type_number(new)
+		return new
+	else
+		return default
+	end
+end
+
+local function validate_and_set(self, message) 
+	self.oxygen = return_new_or_default(message[C.PLANET_OXYGEN], self.oxygen)
+	self.oceans = return_new_or_default(message[C.PLANET_OCEANS], self.oceans)
+	self.temperature = return_new_or_default(message[C.PLANET_TEMPERATURE], self.temperature)
+end
+
+function init(self)
+	update_ui(self)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLANET_PARAMETERS) then
+		validate_and_set(self, message)
+		update_ui(self)
+	end
+end

@@ -1,0 +1,48 @@
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+go.property("wanted_sigle_rating_hight", 50)
+
+local players_rating_list = {}
+local single_rating_height = 0
+local rating_hight_scale = 1
+
+function init(self)
+	local dummy_id = factory.create("#rating_factory", vmath.vector3(), nil, {player_id = 0, value = 0}, 0) 
+	local dummy_url = msg.url(nil, dummy_id, "terrafom_rating")
+	single_rating_height = go.get(dummy_url, "height")
+	go.delete(dummy_id, true)
+	rating_hight_scale = self.wanted_sigle_rating_hight / single_rating_height
+end
+
+local function new_postition_based_on_index()
+	local list_size = 0
+	for k, v in pairs(players_rating_list) do
+		list_size = list_size + 1
+	end
+
+	if list_size == 0 then
+		return go.get_position()
+	else
+		local y = go.get_position().y
+		return vmath.vector3(0, y - list_size * single_rating_height * rating_hight_scale, 0)
+	end
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLAYER_TERRAFORM_RATING) then
+		local player_id = message.player_id
+		local tr = message.terraform_rating
+		local player_node_id = players_rating_list[player_id]
+
+		ASSERTS.positive_number(player_id) --i'm not sure if this check necessary
+		ASSERTS.positive_number(tr)
+		
+		if player_node_id == nil then
+			players_rating_list[player_id] = factory.create("#rating_factory", new_postition_based_on_index(), nil, {player_id = player_id, value = tr}, rating_hight_scale) 
+		else
+			msg.post(player_node_id, C.PLAYER_TERRAFORM_RATING, message) --updates node value
+		end
+	end
+end

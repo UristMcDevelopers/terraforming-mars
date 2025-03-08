@@ -1,0 +1,16 @@
+images {
+  image: "/assets/global/Ocean.png"
+}
+images {
+  image: "/assets/global/Oxygen.png"
+}
+images {
+  image: "/assets/global/Temperature.png"
+}
+images {
+  image: "/assets/global/TerraformRating.png"
+}
+images {
+  image: "/assets/global/White.png"
+}
+extrude_borders: 2
