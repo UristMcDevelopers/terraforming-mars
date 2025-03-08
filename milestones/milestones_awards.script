@@ -14,34 +14,34 @@ local IMAGE_MINER = "Miner"
 
 local width_of_single_node = 0
 local height_of_single_node = 0
+local scale = 1
 
 go.property("reciever_url", hash(""))
+go.property("wanted_single_node_height", 80)
 
-local function init_width_and_height(node_script_url)
-	if width_of_single_node == 0 then
-		width_of_single_node = go.get(node_script_url, "width")
-	end
-	if height_of_single_node == 0 then
-		height_of_single_node = go.get(node_script_url, "height")
-	end
+local function init_width_height_scale(self)
+	local dummy_id = factory.create("#template_factory", nil, nil, { image_name = hash(IMAGE_TERRAFORMER)}, 0)
+	local node_script_url = msg.url(nil, dummy_id, "template_milestone")
+	width_of_single_node = go.get(node_script_url, "width")
+	height_of_single_node = go.get(node_script_url, "height")
+	scale = self.wanted_single_node_height / height_of_single_node
+	go.delete(dummy_id, true)
 end
 
 local function create(table, initial_position)
-	local scale = 0.125
-	for index, milestone_award in ipairs(table) do
-		local node_id = factory.create("#template_factory", nil, nil, { image_name = hash(milestone_award.image_name)}, scale)
-		local node_script_url = msg.url(nil, node_id, "template_milestone")
-		init_width_and_height(node_script_url)
 
-		go.set_position(vmath.vector3(initial_position.x + (index - 1) * width_of_single_node * scale, initial_position.y, 0), node_id)
+	for index, milestone_award in ipairs(table) do
+		local new_node_position = vmath.vector3(initial_position.x + (index - 1) * width_of_single_node * scale, initial_position.y, 0)
+		local node_id = factory.create("#template_factory", new_node_position, nil, { image_name = hash(milestone_award.image_name) }, scale)
 		milestone_award.node = node_id
-		msg.post(node_id, "set_display_name", {display_name = milestone_award.display_name})
+		msg.post(node_id, "set_display_name", { display_name = milestone_award.display_name })
 	end
 end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	self.milestone_title = {node = nil} 
+	init_width_height_scale(self)
+
 	self.milestones = { 
 		{ key = C.MILESTONE_TERRAFORMER, display_name = IMAGE_TERRAFORMER, image_name = IMAGE_TERRAFORMER, node = nil, is_taken = false },
 		{ key = C.MILESTONE_MAYOR, display_name = IMAGE_MAYOR, image_name = IMAGE_MAYOR, node = nil, is_taken = false },
@@ -58,8 +58,8 @@ function init(self)
 	}
 
 	local position = go.get_position()
-	create(self.milestones, position) --
-	local awards_position = vmath.vector3(position.x, position.y - height_of_single_node * 0.125, 0)
+	create(self.milestones, position)
+	local awards_position = vmath.vector3(position.x, position.y - height_of_single_node * scale, 0)
 	create(self.awards, awards_position)
 	
 end

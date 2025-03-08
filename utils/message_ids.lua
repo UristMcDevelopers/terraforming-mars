@@ -12,10 +12,9 @@ M.PLANET_TEMPERATURE = "temperature"
 M.PLANET_OCEANS = "oceans"
 M.PLANET_PARAMETERS = "planet_parameters"
 
-M.PLAYER_TERRAFORM_RATING = "PLAYER_TERRAFORM_RATING"
+M.PLAYER_TERRAFORM_RATING = "terraform_rating"
 M.PLAYER_INCOME_CHANGED = "income_changed"
 M.PLAYER_RECOURCES_CHANGED = "recources_changed"
-M.PLAYER_RATING_CHANGED = "rating_changed"
 M.PLAYER_SPEND_ACTION = "spend_action"
 M.PLAYER_SKIP_TURN = "skip_turn"
 

@@ -4,16 +4,15 @@ local ASSERTS = require "utils.assertions"
 go.property("wanted_sigle_rating_hight", 50)
 
 local players_rating_list = {}
-local single_rating_hight = 0
+local single_rating_height = 0
 local rating_hight_scale = 1
 
 function init(self)
 	local dummy_id = factory.create("#rating_factory", vmath.vector3(), nil, {player_id = 0, value = 0}, 0) 
 	local dummy_url = msg.url(nil, dummy_id, "terrafom_rating")
-	single_rating_hight = go.get(dummy_url, "hight")
-	rating_hight_scale = self.wanted_sigle_rating_hight / single_rating_hight 
-	print("single_rating_hight ", single_rating_hight)
-	print("rating_hight_scale ", rating_hight_scale)
+	single_rating_height = go.get(dummy_url, "height")
+	go.delete(dummy_id, true)
+	rating_hight_scale = self.wanted_sigle_rating_hight / single_rating_height
 end
 
 local function new_postition_based_on_index()
@@ -26,7 +25,7 @@ local function new_postition_based_on_index()
 		return go.get_position()
 	else
 		local y = go.get_position().y
-		return vmath.vector3(0, y - list_size * single_rating_hight * rating_hight_scale, 0)
+		return vmath.vector3(0, y - list_size * single_rating_height * rating_hight_scale, 0)
 	end
 end
 
