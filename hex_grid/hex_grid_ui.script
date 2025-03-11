@@ -1,0 +1,89 @@
+
+local C = require "utils.message_ids"
+local UTILS = require "utils.helpers"
+local ASSERTS = require "utils.assertions"
+local HEX_GRID_UTILS = require "hex_grid.hex_grid_utils"
+
+go.property("reciver_url", msg.url())
+	
+local grid_width = 9
+local grid_height = 9 
+local height = 512
+local size = height / 2
+local width = math.sqrt(3) * size
+local horizontal_spacing = width
+local vertical_spacing = 3/2 * size
+local scale = 0.125
+local position_for_node_x1_y1 = vmath.vector3()
+
+--starts with row1,column1
+local coordinate_table = {}
+-- row index to column values
+local excluded_coords = { [1] = {1,2,8,9}, [2] = {1,2,9}, [3] = {1,9}, [4] = {1}, [5] = {}, [6] = {1}, [7] = {1,9}, [8] = {2,9}, [9] = {2,8,9} }
+
+local function vector_by_row_column(row_index, column_index)
+	local center = go.get_position();
+	local center_node_column_index = 5
+	local center_node_row_index = 5
+	local node_x = center.x - ((center_node_column_index - column_index) * horizontal_spacing + HEX_GRID_UTILS.row_even_offset(row_index, horizontal_spacing)) * scale
+	local node_y = center.y - ( center_node_row_index - row_index) * vertical_spacing * scale
+	return vmath.vector3(node_x, node_y, 0)
+end
+
+local function data(column, row)
+	return {column = column, row = row}
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	for row_index = 1, grid_height do
+		local column_table = {}
+		for column_index = 1, grid_width do
+			if excluded_coords[row_index] ~= nil and UTILS.array_has_value(excluded_coords[row_index], column_index) then
+			else
+				local hex_id = factory.create("#hex_factory", vector_by_row_column(row_index, column_index), nil, data(column_index, row_index), scale)
+				column_table[column_index] = { hex_id = hex_id }
+			end
+		end
+		coordinate_table[row_index] = column_table
+	end
+	
+	position_for_node_x1_y1 = vector_by_row_column(1, 1)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.MAP_SET_TILE) then
+		ASSERTS.positive_number(message.row)
+		ASSERTS.positive_number(message.column)
+		assert(message.player_color)
+		assert(message.image_name)
+		
+		msg.post(
+			coordinate_table[message.row][message.column].hex_id, 
+			message_id, 
+			{ image_name = message.image_name, player_color = message.player_color }
+		)
+	elseif message_id == hash(C.MAP_SET_TILE_RECOURCES) then
+		msg.post(
+			coordinate_table[message.row][message.column].hex_id, 
+			message_id, 
+			message
+	)
+end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed then
+		local pos = position_for_node_x1_y1
+		local relative_x = action.x - pos.x
+		local relative_y = action.y - pos.y
+		
+		local column, row = HEX_GRID_UTILS.pixel_to_even_r_hex_coordinates(relative_x, relative_y, size * scale)
+		local hex_id = coordinate_table[row] 
+				and coordinate_table[row][column] 
+				and coordinate_table[row][column].hex_id
+		if hex_id ~= nil then
+			msg.post(self.reciver_url, C.PLAYER_MAP_CLICKED, {col = column, row = row})
+		end
+	end
+end

@@ -1,0 +1,19 @@
+images {
+  image: "/assets/tiles/City.png"
+}
+images {
+  image: "/assets/tiles/Empty.png"
+}
+images {
+  image: "/assets/tiles/Ocean.png"
+}
+images {
+  image: "/assets/tiles/Tree.png"
+}
+images {
+  image: "/assets/tiles/Empty_ocean.png"
+}
+images {
+  image: "/assets/tiles/Player_marker.png"
+}
+extrude_borders: 2

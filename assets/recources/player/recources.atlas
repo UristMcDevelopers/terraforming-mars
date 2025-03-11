@@ -1,0 +1,22 @@
+images {
+  image: "/assets/recources/player/Heat.png"
+}
+images {
+  image: "/assets/recources/player/MegaCredit.png"
+}
+images {
+  image: "/assets/recources/player/Plant.png"
+}
+images {
+  image: "/assets/recources/player/Power.png"
+}
+images {
+  image: "/assets/recources/player/Steel.png"
+}
+images {
+  image: "/assets/recources/player/Titanium.png"
+}
+images {
+  image: "/assets/recources/Draw.png"
+}
+extrude_borders: 2

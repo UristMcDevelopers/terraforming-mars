@@ -1,8 +1,8 @@
 script: "/game_board/game_board.gui_script"
 nodes {
   position {
-    x: 320.0
-    y: 758.0
+    x: 327.0
+    y: 1013.0
   }
   type: TYPE_TEMPLATE
   id: "spend_action"

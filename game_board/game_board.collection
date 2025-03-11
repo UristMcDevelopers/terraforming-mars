@@ -52,9 +52,26 @@ instances {
     }
   }
 }
+instances {
+  id: "hex_grid"
+  prototype: "/hex_grid/hex_grid.go"
+  position {
+    x: 323.0
+    y: 643.0
+  }
+  component_properties {
+    id: "hex_grid_ui"
+    properties {
+      id: "reciver_url"
+      value: "game_board:/go#game_board"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "go"
+  children: "hex_grid"
   children: "milistones_awards"
   children: "planet_parameters"
   children: "skip_button"
@@ -66,6 +83,22 @@ embedded_instances {
   "components {\n"
   "  id: \"top_bar\"\n"
   "  component: \"/top_bar/top_bar.gui\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"background\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/main.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 323.0\n"
+  "    y: 567.0\n"
+  "    z: -0.999\n"
+  "  }\n"
   "}\n"
   ""
 }
