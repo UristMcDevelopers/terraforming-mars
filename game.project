@@ -51,3 +51,12 @@ use_fixed_timestep = 0
 [html5]
 scale_mode = stretch
 
+[collectionfactory]
+max_count = 128
+
+[sprite]
+max_count = 1024
+
+[label]
+max_count = 1024
+

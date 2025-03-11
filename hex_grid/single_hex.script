@@ -1,0 +1,42 @@
+local C = require "utils.message_ids"
+
+go.property("image_name", hash("Empty"))
+go.property("column", 0)
+go.property("row", 0)
+
+
+function init(self)
+	msg.post("#x", "disable") 
+	msg.post("#y", "disable")
+	-- label.set_text("#x", self.column)
+	-- label.set_text("#y", self.row)
+	-- print("set x", self.column, " set y", self.row, " image_name ", self.image_name)
+	sprite.play_flipbook("#hex_sprite", self.image_name)
+	msg.post("#recource_sprite1", "disable")
+	msg.post("#recource_sprite2", "disable")
+
+	go.set("#marker_sprite", "tint", vmath.vector4(0, 0, 0, 0))
+end
+
+local function update_recource(recource_url, image_name)
+	msg.post(recource_url, "enable")
+	sprite.play_flipbook(recource_url, image_name)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.MAP_SET_TILE) then
+		sprite.play_flipbook("#hex_sprite", message.image_name)
+		go.set("#marker_sprite", "tint", message.player_color)
+	end
+	if message_id == hash(C.MAP_SET_TILE_RECOURCES) then
+		for i, image_name in ipairs(message.resources or {}) do
+			if i == 1 then
+				update_recource("#recource_sprite1", image_name)
+			elseif i == 2 then
+				update_recource("#recource_sprite2", image_name)
+			else
+				error("unsupported index of recource_sprite")
+			end
+		end
+	end
+end
