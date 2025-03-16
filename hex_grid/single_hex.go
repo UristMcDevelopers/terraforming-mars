@@ -33,54 +33,6 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "x"
-  type: "label"
-  data: "size {\n"
-  "  x: 32.0\n"
-  "  y: 32.0\n"
-  "}\n"
-  "color {\n"
-  "  x: 0.0\n"
-  "  y: 0.0\n"
-  "  z: 0.0\n"
-  "}\n"
-  "font: \"/builtins/fonts/default.font\"\n"
-  "material: \"/builtins/fonts/label-df.material\"\n"
-  ""
-  position {
-    x: 144.0
-    y: -36.0
-  }
-  scale {
-    x: 10.0
-    y: 10.0
-  }
-}
-embedded_components {
-  id: "y"
-  type: "label"
-  data: "size {\n"
-  "  x: 32.0\n"
-  "  y: 32.0\n"
-  "}\n"
-  "color {\n"
-  "  x: 0.0\n"
-  "  y: 0.0\n"
-  "  z: 0.0\n"
-  "}\n"
-  "font: \"/builtins/fonts/default.font\"\n"
-  "material: \"/builtins/fonts/label-df.material\"\n"
-  ""
-  position {
-    x: -3.0
-    y: 114.0
-  }
-  scale {
-    x: 10.0
-    y: 10.0
-  }
-}
-embedded_components {
   id: "recource_sprite1"
   type: "sprite"
   data: "default_animation: \"Plant\"\n"
