@@ -63,7 +63,10 @@ function on_message(self, message_id, message, sender)
 	--TEST/DEBUG events to guis
 	if message_id == hash(C.PLAYER_MAP_CLICKED) then
 		print("C.PLAYER_MAP_CLICKED")
-		msg.post("/hex_grid#hex_grid_controller", C.MAP_SET_TILE, { tile_type = test_random_tile_name(), column =  message.col, row = message.row, player_color = C.PLAYER_1_COLOR } );
+		msg.post("/hex_grid#hex_grid_controller", C.MAP_SET_TILE, { tile_type = test_random_tile_name(), column =  message.column, row = message.row, player_color = C.PLAYER_1_COLOR } );
+	end
+	if message_id == hash(C.MAP_TILE_PLACED) then
+		print("C.MAP_TILE_PLACED", message.tile_type, message.row, message.column)
 	end
 end
 

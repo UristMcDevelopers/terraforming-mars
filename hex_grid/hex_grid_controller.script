@@ -129,6 +129,7 @@ function on_message(self, message_id, message, sender)
 		grid_state:set_with_validation(row, column, message.player_color, tile_type)
 
 		msg.post("#hex_grid_ui", C.MAP_SET_TILE, message)
+		msg.post(sender, C.MAP_TILE_PLACED, message)
 	end
 	
 end
