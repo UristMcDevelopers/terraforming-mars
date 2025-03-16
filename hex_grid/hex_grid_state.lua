@@ -2,16 +2,16 @@ local UTILS = require("utils.helpers")
 local GRID_UTILS = require "hex_grid.hex_grid_utils"
 local C = require "utils.message_ids"
 
-local M = {
-	placed_tiles_coords = {},
-	ocean_coords = {},
-	non_mars_coords = {},
-	noctis_city = {},
-	placement_bonuses_coords = {},
-}
+local M = {}
 
 function M.new()
-	return setmetatable(M, { __index = M })
+	return setmetatable({
+		placed_tiles_coords = {},
+		ocean_coords = {},
+		non_mars_coords = {},
+		noctis_city = {},
+		placement_bonuses_coords = {},
+	}, { __index = M })
 end
 
 function M:set_placed_tiles_coords(coords)
