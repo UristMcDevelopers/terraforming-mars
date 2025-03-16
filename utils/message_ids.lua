@@ -49,6 +49,7 @@ M.AWARD_MINER = "award_miner"
 M.MAP_SET_TILE = "map_set_tile"
 M.MAP_SET_TILE_RECOURCES = "map_set_tile_recources"
 M.MAP_SET_CLICKABLE = "map_set_clickable"
+M.MAP_TILE_PLACED = "map_tile_placed"
 
 M.SHOW_SKIP_TURN_BUTTON = "show_skip_button"
 M.SHOW_NEXT_ROUND_BUTTON = "show_next_round_button"
