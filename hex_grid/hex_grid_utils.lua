@@ -1,5 +1,5 @@
 --thanks to https://www.redblobgames.com/grids/hexagons/#coordinates-cube
--- only support even-r grid
+
 local M = {}
 
 local direction_differences = {

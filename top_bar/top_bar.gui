@@ -96,7 +96,7 @@ nodes {
   type: TYPE_TEXT
   text: "0(+0)"
   font: "default"
-  id: "leaf"
+  id: "plant"
   parent: "content"
   inherit_alpha: true
 }

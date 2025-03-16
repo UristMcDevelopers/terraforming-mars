@@ -1,0 +1,26 @@
+
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+local player_to_actions = {[1] = { avalibale_actions = 2 } }
+
+function init(self)
+	
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("player_actions") then
+		assert(message.player_id)
+		ASSERTS.number(message.avalibale_actions)
+
+		player_to_actions[message.player_id] = { avalibale_actions = message.avalibale_actions }
+	elseif message_id == hash(C.PLAYER_SPEND_ACTION) then
+		assert(message.player_id)
+		local actions = player_to_actions[message.player_id]
+		actions.avalibale_actions = actions.avalibale_actions - 1
+		if actions.avalibale_actions == 0 then
+			-- msg.post(sender, )VV
+		end
+	end
+end

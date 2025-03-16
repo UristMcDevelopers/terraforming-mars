@@ -1,16 +1,11 @@
 local C = require "utils.message_ids"
 
 go.property("image_name", hash("Empty"))
-go.property("column", 0)
-go.property("row", 0)
+go.property("height", 0)
 
 
 function init(self)
-	msg.post("#x", "disable") 
-	msg.post("#y", "disable")
-	-- label.set_text("#x", self.column)
-	-- label.set_text("#y", self.row)
-	-- print("set x", self.column, " set y", self.row, " image_name ", self.image_name)
+	self.height = go.get("#hex_sprite", "size").y
 	sprite.play_flipbook("#hex_sprite", self.image_name)
 	msg.post("#recource_sprite1", "disable")
 	msg.post("#recource_sprite2", "disable")

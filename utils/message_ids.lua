@@ -19,6 +19,8 @@ M.PLANET_TEMPERATURE = "temperature"
 M.PLANET_OCEANS = "oceans"
 M.PLANET_PARAMETERS = "planet_parameters"
 
+M.TILE_TYPE_EMPTY = "tile_type_empty"
+M.TILE_TYPE_EMPTY_OCEAN = "tile_type_empty_ocean"
 M.TILE_TYPE_CITY = "tile_type_city"
 M.TILE_TYPE_TREE = "tile_type_tree"
 M.TILE_TYPE_OCEAN = "tile_type_ocean"
