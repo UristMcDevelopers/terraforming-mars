@@ -68,9 +68,23 @@ instances {
     }
   }
 }
+instances {
+  id: "action_bar_ui"
+  prototype: "/action/action_bar_ui.go"
+  position {
+    x: 564.0
+    y: 980.0
+  }
+  scale3 {
+    x: 0.125
+    y: 0.125
+    z: 0.125
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "go"
+  children: "action_bar_ui"
   children: "hex_grid"
   children: "milistones_awards"
   children: "planet_parameters"
@@ -78,7 +92,7 @@ embedded_instances {
   children: "terraform_rating_bar"
   data: "components {\n"
   "  id: \"game_board\"\n"
-  "  component: \"/game_board/game_board.gui\"\n"
+  "  component: \"/game_board/debug_menu.gui\"\n"
   "}\n"
   "components {\n"
   "  id: \"top_bar\"\n"

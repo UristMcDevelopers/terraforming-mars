@@ -1,0 +1,45 @@
+
+local C = require "utils.message_ids"
+local ASSERTS = require "utils.assertions"
+
+local ACTION_1_HAVE_URL = "#action1_not_spended_icon"
+local ACTION_1_SPENDED_URL = "#action1_spended_icon"
+local ACTION_2_HAVE_URL = "#action2_not_spended_icon"
+local ACTION_2_SPENDED_URL = "#action2_spended_icon"
+
+local actions = {true, true}
+
+local function update(index, does_have_action)
+	local state = does_have_action and "enable" or "disable"
+	local reverted_state = (not does_have_action) and "enable" or "disable"
+	if index == 1 then
+		msg.post(ACTION_1_HAVE_URL, state)
+		msg.post(ACTION_1_SPENDED_URL, reverted_state)
+	elseif index == 2 then
+		msg.post(ACTION_2_HAVE_URL, state)
+		msg.post(ACTION_2_SPENDED_URL, reverted_state)
+	end
+end
+
+local function update_ui()
+	for index, value in ipairs(actions) do
+		print("action", index, value)
+	end
+	update(1, actions[1])
+	update(2, actions[2])
+end
+
+function init(self)
+	update_ui()
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.UI_STATE_SET_ACTIONS) then
+		assert(message.actions)
+		assert(#message.actions == 2)
+		ASSERTS.type_boolean(message.actions[1])
+		ASSERTS.type_boolean(message.actions[2])
+		actions = message.actions
+		update_ui()
+	end
+end

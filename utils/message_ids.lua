@@ -53,6 +53,7 @@ M.MAP_TILE_PLACED = "map_tile_placed"
 
 M.SHOW_SKIP_TURN_BUTTON = "show_skip_button"
 M.SHOW_NEXT_ROUND_BUTTON = "show_next_round_button"
+M.UI_STATE_SET_ACTIONS = "ui_state_set_actions"
 
 M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it 
 

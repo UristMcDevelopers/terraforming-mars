@@ -16,4 +16,9 @@ function M.positive_number(value)
 	assert(value > 0, "expected positive number")
 end
 
+function M.type_boolean(value)
+	local value_type = type(value)
+	assert(value_type == "boolean", "expected boolean got " .. value_type)
+end
+
 return M

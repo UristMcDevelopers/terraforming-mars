@@ -20,7 +20,6 @@ local position_for_node_x1_y1
 local coordinate_table = {}
 -- row index to column values
 local excluded_coords = { [1] = {1,2,8,9}, [2] = {1,2,9}, [3] = {1,9}, [4] = {1}, [5] = {}, [6] = {1}, [7] = {1,9}, [8] = {2,9}, [9] = {2,8,9} }
-local IMAGE_EMPTY_OCEAN = "Empty_ocean"
 local tile_type_to_image = {
 	[C.TILE_TYPE_OCEAN] = "Ocean", 
 	[C.TILE_TYPE_TREE] = "Tree", 
