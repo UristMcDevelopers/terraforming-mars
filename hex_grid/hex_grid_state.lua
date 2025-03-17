@@ -39,7 +39,7 @@ function M:is_ocean_place(row, column)
 	return self.ocean_coords[row] and UTILS.array_has_value(self.ocean_coords[row], column)
 end
 
-function M:is_non_mars_place(row, column)
+function M:is_tile_outside_of_mars_zone(row, column)
 	return self.non_mars_coords[row] and UTILS.array_has_value(self.non_mars_coords[row], column)
 end
 
@@ -94,10 +94,10 @@ function M:set_with_validation(row, column, player, tile_type)
 	if tile_type == C.TILE_TYPE_OCEAN and not self:is_ocean_place(row, column) then
 		error("ocean can be placed only in ocean tile")
 	end
-	if tile_type ~= C.TILE_TYPE_CITY and self:is_non_mars_place(row, column) then
+	if tile_type ~= C.TILE_TYPE_CITY and self:is_tile_outside_of_mars_zone(row, column) then
 		error("only city on this tile")
 	end
-	if tile_type == C.TILE_TYPE_CITY and not self:is_non_mars_place(row, column) then
+	if tile_type == C.TILE_TYPE_CITY and not self:is_tile_outside_of_mars_zone(row, column) then
 		if close_cities > 0 then
 			error("has neigbor city")
 		end
