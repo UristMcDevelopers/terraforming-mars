@@ -1,34 +1,251 @@
-script: "/game_board/game_board.gui_script"
+script: "/game_board/debug_menu.gui_script"
 nodes {
   position {
-    x: 327.0
-    y: 1013.0
+    x: 565.0
+    y: 890.0
   }
   type: TYPE_TEMPLATE
-  id: "debug_action"
+  id: "change_income"
   inherit_alpha: true
   template: "/main_menu_gui/button.gui"
 }
 nodes {
   size {
     x: 150.0
-    y: 49.0
+    y: 30.0
   }
   type: TYPE_BOX
-  id: "debug_action/button"
-  parent: "debug_action"
+  id: "change_income/button"
+  parent: "change_income"
   overridden_fields: 4
   template_node_child: true
 }
 nodes {
   size {
     x: 150.0
-    y: 50.0
+    y: 30.0
   }
   type: TYPE_TEXT
-  text: "debug action"
-  id: "debug_action/text"
-  parent: "debug_action"
+  text: "change_income"
+  id: "change_income/text"
+  parent: "change_income"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 625.0
+    y: 920.0
+  }
+  type: TYPE_TEMPLATE
+  id: "hide_menu"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 30.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "hide_menu/button"
+  parent: "hide_menu"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 30.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "+"
+  id: "hide_menu/text"
+  parent: "hide_menu"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 565.0
+    y: 860.0
+  }
+  type: TYPE_TEMPLATE
+  id: "change_global_params"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "change_global_params/button"
+  parent: "change_global_params"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  scale {
+    x: 0.8
+  }
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "change_global_params"
+  id: "change_global_params/text"
+  parent: "change_global_params"
+  overridden_fields: 3
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 565.0
+    y: 830.0
+  }
+  type: TYPE_TEMPLATE
+  id: "spend_action"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "spend_action/button"
+  parent: "spend_action"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "spend_action"
+  id: "spend_action/text"
+  parent: "spend_action"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 565.0
+    y: 800.0
+  }
+  type: TYPE_TEMPLATE
+  id: "update_terraform_rating"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "update_terraform_rating/button"
+  parent: "update_terraform_rating"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  scale {
+    x: 0.7
+    y: 0.7
+  }
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "update_terraform_rating"
+  id: "update_terraform_rating/text"
+  parent: "update_terraform_rating"
+  overridden_fields: 3
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 565.0
+    y: 770.0
+  }
+  type: TYPE_TEMPLATE
+  id: "set_map_clickable"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "set_map_clickable/button"
+  parent: "set_map_clickable"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  scale {
+    x: 0.8
+  }
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "set_map_clickable"
+  id: "set_map_clickable/text"
+  parent: "set_map_clickable"
+  overridden_fields: 3
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 565.0
+    y: 740.0
+  }
+  type: TYPE_TEMPLATE
+  id: "change_milestone"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  id: "change_milestone/button"
+  parent: "change_milestone"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 150.0
+    y: 30.0
+  }
+  type: TYPE_TEXT
+  text: "change_milestone"
+  id: "change_milestone/text"
+  parent: "change_milestone"
   overridden_fields: 4
   overridden_fields: 8
   template_node_child: true

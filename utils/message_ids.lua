@@ -5,7 +5,7 @@ M.NON_PLAYER_COLOR = vmath.vector4(1, 1, 1, 1)
 M.PLAYER_1_COLOR = vmath.vector4(1, 0, 0, 1)
 M.PLAYER_2_COLOR = vmath.vector4(0, 1, 0, 1)
 M.PLAYER_3_COLOR = vmath.vector4(0, 0, 1, 1)
-M.PLAYER_4_COLOR = vmath.vector4(0, 0, 0, 1)
+M.PLAYER_4_COLOR = vmath.vector4(1, 1, 0, 1)
 
 M.RECOURCE_GOLD = "gold"
 M.RECOURCE_STEEL = "steel"

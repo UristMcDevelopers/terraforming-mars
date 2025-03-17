@@ -1,0 +1,56 @@
+local C = require "utils.message_ids"
+local ACTION_STATE = require "action.action_state"
+
+local function update_current_player_actions(self)
+	local player_actions = self.player_list[self.current_player_index]
+	player_actions:spend_action()
+	msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  player_actions:get_actions() } );
+end
+
+local function choose_next_player(self)
+	self.current_player_index = self.current_player_index + 1
+	local player = self.player_list[self.current_player_index]
+	if player == nil then
+		self.current_player_index = 1
+	end
+end
+
+local function next_round(self)
+	self.round = self.round + 1
+	for player_index, action_state in ipairs(self.player_list) do
+		action_state:on_next_round()
+	end
+	print("round " .. self.round)
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.round = 1
+	self.player_list = { ACTION_STATE.new() }
+	self.current_player_index = 1;
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash(C.PLAYER_SKIP_TURN) then
+		local player_actions = self.player_list[self.current_player_index]
+		player_actions:skip_turn()
+		choose_next_player(self)
+		if self.current_player_index == 1 then
+			next_round(self)
+		end
+		msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  player_actions:get_actions() } );
+	elseif message_id == hash(C.PLAYER_SPEND_ACTION) then
+		update_current_player_actions(self)
+	elseif message_id == hash(C.PLAYER_MAP_CLICKED) then
+		print("C.PLAYER_MAP_CLICKED", message.row, message.column)
+		-- msg.post("/hex_grid#hex_grid_controller", C.MAP_SET_TILE, { tile_type = test_random_tile_name(), column =  message.column, row = message.row, player_color = C.PLAYER_1_COLOR } );
+	end
+	if message_id == hash(C.MAP_TILE_PLACED) then
+		print("C.MAP_TILE_PLACED", message.tile_type, message.row, message.column)
+	end
+end
+
+function on_input(self, action_id, action)
+
+end
+
