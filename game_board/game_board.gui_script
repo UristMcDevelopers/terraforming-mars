@@ -49,7 +49,7 @@ function on_message(self, message_id, message, sender)
 		end
 		msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  player_actions:get_actions() } );
 	end
-	
+
 	--TEST/DEBUG events to guis
 	if message_id == hash(C.PLAYER_MAP_CLICKED) then
 		print("C.PLAYER_MAP_CLICKED")

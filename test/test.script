@@ -1,0 +1,11 @@
+local deftest = require "deftest.deftest"
+
+local test_helpers = require "test.test_helpers"
+local test_hex_grid = require "test.test_hex_grid"
+
+function init(self)
+	deftest.add(test_helpers)
+	deftest.add(test_hex_grid)
+
+	deftest.run({ coverage = { enabled = true }, pattern = nil })
+end
