@@ -20,6 +20,7 @@ function on_message(self, message_id, message, sender)
 		msg.post("#white_box", "enable")
 		msg.post("#player_id", "enable")
 		label.set_text("#player_id", "P" .. message.player_id)
+		go.set("#white_box", "tint", message.player_color or vmath.vector4(1, 1, 1, 1))
 	elseif message_id == hash("set_display_name") then
 		label.set_text("#name", message.display_name) -- cant set it on initialization because it's string
 	end

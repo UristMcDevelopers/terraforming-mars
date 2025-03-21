@@ -29,7 +29,6 @@ local function init_width_height_scale(self)
 end
 
 local function create(table, initial_position)
-
 	for index, milestone_award in ipairs(table) do
 		local new_node_position = vmath.vector3(initial_position.x + (index - 1) * width_of_single_node * scale, initial_position.y, 0)
 		local node_id = factory.create("#template_factory", new_node_position, nil, { image_name = hash(milestone_award.image_name) }, scale)
@@ -64,16 +63,21 @@ function init(self)
 	
 end
 
+local function find_node_with_name(list, name)
+	for i, milestones in ipairs(list) do
+		if milestones.key == name then
+			milestones.is_taken = true
+			return milestones.node
+		end
+	end
+	return nil
+end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash(C.REGISTRY) then
 		self.reciever_url = sender
 	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
-		for i, milestones in ipairs(self.milestones) do
-			if milestones.key == message.name then
-				milestones.is_taken = true
-				msg.post(milestones.node, C.TAKE_MILESTONE_OR_AWARD, message)
-			end
-		end
+		local node = find_node_with_name(self.milestones, message.name) or find_node_with_name(self.awards, message.name)
+		msg.post(node, C.TAKE_MILESTONE_OR_AWARD, message)
 	end
 end
