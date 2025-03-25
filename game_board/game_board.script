@@ -1,45 +1,61 @@
 local C = require "utils.message_ids"
 local EVENT_REGISTRY = require "utils.event_regisrty"
-local GAME_STATE = require "logic.game_state"
+local ACTION_STATE = require "action.action_state"
 
-local GameState
+local function update_current_player_actions(self)
+	local player_actions = self.player_list[self.current_player_index]
+	player_actions:spend_action()
+	msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  player_actions:get_actions() } );
+end
+
+local function choose_next_player(self)
+	self.current_player_index = self.current_player_index + 1
+	local player = self.player_list[self.current_player_index]
+	if player == nil then
+		self.current_player_index = 1
+	end
+end
+
+local function next_round(self)
+	self.round = self.round + 1
+	for player_index, action_state in ipairs(self.player_list) do
+		action_state:on_next_round()
+	end
+	print("round " .. self.round)
+end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	GameState = GAME_STATE.new() --TODO add load from file
-
 	EVENT_REGISTRY.registry(C.UI_CLICK_AVAILABLE_ACTIONS, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_CHOSE_ACTION_TO_PLAY, msg.url())
-	EVENT_REGISTRY.registry(C.TAKE_MILESTONE_OR_AWARD, msg.url())
-	EVENT_REGISTRY.registry(C.INCREASE_PLANET_PARAMETER, msg.url())
+	self.round = 1
+	self.player_list = { ACTION_STATE.new() }
+	self.current_player_index = 1;
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash(C.PLAYER_SKIP_TURN) then
-		GameState:skip_turn()
-		msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() } );
+		local player_actions = self.player_list[self.current_player_index]
+		player_actions:skip_turn()
+		choose_next_player(self)
+		if self.current_player_index == 1 then
+			next_round(self)
+		end
+		msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  player_actions:get_actions() } );
 	elseif message_id == hash(C.PLAYER_SPEND_ACTION) then
-		GameState:spend_action()
-		msg.post("/action_bar_ui#ui_action", C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() } );
+		update_current_player_actions(self)
 	elseif message_id == hash(C.PLAYER_MAP_CLICKED) then
 		print("C.PLAYER_MAP_CLICKED", message.row, message.column)
 		-- msg.post("/hex_grid#hex_grid_controller", C.MAP_SET_TILE, { tile_type = test_random_tile_name(), column =  message.column, row = message.row, player_color = C.PLAYER_1_COLOR } );
-	elseif message_id == hash(C.MAP_TILE_PLACED) then
+	end
+	if message_id == hash(C.MAP_TILE_PLACED) then
 		print("C.MAP_TILE_PLACED", message.tile_type, message.row, message.column)
-	elseif message_id == hash(C.UI_CLICK_AVAILABLE_ACTIONS) then
-		-- GameState:get_available_actions()
+	end
+
+	if message_id == hash(C.UI_CLICK_AVAILABLE_ACTIONS) then
 		EVENT_REGISTRY.notify(C.UI_SHOW_ACTIONS_GRID, { actions = { {action_name = "TEST ACTION1"}, {action_name = "TEST ACTION2"}, {action_name = "TEST ACTION3"}, {action_name = "TEST ACTION4"}, {action_name = "TEST ACTION5"}} })
 	elseif message_id == hash(C.PLAYER_CHOSE_ACTION_TO_PLAY) then
 		pprint("player played card", message)
-	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
-		GameState:take_milestone_or_award(message.name)
-		local ma = GameState:get_milestones_awards()
-		EVENT_REGISTRY.notify(C.UI_UPDATE_MILESTONES_AWARDS, ma)
-	elseif message_id == hash(C.INCREASE_PLANET_PARAMETER) then
-		for param_name, details in pairs(message) do
-			GameState:get_planet():increase(param_name, details.times)
-		end
-		EVENT_REGISTRY.notify(C.UI_UPDATE_PLANET_PARAMETERS, GameState:get_planet():get())
 	end
 end
 

@@ -43,6 +43,7 @@ function M:spawn(list_of_data)
 	assert(list_of_data)
 	assert(#list_of_data > 0)
 	
+	self.data = list_of_data or {}
 	self.nodes = {}
 	local dummy_id = factory.create(self.factory, vmath.vector3(0, 0, 0), nil, nil, self.scale)
 	local dummy_url = msg.url(nil, dummy_id, self.script_name)
@@ -55,14 +56,14 @@ function M:spawn(list_of_data)
 	local spawned = 0
 	for col_index = 1, self.column_size do
 		for row_index = 1, self.row_size do
-			if spawned == #list_of_data then
+			if spawned == #self.data then
 				break
 			end
 			
 			local x = self.size_of_node.x * (row_index - 1) * self.scale
 			local y = self.size_of_node.y * (col_index - 1) * self.scale
 			local new_pos = self.init_pos + vmath.vector3(x, -y, 0)
-			local data = list_of_data[spawned + 1] or {}
+			local data = self.data[spawned + 1] or {}
 			local node_id = factory.create(self.factory, new_pos, nil, nil, self.scale)
 			msg.post(msg.url(nil, node_id, self.script_name), "set", data)
 			print(new_pos)

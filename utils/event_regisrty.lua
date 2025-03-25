@@ -18,7 +18,6 @@ function M.notify(topic, data)
 	data = data or {}
 	for index, receiver in ipairs(M.get_by_topic(topic)) do
 		print("notify", topic,  "receiver", receiver)
-		pprint("notify data", data)
 		msg.post(receiver, topic, data)
 	end
 end
