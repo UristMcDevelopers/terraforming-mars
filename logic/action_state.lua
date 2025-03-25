@@ -34,7 +34,7 @@ function M:has_action()
 end
 
 function M:get_actions()
-	return self.actions
+	return { self.actions[1], self.actions[2] } --return copy
 end
 
 return M
