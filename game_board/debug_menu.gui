@@ -243,7 +243,8 @@ nodes {
     y: 30.0
   }
   type: TYPE_TEXT
-  text: "change_milestone"
+  text: "take_random\n"
+  "milestone_or_award"
   id: "change_milestone/text"
   parent: "change_milestone"
   overridden_fields: 4

@@ -8,20 +8,22 @@ go.property("width", 0)
 
 
 function init(self)
-	self.height = go.get("#image", "size").y + go.get("#name_box", "size").y
-	self.width = go.get("#image", "size").x
-	sprite.play_flipbook("#image", self.image_name) 
-	msg.post("#white_box", "disable")
-	msg.post("#player_id", "disable")
+    self.height = go.get("#image", "size").y + go.get("#name_box", "size").y
+    self.width = go.get("#image", "size").x
+    sprite.play_flipbook("#image", self.image_name) 
+    msg.post("#white_box", "disable")
+    msg.post("#player_id", "disable")
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
-		msg.post("#white_box", "enable")
-		msg.post("#player_id", "enable")
-		label.set_text("#player_id", "P" .. message.player_id)
-		go.set("#white_box", "tint", message.player_color or vmath.vector4(1, 1, 1, 1))
-	elseif message_id == hash("set_display_name") then
-		label.set_text("#name", message.display_name) -- cant set it on initialization because it's string
-	end
+    if message_id == hash("set") then
+        if message.player_id then
+            msg.post("#white_box", "enable")
+            msg.post("#player_id", "enable")
+            label.set_text("#player_id", "P" .. message.player_id)
+            go.set("#white_box", "tint", message.player_color or vmath.vector4(1, 1, 1, 1))
+        end
+    elseif message_id == hash("set_display_name") then
+        label.set_text("#name", message.display_name) -- cant set it on initialization because it's string
+    end
 end
