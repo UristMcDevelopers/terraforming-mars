@@ -2,7 +2,7 @@
 
 local C = require "utils.message_ids"
 local ASSERTS = require "utils.assertions"
-local STATE = require "hex_grid.hex_grid_state"
+local STATE = require "logic.hex_grid_state"
 
 local grid_state
 
@@ -131,5 +131,4 @@ function on_message(self, message_id, message, sender)
 		msg.post("#hex_grid_ui", C.MAP_SET_TILE, message)
 		msg.post(sender, C.MAP_TILE_PLACED, message)
 	end
-	
 end
