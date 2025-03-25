@@ -10,8 +10,4 @@ function M.new(name)
 	}, { __index = M })
 end
 
-function M:take(player_id)
-	self.taken_by = player_id
-end
-
 return M
