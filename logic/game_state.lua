@@ -45,6 +45,12 @@ function M:skip_turn()
 	end
 end
 
+function M:take_milestone_or_award(name)
+	self.milestones_awards:take_milestone_or_award(name, self:get_player():get_id())
+end
 
+function M:get_milestones_awards()
+	return self.milestones_awards
+end
 
 return M

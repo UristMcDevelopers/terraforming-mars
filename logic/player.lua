@@ -22,6 +22,10 @@ function M.new()
 	}, { __index = M })
 end
 
+function M:get_id()
+	return self.id
+end
+
 function M:get_actions()
 	return self.actions:get_actions()
 end
