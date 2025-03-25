@@ -43,14 +43,6 @@ instances {
   position {
     y: 300.0
   }
-  component_properties {
-    id: "milestones_awards"
-    properties {
-      id: "reciever_url"
-      value: "game_board:/go#game_board"
-      type: PROPERTY_TYPE_HASH
-    }
-  }
 }
 instances {
   id: "hex_grid"
@@ -81,10 +73,19 @@ instances {
     z: 0.125
   }
 }
+instances {
+  id: "actions_button"
+  prototype: "/available_actions_gui/actions_button.go"
+  position {
+    x: 557.0
+    y: 86.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "go"
   children: "action_bar_ui"
+  children: "actions_button"
   children: "hex_grid"
   children: "milistones_awards"
   children: "planet_parameters"

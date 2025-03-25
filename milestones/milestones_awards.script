@@ -74,9 +74,7 @@ local function find_node_with_name(list, name)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash(C.REGISTRY) then
-		self.reciever_url = sender
-	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
+	if message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
 		local node = find_node_with_name(self.milestones, message.name) or find_node_with_name(self.awards, message.name)
 		msg.post(node, C.TAKE_MILESTONE_OR_AWARD, message)
 	end
