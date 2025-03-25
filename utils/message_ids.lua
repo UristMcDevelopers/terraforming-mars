@@ -57,7 +57,6 @@ M.SHOW_NEXT_ROUND_BUTTON = "show_next_round_button"
 M.UI_STATE_SET_ACTIONS = "ui_state_set_actions"
 M.UI_CLICK_AVAILABLE_ACTIONS = "UI_CLICK_AVAILABLE_ACTIONS"
 M.UI_SHOW_ACTIONS_GRID = "UI_SHOW_ACTIONS_GRID"
-M.UI_UPDATE_MILESTONES_AWARDS = "UI_UPDATE_MILESTONES_AWARDS"
 
 M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it 
 
