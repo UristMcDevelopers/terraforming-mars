@@ -34,6 +34,10 @@ function M:set_placement_bonuses_coords(coords)
 	self.placement_bonuses_coords = coords
 end
 
+function M:get_placement_bonuses_coords()
+	return self.placement_bonuses_coords
+end
+
 
 function M:is_ocean_place(row, column)
 	return self.ocean_coords[row] and UTILS.array_has_value(self.ocean_coords[row], column)
