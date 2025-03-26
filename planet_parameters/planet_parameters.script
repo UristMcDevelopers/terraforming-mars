@@ -1,4 +1,5 @@
 local C = require "utils.message_ids"
+local EVENT_REGISTRY = require "utils.event_regisrty"
 local ASSERTS = require "utils.assertions"
 
 go.property("oxygen", 0)
@@ -27,11 +28,12 @@ local function validate_and_set(self, message)
 end
 
 function init(self)
+	EVENT_REGISTRY.registry(C.UI_UPDATE_PLANET_PARAMETERS, msg.url())
 	update_ui(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash(C.PLANET_PARAMETERS) then
+	if message_id == hash(C.UI_UPDATE_PLANET_PARAMETERS) then
 		validate_and_set(self, message)
 		update_ui(self)
 	end

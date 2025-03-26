@@ -11,6 +11,7 @@ function init(self)
 	EVENT_REGISTRY.registry(C.UI_CLICK_AVAILABLE_ACTIONS, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_CHOSE_ACTION_TO_PLAY, msg.url())
 	EVENT_REGISTRY.registry(C.TAKE_MILESTONE_OR_AWARD, msg.url())
+	EVENT_REGISTRY.registry(C.INCREASE_PLANET_PARAMETER, msg.url())
 end
 
 function on_message(self, message_id, message, sender)
@@ -34,6 +35,11 @@ function on_message(self, message_id, message, sender)
 		GameState:take_milestone_or_award(message.name)
 		local ma = GameState:get_milestones_awards()
 		EVENT_REGISTRY.notify(C.UI_UPDATE_MILESTONES_AWARDS, ma)
+	elseif message_id == hash(C.INCREASE_PLANET_PARAMETER) then
+		for param_name, details in pairs(message) do
+			GameState:get_planet():increase(param_name, details.times)
+		end
+		EVENT_REGISTRY.notify(C.UI_UPDATE_PLANET_PARAMETERS, GameState:get_planet():get())
 	end
 end
 
