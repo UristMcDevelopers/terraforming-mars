@@ -22,4 +22,17 @@ function M.new()
 	}, { __index = M })
 end
 
+function M:get_milestones()
+	return self.milestones
+end
+
+function M:get_awards()
+	return self.awards
+end
+
+function M:take_milestone_or_award(name, player_id)
+	local milestone_or_award = self.milestones[name] or self.awards[name]
+	milestone_or_award:take(player_id)
+end
+
 return M
