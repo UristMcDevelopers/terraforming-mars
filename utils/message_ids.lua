@@ -33,6 +33,7 @@ M.PLAYER_SPEND_ACTION = "spend_action"
 M.PLAYER_SKIP_TURN = "skip_turn"
 M.PLAYER_MAP_CLICKED = "map_clicked"
 M.PLAYER_DRAW_CARD = "draw_card"
+M.PLAYER_CHOSE_ACTION_TO_PLAY = "PLAYER_CHOSE_ACTION_TO_PLAY"
 
 M.TAKE_MILESTONE_OR_AWARD = "take_milestone_or_award"
 M.MILESTONE_TERRAFORMER = "milestone_terraformer"
@@ -54,6 +55,8 @@ M.MAP_TILE_PLACED = "map_tile_placed"
 M.SHOW_SKIP_TURN_BUTTON = "show_skip_button"
 M.SHOW_NEXT_ROUND_BUTTON = "show_next_round_button"
 M.UI_STATE_SET_ACTIONS = "ui_state_set_actions"
+M.UI_CLICK_AVAILABLE_ACTIONS = "UI_CLICK_AVAILABLE_ACTIONS"
+M.UI_SHOW_ACTIONS_GRID = "UI_SHOW_ACTIONS_GRID"
 
 M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it 
 

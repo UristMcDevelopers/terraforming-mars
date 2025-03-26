@@ -10,4 +10,7 @@ images {
 images {
   image: "/assets/ui/Spended_action.png"
 }
+images {
+  image: "/assets/global/White.png"
+}
 extrude_borders: 2
