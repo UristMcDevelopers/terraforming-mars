@@ -8,7 +8,7 @@ go.property("oceans", 0)
 
 local function update_ui(self)
 	label.set_text("#oxygen_label", self.oxygen)
-	label.set_text("#temperature_label", self.temperature)
+	label.set_text("#temperature_label", self.temperature <= 0 and self.temperature or ("+" .. self.temperature))
 	label.set_text("#ocean_label", self.oceans)
 end
 

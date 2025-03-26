@@ -5,22 +5,23 @@
 
 local C = require "utils.message_ids"
 local ASSERT = require "utils.assertions"
+local EVENT_REGISTRY = require "utils.event_regisrty"
 
 
 local function update_ui(self)
 	for _, node_name in ipairs(self.nodes) do
-		gui.set_text(gui.get_node(node_name), string.format('%d(+%d)', self.recources[node_name], self.income[node_name]))
+		local current_value = self.recources[node_name]
+		local income_value = self.income[node_name]
+		ASSERT.type_number(current_value)
+		ASSERT.type_number(income_value)
+		local income_value_text = income_value >= 0 and ("+" .. income_value) or tostring(income_value)
+		gui.set_text(gui.get_node(node_name), string.format('%d(%s)', current_value, income_value_text))
 	end
 end
 
-local function update_values_in_map(map, key, value)
-	ASSERT.type_number(value)
-	assert(map[key], "unsupported key" .. key)
-	map[key] = map[key] + value
-end
-
-
 function init(self)
+	EVENT_REGISTRY.registry(C.UI_UPDATE_RESOURCES, msg.url())
+	
 	self.nodes = { C.RECOURCE_GOLD, C.RECOURCE_STEEL, C.RECOURCE_TITANIUM, C.RECOURCE_PLANT, C.RECOURCE_ELECTRICITY, C.RECOURCE_HEAT }
 	self.recources = {
 		[C.RECOURCE_GOLD] = 0,
@@ -41,17 +42,9 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash(C.PLAYER_INCOME_CHANGED) then
-		print("income update")
-		for key, value in pairs(message) do
-			update_values_in_map(self.income, key, value)
-		end
-		update_ui(self)
-	elseif message_id == hash(C.PLAYER_RECOURCES_CHANGED) then
-		print("recources update")
-		for key, value in pairs(message) do
-			update_values_in_map(self.recources, key, value)
-		end
+	if message_id == hash(C.UI_UPDATE_RESOURCES) then
+		self.income = message.income
+		self.recources = message.current
 		update_ui(self)
 	end
 end

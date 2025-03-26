@@ -26,7 +26,8 @@ nodes {
     y: 30.0
   }
   type: TYPE_TEXT
-  text: "change_income"
+  text: "random recources \n"
+  "change"
   id: "change_income/text"
   parent: "change_income"
   overridden_fields: 4
