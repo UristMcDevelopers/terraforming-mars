@@ -4,13 +4,13 @@ function M.new(actions)
 	local init_actions = actions or { true, true }
 	return setmetatable({
 		actions = init_actions,
-		ends_his_turn = false,
+		ends_turn = false,
 	}, { __index = M })
 end
 
 function M:skip_turn()
 	if self.actions[1] == true and self.actions[2] == true then
-		self.ends_his_turn = true
+		self.ends_turn = true
 	end
 end
 
@@ -24,9 +24,15 @@ function M:spend_action()
 	end
 end
 
+function M:on_next_turn()
+	if not self.ends_turn then
+		self.actions = { true, true }
+	end
+end
+
 function M:on_next_round()
 	self.actions = { true, true }
-	self.ends_his_turn = false
+	self.ends_turn = false
 end
 
 function M:has_action()

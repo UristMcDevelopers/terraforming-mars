@@ -18,6 +18,15 @@ local function increase_planet_param(planet_param)
 	EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, {[planet_param] = { times = 1 }})
 end
 
+local function is_all_players_ends_round(self)
+	for player_index, player_state in ipairs(self.players) do
+		if player_state:is_ends_turn() == false then
+			return false
+		end
+	end
+	return true
+end
+
 function M.new()
 	local planet_parameters = PLANET_PARAMETERS.new()
 	planet_parameters:set_triggers(
@@ -61,13 +70,23 @@ function M:skip_turn()
 	--choose next player
 	player = self.players[self.current_player_index]
 	if player == nil then
-		-- next round
 		self.current_player_index = 1
-		self.round = self.round + 1
-		for player_index, player_state in ipairs(self.players) do
-			player_state:on_next_round()
+		if is_all_players_ends_round(self) then
+			--production phase
+			for player_index, player_state in ipairs(self.players) do
+				player_state:on_production_phase()
+			end
+			-- next round
+			self.round = self.round + 1
+			for player_index, player_state in ipairs(self.players) do
+				player_state:on_next_round()
+			end
+			print("round " .. self.round)
+		else
+			for player_index, player_state in ipairs(self.players) do
+				player_state:on_next_turn()
+			end
 		end
-		print("round " .. self.round)
 	end
 end
 
@@ -77,6 +96,10 @@ end
 
 function M:get_milestones_awards()
 	return self.milestones_awards
+end
+
+function M:get_available_actions()
+	return self:get_player():get_available_actions()
 end
 
 return M

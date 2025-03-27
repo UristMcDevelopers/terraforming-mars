@@ -5,6 +5,7 @@ local M = {}
 local registry = {}
 
 function M.registry(topic, reciever)
+	assert(topic)
 	local recievers = registry[topic] or {}
 	table.insert(recievers, reciever)
 	registry[topic] = recievers
