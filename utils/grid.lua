@@ -21,8 +21,12 @@ function M:set_height_of_node(wanted_height)
 end
 
 function M:set_size(x, y)
-	self.row_size = x
-	self.column_size = y
+	self.column_size = x
+	self.row_size = y
+end
+
+function M:set_padding_between(value)
+	self.padding_between = value
 end
 
 function M:set_factory_name(factory)
@@ -42,6 +46,7 @@ function M:spawn(list_of_data)
 	assert(self.factory)
 	assert(list_of_data)
 	assert(#list_of_data > 0)
+	self.padding_between = self.padding_between or 0 
 	
 	self.nodes = {}
 	local dummy_id = factory.create(self.factory, vmath.vector3(0, 0, 0), nil, nil, self.scale)
@@ -53,19 +58,26 @@ function M:spawn(list_of_data)
 	self.scale = self.wanted_height / size.y
 	self.init_pos = self.init_pos or go.get_position()
 	local spawned = 0
-	for col_index = 1, self.column_size do
-		for row_index = 1, self.row_size do
+	for row_index = 1, self.row_size do
+		for col_index = 1, self.column_size do
 			if spawned == #list_of_data then
-				break
+				break -- not spawning more then size of provided data
 			end
-			
-			local x = self.size_of_node.x * (row_index - 1) * self.scale
-			local y = self.size_of_node.y * (col_index - 1) * self.scale
+
+			local grid_x_index = col_index - 1
+			local grid_y_index = row_index - 1
+
+			local padding_x = col_index == 1 and 0 or self.padding_between * grid_x_index	
+			local padding_y = row_index == 1 and 0 or self.padding_between * grid_y_index
+
+			local x = self.size_of_node.x * self.scale * grid_x_index + padding_x
+			local y = self.size_of_node.y * self.scale * grid_y_index + padding_y
+
 			local new_pos = self.init_pos + vmath.vector3(x, -y, 0)
 			local data = list_of_data[spawned + 1] or {}
 			local node_id = factory.create(self.factory, new_pos, nil, nil, self.scale)
 			msg.post(msg.url(nil, node_id, self.script_name), "set", data)
-			print(new_pos)
+			print(node_id, "position", new_pos)
 			local to_corner_vector = self.size_of_node * self.scale / 2
 			self.nodes[node_id] = {
 				data = data, 
