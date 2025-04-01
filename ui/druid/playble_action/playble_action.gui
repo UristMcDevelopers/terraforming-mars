@@ -1,0 +1,102 @@
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "tags"
+  texture: "/assets/tags/tags.atlas"
+}
+nodes {
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  color {
+    y: 0.902
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "root"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 50.0
+    y: 20.0
+  }
+  type: TYPE_BOX
+  texture: "tags/Action_arrow"
+  id: "image_arrow"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -85.0
+  }
+  size {
+    x: 120.0
+    y: 70.0
+  }
+  type: TYPE_BOX
+  id: "spend_side"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    z: 0.5
+  }
+  size {
+    x: 120.0
+    y: 70.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "spend_text\n"
+  ""
+  font: "default"
+  id: "spend_text"
+  parent: "spend_side"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+  }
+  size {
+    x: 120.0
+    y: 70.0
+  }
+  type: TYPE_BOX
+  id: "get_side"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    z: 0.5
+  }
+  size {
+    x: 120.0
+    y: 70.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "get_text\n"
+  ""
+  font: "default"
+  id: "get_text"
+  parent: "get_side"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

@@ -1,0 +1,40 @@
+images {
+  image: "/assets/tags/Animal.png"
+}
+images {
+  image: "/assets/tags/Building.png"
+}
+images {
+  image: "/assets/tags/City.png"
+}
+images {
+  image: "/assets/tags/Earth.png"
+}
+images {
+  image: "/assets/tags/Empty.png"
+}
+images {
+  image: "/assets/tags/Event.png"
+}
+images {
+  image: "/assets/tags/Jupiter.png"
+}
+images {
+  image: "/assets/tags/Microbe.png"
+}
+images {
+  image: "/assets/tags/Plant.png"
+}
+images {
+  image: "/assets/tags/Power.png"
+}
+images {
+  image: "/assets/tags/Science.png"
+}
+images {
+  image: "/assets/tags/Space.png"
+}
+images {
+  image: "/assets/tags/Action_arrow.png"
+}
+extrude_borders: 2

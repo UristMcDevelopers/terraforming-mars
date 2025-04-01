@@ -1,4 +1,5 @@
 local C = require "utils.message_ids"
+local EVENT_REGISTRY = require "utils.event_regisrty"
 local ASSERTS = require "utils.assertions"
 
 go.property("wanted_sigle_rating_hight", 50)
@@ -8,6 +9,7 @@ local single_rating_height = 0
 local rating_hight_scale = 1
 
 function init(self)
+	EVENT_REGISTRY.registry(C.PLAYER_TERRAFORM_RATING, msg.url())
 	local dummy_id = factory.create("#rating_factory", vmath.vector3(), nil, {player_id = 0, value = 0}, 0) 
 	local dummy_url = msg.url(nil, dummy_id, "terrafom_rating")
 	single_rating_height = go.get(dummy_url, "height")

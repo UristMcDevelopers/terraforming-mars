@@ -21,16 +21,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
-  text: "random recources \n"
-  "change"
+  text: "change_income"
   id: "change_income/text"
-  parent: "change_income"
-  overridden_fields: 4
+  parent: "change_income/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -56,15 +50,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  size {
-    x: 30.0
-    y: 30.0
-  }
   type: TYPE_TEXT
   text: "+"
   id: "hide_menu/text"
-  parent: "hide_menu"
-  overridden_fields: 4
+  parent: "hide_menu/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -90,19 +79,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  scale {
-    x: 0.8
-  }
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
   text: "change_global_params"
   id: "change_global_params/text"
-  parent: "change_global_params"
-  overridden_fields: 3
-  overridden_fields: 4
+  parent: "change_global_params/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -128,15 +108,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
   text: "spend_action"
   id: "spend_action/text"
-  parent: "spend_action"
-  overridden_fields: 4
+  parent: "spend_action/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -162,20 +137,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  scale {
-    x: 0.7
-    y: 0.7
-  }
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
   text: "update_terraform_rating"
   id: "update_terraform_rating/text"
-  parent: "update_terraform_rating"
-  overridden_fields: 3
-  overridden_fields: 4
+  parent: "update_terraform_rating/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -201,19 +166,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  scale {
-    x: 0.8
-  }
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
   text: "set_map_clickable"
   id: "set_map_clickable/text"
-  parent: "set_map_clickable"
-  overridden_fields: 3
-  overridden_fields: 4
+  parent: "set_map_clickable/button"
   overridden_fields: 8
   template_node_child: true
 }
@@ -239,16 +195,10 @@ nodes {
   template_node_child: true
 }
 nodes {
-  size {
-    x: 150.0
-    y: 30.0
-  }
   type: TYPE_TEXT
-  text: "take_random\n"
-  "milestone_or_award"
+  text: "change_milestone"
   id: "change_milestone/text"
-  parent: "change_milestone"
-  overridden_fields: 4
+  parent: "change_milestone/button"
   overridden_fields: 8
   template_node_child: true
 }

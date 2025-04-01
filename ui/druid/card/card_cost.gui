@@ -1,0 +1,53 @@
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "recources"
+  texture: "/assets/recources/player/recources.atlas"
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "recources/MegaCredit"
+  id: "image_cost"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  scale {
+    x: 4.0
+    y: 4.0
+  }
+  size {
+    x: 25.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "25"
+  font: "default"
+  id: "text_cost"
+  parent: "root"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
