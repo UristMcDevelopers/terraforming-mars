@@ -19,8 +19,7 @@ nodes {
   type: TYPE_TEXT
   text: "Start"
   id: "start/text"
-  parent: "start"
-  overridden_fields: 8
+  parent: "start/button"
   template_node_child: true
 }
 nodes {
@@ -43,8 +42,7 @@ nodes {
   type: TYPE_TEXT
   text: "Quit"
   id: "quit/text"
-  parent: "quit"
-  overridden_fields: 8
+  parent: "quit/button"
   template_node_child: true
 }
 material: "/builtins/materials/gui.material"

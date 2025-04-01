@@ -31,6 +31,7 @@ nodes {
   text: "<text>"
   font: "default"
   id: "text"
+  parent: "button"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

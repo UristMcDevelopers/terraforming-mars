@@ -73,19 +73,10 @@ instances {
     z: 0.125
   }
 }
-instances {
-  id: "actions_button"
-  prototype: "/available_actions_gui/actions_button.go"
-  position {
-    x: 557.0
-    y: 86.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "go"
   children: "action_bar_ui"
-  children: "actions_button"
   children: "hex_grid"
   children: "milistones_awards"
   children: "planet_parameters"
@@ -103,6 +94,10 @@ embedded_instances {
   "  id: \"game_board\"\n"
   "  component: \"/game_board/game_board.script\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"druid_board\"\n"
+  "  component: \"/ui/druid/druid_board.gui\"\n"
+  "}\n"
   "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
@@ -114,8 +109,8 @@ embedded_instances {
   "}\\n"
   "\"\n"
   "  position {\n"
-  "    x: 323.0\n"
-  "    y: 567.0\n"
+  "    x: 320.0\n"
+  "    y: 568.0\n"
   "    z: -0.999\n"
   "  }\n"
   "}\n"

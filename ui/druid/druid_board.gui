@@ -1,0 +1,284 @@
+script: "/ui/druid/druid_board.gui_script"
+textures {
+  name: "ui"
+  texture: "/assets/ui/ui.atlas"
+}
+nodes {
+  position {
+    x: 320.0
+    y: 568.0
+  }
+  size {
+    x: 640.0
+    y: 1136.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 215.0
+    y: -464.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_available_actions"
+  parent: "root"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 120.0
+    y: 120.0
+  }
+  type: TYPE_BOX
+  texture: "ui/White"
+  id: "button_available_actions/button"
+  parent: "button_available_actions"
+  overridden_fields: 4
+  overridden_fields: 9
+  overridden_fields: 22
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Available\n"
+  "actions"
+  id: "button_available_actions/text"
+  parent: "button_available_actions/button"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup"
+  parent: "root"
+  inherit_alpha: true
+  template: "/ui/druid/choice_popup/choice_popup.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/root"
+  parent: "choice_popup"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/background"
+  parent: "choice_popup/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/title"
+  parent: "choice_popup/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/scrollable_grid_view"
+  parent: "choice_popup/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/playble_action_grid_content"
+  parent: "choice_popup/scrollable_grid_view"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/playble_action"
+  parent: "choice_popup/playble_action_grid_content"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/playble_action/root"
+  parent: "choice_popup/playble_action"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/playble_action/image_arrow"
+  parent: "choice_popup/playble_action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/playble_action/spend_side"
+  parent: "choice_popup/playble_action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/playble_action/spend_text"
+  parent: "choice_popup/playble_action/spend_side"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/playble_action/get_side"
+  parent: "choice_popup/playble_action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/playble_action/get_text"
+  parent: "choice_popup/playble_action/get_side"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card_grid_content"
+  parent: "choice_popup/scrollable_grid_view"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card"
+  parent: "choice_popup/card_grid_content"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/card_background"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/card/card_name"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card/card_cost"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/card_cost/root"
+  parent: "choice_popup/card/card_cost"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/card_cost/image_cost"
+  parent: "choice_popup/card/card_cost/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/card/card_cost/text_cost"
+  parent: "choice_popup/card/card_cost/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tags"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card/tag"
+  parent: "choice_popup/card/tags"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag/root"
+  parent: "choice_popup/card/tag"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag/image_tag"
+  parent: "choice_popup/card/tag/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card/tag1"
+  parent: "choice_popup/card/tags"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag1/root"
+  parent: "choice_popup/card/tag1"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag1/image_tag"
+  parent: "choice_popup/card/tag1/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card/tag2"
+  parent: "choice_popup/card/tags"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag2/root"
+  parent: "choice_popup/card/tag2"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag2/image_tag"
+  parent: "choice_popup/card/tag2/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/card_content"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/expansion_tag"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/card_score"
+  parent: "choice_popup/card/prefab_card"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/confirm_button"
+  parent: "choice_popup/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/confirm_button/button"
+  parent: "choice_popup/confirm_button"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/confirm_button/text"
+  parent: "choice_popup/confirm_button/button"
+  template_node_child: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
