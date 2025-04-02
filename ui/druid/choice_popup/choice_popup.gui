@@ -2,6 +2,10 @@ fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
 }
+textures {
+  name: "ui"
+  texture: "/assets/ui/ui.atlas"
+}
 nodes {
   size {
     x: 450.0
@@ -283,12 +287,20 @@ nodes {
 }
 nodes {
   position {
-    y: -251.0
+    y: -250.0
+  }
+  size {
+    x: 220.0
+    y: 50.0
   }
   type: TYPE_BOX
+  texture: "ui/Confirm_button"
   id: "confirm_button/button"
   parent: "confirm_button"
   overridden_fields: 1
+  overridden_fields: 4
+  overridden_fields: 9
+  overridden_fields: 22
   template_node_child: true
 }
 nodes {
@@ -297,7 +309,10 @@ nodes {
   id: "confirm_button/text"
   parent: "confirm_button/button"
   overridden_fields: 8
+  overridden_fields: 45
+  overridden_fields: 46
   template_node_child: true
+  enabled: false
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

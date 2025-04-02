@@ -3,8 +3,8 @@ fonts {
   font: "/builtins/fonts/default.font"
 }
 textures {
-  name: "tags"
-  texture: "/assets/tags/tags.atlas"
+  name: "ui"
+  texture: "/assets/ui/ui.atlas"
 }
 nodes {
   size {
@@ -25,7 +25,7 @@ nodes {
     y: 20.0
   }
   type: TYPE_BOX
-  texture: "tags/Action_arrow"
+  texture: "ui/Action_arrow"
   id: "image_arrow"
   parent: "root"
   inherit_alpha: true
