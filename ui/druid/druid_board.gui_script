@@ -13,7 +13,10 @@ local function create_choice_popup(self, message)
 	if self.choice_popup == nil or self.choice_popup:is_deleted() then
 		self.choice_popup = self.druid:new(choice_popup, "choice_popup")
 		self.choice_popup:set_actions(message.actions)
-		self.choice_popup:on_confirm(function (selected_nodes) pprint("returns", selected_nodes) end)
+		self.choice_popup:on_confirm(function (selected_nodes) 
+			assert(#selected_nodes == 1)
+			EVENT_REGISTRY.notify(C.PLAYER_CHOSE_ACTION_TO_PLAY, selected_nodes[1])
+		 end)
 		self.choice_popup:set_multi_choice(false)
 	else
 		print("pop up window already created, skipping")
