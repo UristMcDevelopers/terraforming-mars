@@ -48,10 +48,11 @@ local function confirm_selected_nodes(self)
 	self:clear()
 end
 
-local function on_node_click(self, clicked_node)
+local function on_node_click(self, clicked_node, box_node_name)
 	if self.multi_choice then
 		if not UTILS.array_has_value(self.selected_nodes, clicked_node) then
 			pprint("add to selected nodes", clicked_node)
+			--TODO add select effect via shader or texture swap
 			table.insert(self.selected_nodes, clicked_node)
 		end
 	else
@@ -100,7 +101,7 @@ function M:add_action_element(action)
 	local root = prefab_nodes["choice_popup/playble_action/root"]
 	local spend_text = prefab_nodes["choice_popup/playble_action/spend_text"]
 	local get_text = prefab_nodes["choice_popup/playble_action/get_text"]
-	local button = self.druid:new_button(root, function () on_node_click(self, action) end)
+	local button = self.druid:new_button(root, function () on_node_click(self, action, root) end)
 	button.hover:set_enabled(false) --TODO disable hover, bacause for some reason hover hides text, and i dont want to investigate it
 	
 	gui.set_enabled(root, true)
