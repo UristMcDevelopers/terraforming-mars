@@ -38,7 +38,7 @@ function on_message(self, message_id, message, sender)
 		-- GameState:get_available_actions()
 		EVENT_REGISTRY.notify(C.UI_SHOW_ACTIONS_GRID, { actions = { {action_name = "TEST ACTION1"}, {action_name = "TEST ACTION2"}, {action_name = "TEST ACTION3"}, {action_name = "TEST ACTION4"}, {action_name = "TEST ACTION5"}} })
 	elseif message_id == hash(C.PLAYER_CHOSE_ACTION_TO_PLAY) then
-		pprint("player played card", message)
+		pprint("player played action", message)
 	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
 		GameState:take_milestone_or_award(message.name)
 		local ma = GameState:get_milestones_awards()
