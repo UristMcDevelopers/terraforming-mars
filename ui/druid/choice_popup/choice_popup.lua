@@ -87,7 +87,7 @@ function M:set_actions(actions)
 	self.grid = self.druid:new_static_grid(PREFAB_ACTION_NODE_NAME, self.action_prefab, 1)
 	self.scroll:bind_grid(self.grid)
 
-	for index, action in ipairs(actions) do
+	for index, action in ipairs(actions or {}) do
 		self:add_action_element(action)
 	end
 end

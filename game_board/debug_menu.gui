@@ -92,35 +92,6 @@ nodes {
     y: 830.0
   }
   type: TYPE_TEMPLATE
-  id: "spend_action"
-  inherit_alpha: true
-  template: "/main_menu_gui/button.gui"
-}
-nodes {
-  size {
-    x: 150.0
-    y: 30.0
-  }
-  type: TYPE_BOX
-  id: "spend_action/button"
-  parent: "spend_action"
-  overridden_fields: 4
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  text: "spend_action"
-  id: "spend_action/text"
-  parent: "spend_action/button"
-  overridden_fields: 8
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 565.0
-    y: 800.0
-  }
-  type: TYPE_TEMPLATE
   id: "update_terraform_rating"
   inherit_alpha: true
   template: "/main_menu_gui/button.gui"
@@ -147,7 +118,7 @@ nodes {
 nodes {
   position {
     x: 565.0
-    y: 770.0
+    y: 800.0
   }
   type: TYPE_TEMPLATE
   id: "set_map_clickable"
@@ -176,7 +147,7 @@ nodes {
 nodes {
   position {
     x: 565.0
-    y: 740.0
+    y: 770.0
   }
   type: TYPE_TEMPLATE
   id: "change_milestone"

@@ -1,6 +1,11 @@
 local C = require "utils.message_ids"
 local actions = require "logic.action_state"
 local RESOURCES = require "logic.resources"
+local standart_projects = require("logic.actions.standarts.standart_projects")
+local EFFECT_TYPE = require("logic.enums.action_effect_type")
+local TARGET_TYPE = require("logic.enums.target_type")
+local EVENT_REGISTRY = require("utils.event_regisrty")
+
 
 
 local M = {}
@@ -8,6 +13,7 @@ local M = {}
 function M.new()
 	return setmetatable({
 		id = 1,
+		color = C.PLAYER_1_COLOR,
 		terraform_rating = 20,
 		corporation = {},
 		actions = actions.new(),
@@ -20,11 +26,20 @@ function M.new()
 		hand = {}, 
 		tags = {}, --played cards tags can be moved to played_cards as extra field
 		played_cards = {}, -- just for score system
-		available_actions = {}, -- blue cards effects/actions/standart projects/corporation action/
+		available_actions = {
+			standart_projects.new_increase_electicity_income(),
+			standart_projects.new_asteroid(),
+			standart_projects.new_ocean(),
+			standart_projects.new_tree(),
+			standart_projects.new_city(),
+			standart_projects.new_spend_heat(),
+			standart_projects.new_spend_plants(),
+		}, -- blue cards effects/actions/standart projects/corporation action/
 	}, { __index = M })
 end
 
 local function apply_income(self)
+	self.resources.current:electricity_transfer_to_heat()
 	self.resources.current:update(self.resources.income)
 	self.resources.current:update_resource(C.RECOURCE_GOLD, self.terraform_rating)
 end
@@ -41,8 +56,77 @@ function M:get_actions()
 	return self.actions:get_actions()
 end
 
-function M:spend_action()
+function M:get_available_actions()
+	local _available_actions = {}
+	for _, action in ipairs(self.available_actions) do
+		if action:is_available() then
+			table.insert(_available_actions, action)
+		end
+	end
+	return _available_actions
+end
+
+function M:spend_action(played_action)
+	for index, value in ipairs(self.available_actions) do
+		if value.id == played_action.id then
+			pprint("find played action", value)
+			value:effect_played()
+		end
+	end
 	self.actions:spend_action()
+
+
+	--TODO think where to put this code for applying action effects 
+	local type = played_action.spend.type
+	local resource_type = played_action.spend.resource_type
+	local amount = played_action.spend.amount
+	local target = played_action.spend.target
+	print("spend_action", type, resource_type, amount, target)
+	if EFFECT_TYPE.RESOURCE == type then
+		self.resources.current:update_resource(resource_type, amount)
+	elseif EFFECT_TYPE.INCOME == type then
+		self.resources.income:update_resource(resource_type, amount)
+	elseif EFFECT_TYPE.RESOURCE_ON_CARD == type then
+		if target == TARGET_TYPE.THIS then
+			--TODO find card, delete token from it
+		elseif target == TARGET_TYPE.OTHER then
+			--TODO give player to choose other card, even from other player(add other player tag on card)
+		elseif target == TARGET_TYPE.ANY then
+			--TODO find suitable cards to choose from (it's delete)
+		end
+	elseif EFFECT_TYPE.SELL_CARDS == type then
+		--TODO give player multi choice of cards to sell
+	end
+
+	for _, get_effect in ipairs(played_action.get) do
+		type = get_effect.type
+		resource_type = get_effect.resource_type
+		amount = get_effect.amount
+		target = get_effect.target
+		print("get effect", type, resource_type, amount, target)
+		
+		if EFFECT_TYPE.RESOURCE == type then
+			self.resources.current:update_resource(resource_type, amount)
+		elseif EFFECT_TYPE.INCOME == type then
+			self.resources.income:update_resource(resource_type, amount)
+		elseif EFFECT_TYPE.RESOURCE_ON_CARD == type then
+			if target == TARGET_TYPE.THIS then
+				--TODO find card, delete token from it
+			elseif target == TARGET_TYPE.OTHER then
+				--TODO give player to choose other card, even from other player(add other player tag on card)
+			elseif target == TARGET_TYPE.ANY then
+				--TODO find suitable cards to choose from (it's delete)
+			end
+		elseif EFFECT_TYPE.SELL_CARDS == type then
+			--TODO give player multi choice of cards to sell
+		elseif EFFECT_TYPE.PLANET_PARAM == type then
+			EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, {[resource_type] = { times = amount }})
+		elseif EFFECT_TYPE.PLACE_THE_TILE == type then
+			EVENT_REGISTRY.notify(C.GIVE_PLAYER_TO_PLACE_TILE, { tile_type = resource_type, player_color = self.color })
+		end
+	end
+
+
 end
 
 function M:skip_turn()
@@ -55,10 +139,6 @@ end
 
 function M:on_next_turn()
 	self.actions:on_next_turn()
-end
-
-function M:available_actions()
-	return self.available_actions
 end
 
 function M:get_resources()

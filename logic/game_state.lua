@@ -57,9 +57,9 @@ function M:get_planet()
 	return self.planet_parameters
 end
 
-function M:spend_action()
+function M:spend_action(played_action)
 	local player = self.players[self.current_player_index]
-	player:spend_action()
+	player:spend_action(played_action)
 end
 
 function M:skip_turn()
@@ -101,5 +101,16 @@ end
 function M:get_available_actions()
 	return self:get_player():get_available_actions()
 end
+
+function M:render_map()
+	self.map:render_map_recources()
+	self.map:render_map_oceans()
+end
+
+function M:tile_placed(tile_type, row, column)
+	self.map:update_placed_tiles(row, column, self.current_player_index, tile_type)
+end
+
+
 
 return M

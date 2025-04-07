@@ -3,6 +3,7 @@ title = terraforming
 version = 0.1
 dependencies#0 = https://github.com/britzl/deftest/archive/refs/tags/2.8.0.zip
 dependencies#1 = https://github.com/Insality/druid/archive/refs/tags/1.0.zip
+dependencies#2 = https://github.com/selimanac/defold-random/archive/refs/tags/v1.2.6.zip
 
 [bootstrap]
 main_collection = /game_board/game_board.collectionc

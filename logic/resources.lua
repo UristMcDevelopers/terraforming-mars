@@ -23,4 +23,10 @@ function M:update(map)
 	end
 end
 
+function M:electricity_transfer_to_heat()
+	local transfer = self[C.RECOURCE_ELECTRICITY]
+	self[C.RECOURCE_ELECTRICITY] = 0
+	self[C.RECOURCE_HEAT] = self[C.RECOURCE_HEAT] + transfer 
+end
+
 return M

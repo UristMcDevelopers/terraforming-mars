@@ -1,17 +1,112 @@
 local UTILS = require("utils.helpers")
 local GRID_UTILS = require "hex_grid.hex_grid_utils"
 local C = require "utils.message_ids"
+local EVENT_REGISTRY = require("utils.event_regisrty")
 
 local M = {}
+
+-- TODO вынести в файл все координаты и ресурс
+local default_ocean_coords = {[1] = {7}, [4] = {7,8,9}, [5] = {4,5,6}, [6] = {9}, [8] = {8}, [9] = {4,6,7}}
+local default_non_mars_coords = {[8] = {1}, [9] = {1}}
+local default_noctis_city = {[5] = {3}}
+local default_placement_bonuses_coords = {
+	[1] = { 
+		[3] = { C.RECOURCE_STEEL },
+		[4] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
+		[7] = { C.RECOURCE_TITANIUM, C.RECOURCE_TITANIUM },
+	},
+	[2] = {
+		[3] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
+		[5] = { C.PLAYER_DRAW_CARD },
+		[6] = { C.PLAYER_DRAW_CARD },
+		[8] = { C.RECOURCE_TITANIUM },
+	},
+	[3] = {
+		[7] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+	},
+	[4] = {
+		[2] = { C.RECOURCE_PLANT },
+		[3] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[4] = { C.RECOURCE_PLANT },
+		[5] = { C.RECOURCE_PLANT },
+		[6] = { C.RECOURCE_PLANT },
+		[7] = { C.RECOURCE_PLANT },
+		[8] = { C.RECOURCE_PLANT },
+		[9] = { C.RECOURCE_PLANT },
+	},
+	[5] = {
+		[1] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[2] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[3] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[4] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[5] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[6] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[7] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[8] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+		[9] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+	},
+	[6] = {
+		[2] = { C.RECOURCE_PLANT, C.RECOURCE_STEEL },
+		[3] = { C.RECOURCE_PLANT },
+		[4] = { C.RECOURCE_PLANT },
+		[5] = { C.RECOURCE_PLANT },
+		[6] = { C.RECOURCE_PLANT },
+		[7] = { C.RECOURCE_PLANT },
+		[8] = { C.RECOURCE_PLANT },
+		[9] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
+	},
+	[7] = { 
+		[2] = { C.PLAYER_DRAW_CARD },
+		[8] = { C.RECOURCE_STEEL },
+	},
+	[8] = { 
+		[4] = { C.RECOURCE_STEEL },
+		[8] = { C.PLAYER_DRAW_CARD, C.PLAYER_DRAW_CARD },
+	},
+	[9] = { 
+		[3] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
+		[4] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
+		[6] = { C.PLAYER_DRAW_CARD },
+	},
+}
 
 function M.new()
 	return setmetatable({
 		placed_tiles_coords = {},
-		ocean_coords = {},
-		non_mars_coords = {},
-		noctis_city = {},
-		placement_bonuses_coords = {},
+		ocean_coords = default_ocean_coords,
+		non_mars_coords = default_non_mars_coords,
+		noctis_city = default_noctis_city,
+		placement_bonuses_coords = default_placement_bonuses_coords,
 	}, { __index = M })
+end
+
+
+function M:render_map_recources()
+	pprint("render_map_recources", self.placement_bonuses_coords)
+	for row_index, column_indexes in pairs(self.placement_bonuses_coords) do
+		for column_index, resource_list in pairs(column_indexes) do
+			if #resource_list > 0 then
+				EVENT_REGISTRY.notify(C.MAP_SET_TILE_RECOURCES, {
+					row = row_index,
+					column = column_index,
+					resources = resource_list
+				})
+			end
+		end
+	end
+end
+
+function M:render_map_oceans()
+	for row_index, column_indexes in pairs(self.ocean_coords) do
+		for k, column_index in pairs(column_indexes) do
+			EVENT_REGISTRY.notify(C.MAP_SET_TILE, {
+				tile_type = C.TILE_TYPE_EMPTY_OCEAN,
+				row = row_index, 
+				column = column_index, 
+				player_color = C.TRANSPARENT_COLOR
+			})
+		end
+	end
 end
 
 function M:set_placed_tiles_coords(coords)

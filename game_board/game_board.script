@@ -15,7 +15,8 @@ function init(self)
 	EVENT_REGISTRY.registry(C.PLAYER_RESOURCES_CHANGED, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_SKIP_TURN, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_SPEND_ACTION, msg.url())
-	print("game board")
+	EVENT_REGISTRY.registry(C.MAP_TILE_PLACED, msg.url())
+	EVENT_REGISTRY.registry(C.HEX_GRID_COMPONENT_LOADED, msg.url())
 end
 
 function on_message(self, message_id, message, sender)
@@ -23,33 +24,41 @@ function on_message(self, message_id, message, sender)
 		GameState:skip_turn()
 		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
 		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources()) --TODO im not shure if we need send it from here. maybe from state itself
+
 	elseif message_id == hash(C.PLAYER_SPEND_ACTION) then
 		GameState:spend_action()
 		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
+		
 	elseif message_id == hash(C.PLAYER_RESOURCES_CHANGED) then
 		GameState:get_player():update_resources(message)
 		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources())
-	elseif message_id == hash(C.PLAYER_MAP_CLICKED) then
-		print("C.PLAYER_MAP_CLICKED", message.row, message.column)
-		-- msg.post("/hex_grid#hex_grid_controller", C.MAP_SET_TILE, { tile_type = test_random_tile_name(), column =  message.column, row = message.row, player_color = C.PLAYER_1_COLOR } );
+		
 	elseif message_id == hash(C.MAP_TILE_PLACED) then
-		print("C.MAP_TILE_PLACED", message.tile_type, message.row, message.column)
+		GameState:tile_placed(message.tile_type, message.row, message.column)
+
 	elseif message_id == hash(C.UI_CLICK_AVAILABLE_ACTIONS) then
-		-- GameState:get_available_actions()
-		EVENT_REGISTRY.notify(C.UI_SHOW_ACTIONS_GRID, { actions = { {action_name = "TEST ACTION1"}, {action_name = "TEST ACTION2"}, {action_name = "TEST ACTION3"}, {action_name = "TEST ACTION4"}, {action_name = "TEST ACTION5"}} })
+		EVENT_REGISTRY.notify_with_large_message(C.UI_SHOW_ACTIONS_GRID, { actions = GameState:get_available_actions() })
+
 	elseif message_id == hash(C.PLAYER_CHOSE_ACTION_TO_PLAY) then
+		local played_action = message
 		pprint("player played action", message)
-		GameState:spend_action()
+		GameState:spend_action(played_action)
 		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
+		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources())
+
 	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
 		GameState:take_milestone_or_award(message.name)
 		local ma = GameState:get_milestones_awards()
 		EVENT_REGISTRY.notify(C.UI_UPDATE_MILESTONES_AWARDS, ma)
+
 	elseif message_id == hash(C.INCREASE_PLANET_PARAMETER) then
 		for param_name, details in pairs(message) do
 			GameState:get_planet():increase(param_name, details.times)
 		end
 		EVENT_REGISTRY.notify(C.UI_UPDATE_PLANET_PARAMETERS, GameState:get_planet():get())
+
+	elseif message_id == hash(C.HEX_GRID_COMPONENT_LOADED) then
+		GameState:render_map()
 	end
 end
 

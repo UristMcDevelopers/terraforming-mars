@@ -21,4 +21,16 @@ function M.type_boolean(value)
 	assert(value_type == "boolean", "expected boolean got " .. value_type)
 end
 
+function M.value_of_enum(enum, value)
+	assert(type(enum) == 'table')
+	for enum_key, enum_value in pairs(enum) do
+		if value == enum_value then
+			return
+		end	
+	end
+	assert(nil, "value is not in enum values")
+	
+end
+
+
 return M

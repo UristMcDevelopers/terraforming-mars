@@ -54,3 +54,8 @@
     3. if skip turn with 0 played actions you're done with round
 5. Score system
 
+## next TODOs
+- Add text/icon to user on GIVE_PLAYER_TO_PLACE_TILE
+- Disable buttons which should not be clickable while placing tile/choosing in popup menu
+- add initial tests for logic
+- maybe code clean up for TODOs in code
