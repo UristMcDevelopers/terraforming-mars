@@ -1,4 +1,5 @@
 local C = require("utils.message_ids")
+local EVENT_REGISTRY = require("utils.event_regisrty")
 
 local M = {}
 
@@ -36,6 +37,7 @@ function M:increase(planet_param, times)
 			for index, trigger in ipairs(self.triggers or {}) do
 				trigger:trigger_if_equal(planet_param, self[planet_param])
 			end
+			EVENT_REGISTRY.notify(C.INCREASE_TERRAFORM_RATING)
 		else
 			print("planet param", planet_param, "already at max value")
 		end

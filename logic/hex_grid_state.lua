@@ -80,6 +80,17 @@ function M.new()
 	}, { __index = M })
 end
 
+local function send_tile_bonus_resources(self, row, column)
+	local bonus_coords = self:get_placement_bonuses_coords()
+	local bonuses_on_tile = (bonus_coords[row] and bonus_coords[row][column]) or {}
+	for _, recource_type in ipairs(bonuses_on_tile) do
+		if recource_type == C.PLAYER_DRAW_CARD then
+			EVENT_REGISTRY.notify(C.PLAYER_DRAW_CARD)
+		else
+			EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { current_change = {[recource_type] = 1 } })
+		end
+	end
+end
 
 function M:render_map_recources()
 	pprint("render_map_recources", self.placement_bonuses_coords)
@@ -130,7 +141,7 @@ function M:set_placement_bonuses_coords(coords)
 end
 
 function M:get_placement_bonuses_coords()
-	return self.placement_bonuses_coords
+	return self.placement_bonuses_coords or {}
 end
 
 
@@ -201,12 +212,15 @@ function M:set_with_validation(row, column, player, tile_type)
 			error("has neigbor city")
 		end
 	end		
-	if close_oceans > 0 then
-		print("neigbor oceans", close_oceans)
-		-- TODO send 2 gold per tile to player who put tile
-	end
 
 	self:update_placed_tiles(row, column, player, tile_type)
+
+	if close_oceans > 0 then
+		print("neigbor oceans", close_oceans)
+		EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { current_change = {[C.RECOURCE_GOLD] = (close_oceans * 2) }})
+	end
+	
+	send_tile_bonus_resources(self, row, column) 
 end
 
 return M

@@ -108,7 +108,12 @@ function M:render_map()
 end
 
 function M:tile_placed(tile_type, row, column)
-	self.map:update_placed_tiles(row, column, self.current_player_index, tile_type)
+	self.map:set_with_validation(row, column, self.current_player_index, tile_type)
+	if tile_type == C.TILE_TYPE_OCEAN then
+		increase_planet_param(C.PLANET_OCEANS)
+	elseif tile_type == C.TILE_TYPE_TREE then
+		increase_planet_param(C.PLANET_OXYGEN)
+	end
 end
 
 

@@ -52,6 +52,15 @@ function M:get_id()
 	return self.id
 end
 
+function M:get_terraform_rating()
+	return self.terraform_rating
+end
+
+function M:increase_terraform_rating(amount)
+	amount = amount or 1
+	self.terraform_rating = self.terraform_rating + amount
+end
+
 function M:get_actions()
 	return self.actions:get_actions()
 end
@@ -146,8 +155,8 @@ function M:get_resources()
 end
 
 function M:update_resources(resource_event)
-	self.resources.current:update(resource_event.current_change)
-	self.resources.income:update(resource_event.income_change)
+	self.resources.current:update(resource_event.current_change or {})
+	self.resources.income:update(resource_event.income_change or {})
 end
 
 function M:on_production_phase()

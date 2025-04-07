@@ -52,6 +52,8 @@ M.MAP_SET_TILE_RECOURCES = "map_set_tile_recources"
 M.MAP_SET_CLICKABLE = "map_set_clickable"
 M.MAP_TILE_PLACED = "map_tile_placed"
 
+M.INCREASE_TERRAFORM_RATING = "INCREASE_TERRAFORM_RATING"
+
 M.GIVE_PLAYER_TO_PLACE_TILE = "GIVE_PLAYER_TO_PLACE_TILE"
 M.SHOW_SKIP_TURN_BUTTON = "show_skip_button"
 M.SHOW_NEXT_ROUND_BUTTON = "show_next_round_button"

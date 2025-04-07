@@ -17,6 +17,7 @@ function init(self)
 	EVENT_REGISTRY.registry(C.PLAYER_SPEND_ACTION, msg.url())
 	EVENT_REGISTRY.registry(C.MAP_TILE_PLACED, msg.url())
 	EVENT_REGISTRY.registry(C.HEX_GRID_COMPONENT_LOADED, msg.url())
+	EVENT_REGISTRY.registry(C.INCREASE_TERRAFORM_RATING, msg.url())
 end
 
 function on_message(self, message_id, message, sender)
@@ -25,16 +26,17 @@ function on_message(self, message_id, message, sender)
 		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
 		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources()) --TODO im not shure if we need send it from here. maybe from state itself
 
-	elseif message_id == hash(C.PLAYER_SPEND_ACTION) then
-		GameState:spend_action()
-		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
-		
 	elseif message_id == hash(C.PLAYER_RESOURCES_CHANGED) then
 		GameState:get_player():update_resources(message)
 		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources())
 		
+	elseif message_id == hash(C.INCREASE_TERRAFORM_RATING) then
+		GameState:get_player():increase_terraform_rating()
+		EVENT_REGISTRY.notify(C.PLAYER_TERRAFORM_RATING, { player_id = GameState:get_player():get_id(), terraform_rating = GameState:get_player():get_terraform_rating() })
+
 	elseif message_id == hash(C.MAP_TILE_PLACED) then
 		GameState:tile_placed(message.tile_type, message.row, message.column)
+		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources())
 
 	elseif message_id == hash(C.UI_CLICK_AVAILABLE_ACTIONS) then
 		EVENT_REGISTRY.notify_with_large_message(C.UI_SHOW_ACTIONS_GRID, { actions = GameState:get_available_actions() })
