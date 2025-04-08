@@ -55,7 +55,9 @@
 5. Score system
 
 ## next TODOs
-- Add text/icon to user on GIVE_PLAYER_TO_PLACE_TILE
-- Disable buttons which should not be clickable while placing tile/choosing in popup menu
+- Disable buttons which should not be clickable while placing tile/choosing in popup menu (maybe crate screen_manager which nows what disable on certain event)
+- update tile after placing if validation failed (or just refill all placed tiles on map)
+- add a way to close popup without playing (like click outside of popup)
 - add initial tests for logic
 - maybe code clean up for TODOs in code
+- move hex_grid_ui to druid

@@ -5,7 +5,6 @@ local druid = require("druid.druid")
 local choice_popup = require("ui.druid.choice_popup.choice_popup")
 
 local function on_button_callback(self)
-	print("The button clicked!")
 	EVENT_REGISTRY.notify(C.UI_CLICK_AVAILABLE_ACTIONS)
 end
 
@@ -16,8 +15,11 @@ local function create_choice_popup(self, message)
 		self.choice_popup:on_confirm(function (selected_nodes) 
 			assert(#selected_nodes == 1)
 			EVENT_REGISTRY.notify(C.PLAYER_CHOSE_ACTION_TO_PLAY, selected_nodes[1])
-		 end)
+			self.actions_button:set_enabled(true)
+		end)
 		self.choice_popup:set_multi_choice(false)
+
+		self.actions_button:set_enabled(false)
 	else
 		print("pop up window already created, skipping")
 	end
@@ -27,10 +29,13 @@ end
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	EVENT_REGISTRY.registry_for_large_message(C.UI_SHOW_ACTIONS_GRID, msg.url())
+	EVENT_REGISTRY.registry(C.GIVE_PLAYER_TO_PLACE_TILE, msg.url())
+	EVENT_REGISTRY.registry(C.MAP_TILE_PLACED, msg.url())
 	
 	self.druid = druid.new(self)
-	self.button = self.druid:new_button("button_available_actions/button", on_button_callback)
+	self.actions_button = self.druid:new_button("button_available_actions/button", on_button_callback)
 	gui.set_enabled(gui.get_node("choice_popup/root"), false)
+	gui.set_enabled(gui.get_node("titile_box"), false)
 end
 
 function final(self)
@@ -47,6 +52,16 @@ function on_message(self, message_id, message, sender)
 	self.druid:on_message(message_id, message, sender)
 	if message_id == hash(C.UI_SHOW_ACTIONS_GRID) then
 		create_choice_popup(self, EVENT_DATA.pop(C.UI_SHOW_ACTIONS_GRID))
+
+	--TODO after hex grid ui whould move to druid component system this will not be needed
+	elseif message_id == hash(C.GIVE_PLAYER_TO_PLACE_TILE) then
+		local text = (message.tile_type == C.TILE_TYPE_OCEAN and "Ocean") or (message.tile_type == C.TILE_TYPE_CITY and "City") or (message.tile_type == C.TILE_TYPE_TREE and "Greenary")
+		gui.set_enabled(gui.get_node("titile_box"), true)
+		gui.set_text(gui.get_node("titile_text"), "Choose tile to place " .. text)
+		self.actions_button:set_enabled(false)
+	elseif message_id == hash(C.MAP_TILE_PLACED) then
+		gui.set_enabled(gui.get_node("titile_box"), false)
+		self.actions_button:set_enabled(true)
 	end
 end
 

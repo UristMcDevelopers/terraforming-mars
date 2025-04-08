@@ -1,4 +1,8 @@
 script: "/ui/druid/druid_board.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
 textures {
   name: "ui"
   texture: "/assets/ui/ui.atlas"
@@ -279,6 +283,41 @@ nodes {
   id: "choice_popup/confirm_button/text"
   parent: "choice_popup/confirm_button/button"
   template_node_child: true
+}
+nodes {
+  position {
+    y: 424.0
+  }
+  size {
+    x: 350.0
+    y: 70.0
+  }
+  color {
+    y: 0.902
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "titile_box"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 350.0
+    y: 70.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Choose tile to put Ocean"
+  font: "default"
+  id: "titile_text"
+  parent: "titile_box"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
