@@ -11,7 +11,7 @@ local TRIGGER = require("logic.trigger")
 local M = {}
 
 local function increase_income(recource_name)
-	EVENT_REGISTRY.notify(C.PLAYER_INCOME_CHANGED, {[recource_name] = 1})
+	EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { income_change = {[recource_name] = 1}})
 end
 
 local function increase_planet_param(planet_param)
