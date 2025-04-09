@@ -18,6 +18,9 @@ local function create_choice_popup(self, message)
 			self.actions_button:set_enabled(true)
 		end)
 		self.choice_popup:set_multi_choice(false)
+		self.choice_popup:on_cancel(function ()
+			self.actions_button:set_enabled(true)
+		end)
 
 		self.actions_button:set_enabled(false)
 	else

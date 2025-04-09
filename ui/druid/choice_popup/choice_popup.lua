@@ -28,10 +28,20 @@ function M:init(template, nodes)
 
 	self.druid = self:get_druid(template, nodes)
 	self.root = self:get_node("root")
+	self.background_node = self:get_node("background")
 	self.confirm_button = self:get_node("confirm_button/button")
 	self.on_confirm_cb = nil
+	self.on_outside_cb = function ()  end
 	gui.set_enabled(self.root, true)
 	gui.set_enabled(self.confirm_button, false)
+
+	local background_as_button = self.druid:new_button(self.background_node, function () end)
+	background_as_button.hover:set_enabled(false)
+	background_as_button.style.on_click = function () end
+	background_as_button.on_click_outside:subscribe(function () 
+		pcall(self.on_cancel_cb)
+		self:clear()
+	end)
 
 	-- workaround. Sooooo on self.druid:remove(self) we deliting confirm button from druid too
 	-- but animation of click is not ended. so it's removed at the moment its scaled a bit, (for click feel) 
@@ -72,7 +82,11 @@ end
 
 function M:on_confirm(func_on_selected_nodes)
 	self.on_confirm_cb = func_on_selected_nodes
+end
 
+
+function M:on_cancel(func_on_cancel)
+	self.on_cancel_cb = func_on_cancel
 end
 
 function M:set_actions(actions)
