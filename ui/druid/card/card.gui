@@ -8,7 +8,7 @@ nodes {
     y: 170.0
   }
   type: TYPE_BOX
-  id: "prefab_card"
+  id: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -24,14 +24,14 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_background"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
     x: -1.0
-    y: 47.0
+    y: 48.0
   }
   scale {
     x: 0.5
@@ -45,7 +45,7 @@ nodes {
   text: "card_name"
   font: "default"
   id: "card_name"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
 }
 nodes {
@@ -59,7 +59,7 @@ nodes {
   }
   type: TYPE_TEMPLATE
   id: "card_cost"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   template: "/ui/druid/card/card_cost.gui"
 }
@@ -92,7 +92,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "tags"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -185,9 +185,26 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_content"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Description"
+  font: "default"
+  id: "card_description"
+  parent: "card_content"
+  inherit_alpha: true
 }
 nodes {
   position {
@@ -200,7 +217,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "expansion_tag"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -215,7 +232,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_score"
-  parent: "prefab_card"
+  parent: "root"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

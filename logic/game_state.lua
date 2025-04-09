@@ -62,6 +62,10 @@ function M:spend_action(played_action)
 	player:spend_action(played_action)
 end
 
+function M:play_card(card, resource_distribution)
+	self:get_player():play_card(card, resource_distribution)
+end
+
 function M:skip_turn()
 	local player = self.players[self.current_player_index]
 	player:skip_turn()

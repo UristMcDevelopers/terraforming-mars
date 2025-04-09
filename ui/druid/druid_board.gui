@@ -148,26 +148,26 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "choice_popup/card/prefab_card"
+  id: "choice_popup/card/root"
   parent: "choice_popup/card"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_background"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "choice_popup/card/card_name"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEMPLATE
   id: "choice_popup/card/card_cost"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
@@ -191,7 +191,7 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/tags"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
@@ -251,19 +251,25 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_content"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "choice_popup/card/card_description"
+  parent: "choice_popup/card/card_content"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/expansion_tag"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_score"
-  parent: "choice_popup/card/prefab_card"
+  parent: "choice_popup/card/root"
   template_node_child: true
 }
 nodes {
@@ -318,6 +324,40 @@ nodes {
   id: "titile_text"
   parent: "titile_box"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: -114.0
+    y: -461.0
+  }
+  type: TYPE_TEMPLATE
+  id: "hand"
+  parent: "root"
+  inherit_alpha: true
+  template: "/main_menu_gui/button.gui"
+}
+nodes {
+  size {
+    x: 120.0
+    y: 120.0
+  }
+  type: TYPE_BOX
+  texture: "ui/White"
+  id: "hand/button"
+  parent: "hand"
+  overridden_fields: 4
+  overridden_fields: 9
+  overridden_fields: 22
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "Choose\n"
+  "card to play"
+  id: "hand/text"
+  parent: "hand/button"
+  overridden_fields: 8
+  template_node_child: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

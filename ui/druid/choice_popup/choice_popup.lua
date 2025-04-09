@@ -1,6 +1,8 @@
 local UTILS = require("utils.helpers")
 local component = require("druid.component")
 local playble_action = require("ui.druid.playble_action.playble_action")
+local card_component = require("ui.druid.card.card")
+
 
 local M = component.create("choice_popup")
 
@@ -58,7 +60,7 @@ local function confirm_selected_nodes(self)
 	self:clear()
 end
 
-local function on_node_click(self, clicked_node, box_node_name)
+local function on_action_click(self, clicked_node, box_node_name)
 	if self.multi_choice then
 		if not UTILS.array_has_value(self.selected_nodes, clicked_node) then
 			pprint("add to selected nodes", clicked_node)
@@ -92,7 +94,7 @@ end
 function M:set_actions(actions)
 	self.action_dummy = self.druid:new(playble_action, "playble_action")
 
-	self.druid:new_button("playble_action/root", function() print("kek") end)
+	-- self.druid:new_button("playble_action/root", function() print("kek") end)
 	self.action_prefab = self:get_node("playble_action/root")
 
 	self.scroll = self.druid:new_scroll(SCROLL_VIEW_ZONE, PREFAB_ACTION_NODE_NAME)
@@ -115,7 +117,7 @@ function M:add_action_element(action)
 	local root = prefab_nodes["choice_popup/playble_action/root"]
 	local spend_text = prefab_nodes["choice_popup/playble_action/spend_text"]
 	local get_text = prefab_nodes["choice_popup/playble_action/get_text"]
-	local button = self.druid:new_button(root, function () on_node_click(self, action, root) end)
+	local button = self.druid:new_button(root, function () on_action_click(self, action, root) end)
 	button.hover:set_enabled(false) --TODO disable hover, bacause for some reason hover hides text, and i dont want to investigate it
 	
 	gui.set_enabled(root, true)
@@ -134,6 +136,36 @@ function M:clear()
 	gui.set_enabled(self.root, false)
 	self.deleted = true
 	self.druid:remove(self)
+end
+
+function M:set_cards(cards)
+	self.card_dummy = self.druid:new(card_component, "card")
+	self.card_root = self:get_node("card/root")
+
+	self.scroll = self.druid:new_scroll(SCROLL_VIEW_ZONE, PREFAB_CARD_NODE_NAME)
+	:set_extra_stretch_size(0)
+	:set_inert(false)
+	self.grid = self.druid:new_static_grid(PREFAB_CARD_NODE_NAME, self.card_root, 3)
+	self.scroll:bind_grid(self.grid)
+
+	for index, card in ipairs(cards or {}) do
+		self:add_card_element(card)
+	end
+end
+
+function M:add_card_element(card)
+	local prefab_nodes = gui.clone_tree(self.card_dummy.root)
+	local root = prefab_nodes["choice_popup/card/root"]
+	local card_name = prefab_nodes["choice_popup/card/card_name"]
+	local card_description = prefab_nodes["choice_popup/card/card_description"]
+	self.druid:new_button(root, function () on_action_click(self, card, root) end) --TODO change function to give player resource distribution choice
+
+	gui.set_enabled(root, true)
+	gui.set_text(card_name, "card.name")
+	gui.set_text(card_description, "card.card_description")
+
+	self.grid:add(root)
+	table.insert(self.created_nodes, root)
 end
 
 return M

@@ -55,7 +55,10 @@
 5. Score system
 
 ## next TODOs
+- Card structure
+- Show terraform rating at the start
 - Disable buttons which should not be clickable while placing tile/choosing in popup menu (maybe crate screen_manager which nows what disable on certain event)
 - add initial tests for logic
 - maybe code clean up for TODOs in code
 - move hex_grid_ui to druid
+- move all ui to druid

@@ -9,7 +9,9 @@ function init(self)
 	GameState = GAME_STATE.new() --TODO add load from file
 
 	EVENT_REGISTRY.registry(C.UI_CLICK_AVAILABLE_ACTIONS, msg.url())
+	EVENT_REGISTRY.registry(C.UI_CLICK_HAND, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_CHOSE_ACTION_TO_PLAY, msg.url())
+	EVENT_REGISTRY.registry(C.PLAYER_CHOSE_CARD_TO_PLAY, msg.url())
 	EVENT_REGISTRY.registry(C.TAKE_MILESTONE_OR_AWARD, msg.url())
 	EVENT_REGISTRY.registry(C.INCREASE_PLANET_PARAMETER, msg.url())
 	EVENT_REGISTRY.registry(C.PLAYER_RESOURCES_CHANGED, msg.url())
@@ -17,6 +19,7 @@ function init(self)
 	EVENT_REGISTRY.registry(C.MAP_TILE_PLACED, msg.url())
 	EVENT_REGISTRY.registry(C.HEX_GRID_COMPONENT_LOADED, msg.url())
 	EVENT_REGISTRY.registry(C.INCREASE_TERRAFORM_RATING, msg.url())
+	
 end
 
 function on_message(self, message_id, message, sender)
@@ -39,13 +42,17 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash(C.UI_CLICK_AVAILABLE_ACTIONS) then
 		EVENT_REGISTRY.notify_with_large_message(C.UI_SHOW_ACTIONS_GRID, { actions = GameState:get_available_actions() })
+	elseif message_id == hash(C.UI_CLICK_HAND) then
+		print("UI_CLICK_HAND")
+		EVENT_REGISTRY.notify_with_large_message(C.UI_SHOW_HAND, { cards = GameState:get_player():get_cards() })
 
 	elseif message_id == hash(C.PLAYER_CHOSE_ACTION_TO_PLAY) then
 		local played_action = message
-		pprint("player played action", message)
 		GameState:spend_action(played_action)
 		EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  GameState:get_player():get_actions() })
 		EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, GameState:get_player():get_resources())
+	elseif message_id == hash(C.PLAYER_CHOSE_CARD_TO_PLAY) then
+		GameState:play_card(message.card, message.resource_distribution)
 
 	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
 		GameState:take_milestone_or_award(message.name)

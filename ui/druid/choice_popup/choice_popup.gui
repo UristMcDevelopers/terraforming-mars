@@ -69,12 +69,9 @@ nodes {
   clipping_mode: CLIPPING_MODE_STENCIL
 }
 nodes {
-  position {
-    y: -1.0
-  }
   size {
     x: 450.0
-    y: 424.0
+    y: 450.0
   }
   color {
     x: 0.502
@@ -97,6 +94,7 @@ nodes {
   parent: "playble_action_grid_content"
   inherit_alpha: true
   template: "/ui/druid/playble_action/playble_action.gui"
+  enabled: false
 }
 nodes {
   type: TYPE_BOX
@@ -136,8 +134,8 @@ nodes {
 }
 nodes {
   size {
-    x: 100.0
-    y: 100.0
+    x: 450.0
+    y: 400.0
   }
   color {
     x: 0.702
@@ -160,26 +158,26 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "card/prefab_card"
+  id: "card/root"
   parent: "card"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "card/card_background"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "card/card_name"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEMPLATE
   id: "card/card_cost"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {
@@ -203,7 +201,7 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "card/tags"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {
@@ -261,21 +259,32 @@ nodes {
   template_node_child: true
 }
 nodes {
+  color {
+    x: 0.702
+    y: 0.8
+  }
   type: TYPE_BOX
   id: "card/card_content"
-  parent: "card/prefab_card"
+  parent: "card/root"
+  overridden_fields: 5
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "card/card_description"
+  parent: "card/card_content"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "card/expansion_tag"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "card/card_score"
-  parent: "card/prefab_card"
+  parent: "card/root"
   template_node_child: true
 }
 nodes {

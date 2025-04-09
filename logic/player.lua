@@ -2,6 +2,7 @@ local C = require "utils.message_ids"
 local actions = require "logic.action_state"
 local RESOURCES = require "logic.resources"
 local standart_projects = require("logic.actions.standarts.standart_projects")
+local _card = require("logic.cards.card")
 local EFFECT_TYPE = require("logic.enums.action_effect_type")
 local TARGET_TYPE = require("logic.enums.target_type")
 local EVENT_REGISTRY = require("utils.event_regisrty")
@@ -23,7 +24,8 @@ function M.new()
 		},
 
 		temporary_hand = {}, --for effects like "choose one of", "buy at the start of round". can be moved to field "hand" 
-		hand = {}, 
+		hand = { _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
+		_card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), _card.new("Ants4", "ant desc4", 12) }, 
 		tags = {}, --played cards tags can be moved to played_cards as extra field
 		played_cards = {}, -- just for score system
 		available_actions = {
@@ -73,6 +75,29 @@ function M:get_available_actions()
 		end
 	end
 	return _available_actions
+end
+
+function M:get_cards()
+	return self.hand
+end
+
+function M:play_card(card, resource_distribution)
+	--remove card from hand
+	local card_index = -1
+	for index, card_in_hand in ipairs(self.hand) do
+		if card_in_hand.id == card.id then
+			card_index = index
+			break
+		end
+	end
+	table.remove(self.hand, card_index)
+	--remove resources
+	for resource_name, update_value in pairs(resource_distribution) do
+		self.resources.current:update_resource(resource_name, update_value)
+	end
+
+	--TODO apply card effects
+	
 end
 
 function M:spend_action(played_action)
