@@ -211,7 +211,7 @@ function M:set_with_validation(row, column, player, tile_type)
 		if close_cities > 0 then
 			error("has neigbor city")
 		end
-	end		
+	end
 
 	self:update_placed_tiles(row, column, player, tile_type)
 

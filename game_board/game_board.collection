@@ -24,14 +24,6 @@ instances {
     x: 484.0
     y: 1012.0
   }
-  component_properties {
-    id: "skip_button"
-    properties {
-      id: "reciver_url"
-      value: "game_board:/go#game_board"
-      type: PROPERTY_TYPE_URL
-    }
-  }
   scale3 {
     x: 0.25
     y: 0.25

@@ -56,7 +56,6 @@
 
 ## next TODOs
 - Disable buttons which should not be clickable while placing tile/choosing in popup menu (maybe crate screen_manager which nows what disable on certain event)
-- update tile after placing if validation failed (or just refill all placed tiles on map)
 - add initial tests for logic
 - maybe code clean up for TODOs in code
 - move hex_grid_ui to druid
