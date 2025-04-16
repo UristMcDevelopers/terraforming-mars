@@ -6,7 +6,7 @@ local card_component = require("ui.druid.card.card")
 
 local M = component.create("choice_popup")
 
-local PREFAB_CARD_NODE_NAME = "card_grid_content" --TODO support card choice
+local PREFAB_CARD_NODE_NAME = "card_grid_content"
 local PREFAB_ACTION_NODE_NAME = "playble_action_grid_content"
 local SCROLL_VIEW_ZONE = "scrollable_grid_view"
 
@@ -145,7 +145,7 @@ function M:set_cards(cards)
 	self.scroll = self.druid:new_scroll(SCROLL_VIEW_ZONE, PREFAB_CARD_NODE_NAME)
 	:set_extra_stretch_size(0)
 	:set_inert(false)
-	self.grid = self.druid:new_static_grid(PREFAB_CARD_NODE_NAME, self.card_root, 3)
+	self.grid = self.druid:new_static_grid(PREFAB_CARD_NODE_NAME, self.card_root, 2)
 	self.scroll:bind_grid(self.grid)
 
 	for index, card in ipairs(cards or {}) do
@@ -155,7 +155,7 @@ end
 
 function M:add_card_element(card)
 	local prefab_nodes = gui.clone_tree(self.card_dummy.root)
-	local root = prefab_nodes["choice_popup/card/root"]
+	local root = prefab_nodes["choice_popup/card/card_data"]
 	local card_name = prefab_nodes["choice_popup/card/card_name"]
 	local card_description = prefab_nodes["choice_popup/card/card_description"]
 	self.druid:new_button(root, function () on_action_click(self, card, root) end) --TODO change function to give player resource distribution choice

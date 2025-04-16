@@ -15,6 +15,18 @@ nodes {
 }
 nodes {
   size {
+    x: 120.0
+    y: 170.0
+  }
+  type: TYPE_BOX
+  id: "card_data"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  size {
     x: 100.0
     y: 150.0
   }
@@ -24,7 +36,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_background"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -45,7 +57,7 @@ nodes {
   text: "card_name"
   font: "default"
   id: "card_name"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
 }
 nodes {
@@ -59,7 +71,7 @@ nodes {
   }
   type: TYPE_TEMPLATE
   id: "card_cost"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   template: "/ui/druid/card/card_cost.gui"
 }
@@ -92,7 +104,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "tags"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -185,7 +197,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_content"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -217,7 +229,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "expansion_tag"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -232,7 +244,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "card_score"
-  parent: "root"
+  parent: "card_data"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

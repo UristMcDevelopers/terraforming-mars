@@ -164,20 +164,26 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "card/card_background"
+  id: "card/card_data"
   parent: "card/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "card/card_background"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "card/card_name"
-  parent: "card/root"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEMPLATE
   id: "card/card_cost"
-  parent: "card/root"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
@@ -201,7 +207,7 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "card/tags"
-  parent: "card/root"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
@@ -259,14 +265,9 @@ nodes {
   template_node_child: true
 }
 nodes {
-  color {
-    x: 0.702
-    y: 0.8
-  }
   type: TYPE_BOX
   id: "card/card_content"
-  parent: "card/root"
-  overridden_fields: 5
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
@@ -278,13 +279,13 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "card/expansion_tag"
-  parent: "card/root"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "card/card_score"
-  parent: "card/root"
+  parent: "card/card_data"
   template_node_child: true
 }
 nodes {

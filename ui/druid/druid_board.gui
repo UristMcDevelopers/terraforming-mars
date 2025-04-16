@@ -56,6 +56,9 @@ nodes {
   template_node_child: true
 }
 nodes {
+  position {
+    y: -13.0
+  }
   type: TYPE_TEMPLATE
   id: "choice_popup"
   parent: "root"
@@ -63,40 +66,81 @@ nodes {
   template: "/ui/druid/choice_popup/choice_popup.gui"
 }
 nodes {
+  size {
+    x: 450.0
+    y: 900.0
+  }
   type: TYPE_BOX
   id: "choice_popup/root"
   parent: "choice_popup"
+  overridden_fields: 4
+  overridden_fields: 46
   template_node_child: true
 }
 nodes {
+  size {
+    x: 450.0
+    y: 900.0
+  }
   type: TYPE_BOX
   id: "choice_popup/background"
   parent: "choice_popup/root"
+  overridden_fields: 4
   template_node_child: true
 }
 nodes {
+  position {
+    y: 437.0
+  }
   type: TYPE_TEXT
   id: "choice_popup/title"
   parent: "choice_popup/root"
+  overridden_fields: 1
   template_node_child: true
 }
 nodes {
+  position {
+    y: -12.0
+    z: 0.1
+  }
+  size {
+    x: 450.0
+    y: 874.0
+  }
   type: TYPE_BOX
   id: "choice_popup/scrollable_grid_view"
   parent: "choice_popup/root"
+  overridden_fields: 1
+  overridden_fields: 4
+  overridden_fields: 46
   template_node_child: true
 }
 nodes {
+  position {
+    y: 409.0
+  }
+  size {
+    x: 450.0
+    y: 900.0
+  }
   type: TYPE_BOX
   id: "choice_popup/playble_action_grid_content"
   parent: "choice_popup/scrollable_grid_view"
+  overridden_fields: 1
+  overridden_fields: 4
   template_node_child: true
 }
 nodes {
+  position {
+    y: -58.0
+  }
   type: TYPE_TEMPLATE
   id: "choice_popup/playble_action"
   parent: "choice_popup/playble_action_grid_content"
+  overridden_fields: 1
+  overridden_fields: 45
   template_node_child: true
+  enabled: false
 }
 nodes {
   type: TYPE_BOX
@@ -135,39 +179,75 @@ nodes {
   template_node_child: true
 }
 nodes {
+  position {
+    y: 410.0
+  }
+  size {
+    x: 450.0
+    y: 900.0
+  }
   type: TYPE_BOX
   id: "choice_popup/card_grid_content"
+  pivot: PIVOT_N
   parent: "choice_popup/scrollable_grid_view"
+  overridden_fields: 1
+  overridden_fields: 4
+  overridden_fields: 14
   template_node_child: true
 }
 nodes {
+  position {
+    y: -164.0
+  }
   type: TYPE_TEMPLATE
   id: "choice_popup/card"
   parent: "choice_popup/card_grid_content"
+  overridden_fields: 1
+  overridden_fields: 45
   template_node_child: true
+  enabled: false
 }
 nodes {
+  size {
+    x: 180.0
+    y: 255.0
+  }
   type: TYPE_BOX
   id: "choice_popup/card/root"
   parent: "choice_popup/card"
+  overridden_fields: 3
+  overridden_fields: 4
   template_node_child: true
+}
+nodes {
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  type: TYPE_BOX
+  id: "choice_popup/card/card_data"
+  parent: "choice_popup/card/root"
+  overridden_fields: 3
+  overridden_fields: 46
+  template_node_child: true
+  visible: false
 }
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_background"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "choice_popup/card/card_name"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEMPLATE
   id: "choice_popup/card/card_cost"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
@@ -191,7 +271,7 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/tags"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
@@ -251,7 +331,7 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_content"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
@@ -263,19 +343,23 @@ nodes {
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/expansion_tag"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
   id: "choice_popup/card/card_score"
-  parent: "choice_popup/card/root"
+  parent: "choice_popup/card/card_data"
   template_node_child: true
 }
 nodes {
+  position {
+    y: -226.0
+  }
   type: TYPE_TEMPLATE
   id: "choice_popup/confirm_button"
   parent: "choice_popup/root"
+  overridden_fields: 1
   template_node_child: true
 }
 nodes {
@@ -292,7 +376,7 @@ nodes {
 }
 nodes {
   position {
-    y: 424.0
+    y: 484.0
   }
   size {
     x: 350.0
