@@ -212,24 +212,6 @@ nodes {
 }
 nodes {
   type: TYPE_TEMPLATE
-  id: "card/tag"
-  parent: "card/tags"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "card/tag/root"
-  parent: "card/tag"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "card/tag/image_tag"
-  parent: "card/tag/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEMPLATE
   id: "card/tag1"
   parent: "card/tags"
   template_node_child: true
@@ -262,6 +244,24 @@ nodes {
   type: TYPE_BOX
   id: "card/tag2/image_tag"
   parent: "card/tag2/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "card/tag3"
+  parent: "card/tags"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "card/tag3/root"
+  parent: "card/tag3"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "card/tag3/image_tag"
+  parent: "card/tag3/root"
   template_node_child: true
 }
 nodes {

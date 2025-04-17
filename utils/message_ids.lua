@@ -68,6 +68,7 @@ M.UI_UPDATE_RESOURCES = "UI_UPDATE_RESOURCES"
 
 -- System events
 M.HEX_GRID_COMPONENT_LOADED = "HEX_GRID_COMPONENT_LOADED"
+M.TERRAFORM_COMPONENT_LOADED = "TERRAFORM_COMPONENT_LOADED"
 
 M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it 
 

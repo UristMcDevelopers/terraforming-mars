@@ -157,11 +157,18 @@ function M:add_card_element(card)
 	local prefab_nodes = gui.clone_tree(self.card_dummy.root)
 	local root = prefab_nodes["choice_popup/card/card_data"]
 	local card_name = prefab_nodes["choice_popup/card/card_name"]
+	local card_cost = prefab_nodes["choice_popup/card/card_cost/text_cost"]
 	local card_description = prefab_nodes["choice_popup/card/card_description"]
 	self.druid:new_button(root, function () on_action_click(self, card, root) end) --TODO change function to give player resource distribution choice
 
-	gui.set_enabled(root, true)
-	gui.set_text(card_name, "card.name")
+	-- gui.set_enabled(root, true)
+	gui.set_text(card_name, card.name)
+	gui.set_text(card_cost, card.cost)
+	for index, tag in ipairs(card.tags or {}) do
+		local tag_node = prefab_nodes["choice_popup/card/" .. "tag" .. index .."/image_tag"]
+		gui.play_flipbook(tag_node, tag)
+	end
+
 	gui.set_text(card_description, "card.card_description")
 
 	self.grid:add(root)

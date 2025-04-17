@@ -25,7 +25,8 @@ function M.new()
 
 		temporary_hand = {}, --for effects like "choose one of", "buy at the start of round". can be moved to field "hand" 
 		hand = { _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
-		_card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), _card.new("Ants4", "ant desc4", 12) }, 
+		_card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
+		_card.new("Ants4", "ant desc4", 12) }, 
 		tags = {}, --played cards tags can be moved to played_cards as extra field
 		played_cards = {}, -- just for score system
 		available_actions = {
@@ -79,6 +80,11 @@ end
 
 function M:get_cards()
 	return self.hand
+end
+
+function M:add_card(card)
+	assert(card)
+	table.insert(self.hand, card)
 end
 
 function M:play_card(card, resource_distribution)

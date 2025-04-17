@@ -276,24 +276,6 @@ nodes {
 }
 nodes {
   type: TYPE_TEMPLATE
-  id: "choice_popup/card/tag"
-  parent: "choice_popup/card/tags"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "choice_popup/card/tag/root"
-  parent: "choice_popup/card/tag"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "choice_popup/card/tag/image_tag"
-  parent: "choice_popup/card/tag/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEMPLATE
   id: "choice_popup/card/tag1"
   parent: "choice_popup/card/tags"
   template_node_child: true
@@ -326,6 +308,24 @@ nodes {
   type: TYPE_BOX
   id: "choice_popup/card/tag2/image_tag"
   parent: "choice_popup/card/tag2/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "choice_popup/card/tag3"
+  parent: "choice_popup/card/tags"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag3/root"
+  parent: "choice_popup/card/tag3"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "choice_popup/card/tag3/image_tag"
+  parent: "choice_popup/card/tag3/root"
   template_node_child: true
 }
 nodes {

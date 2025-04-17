@@ -5,6 +5,7 @@ local PLAYER = require("logic.player")
 local PLANET_PARAMETERS = require("logic.planet_parameters")
 local MA = require("logic.milestones_awards")
 local HEX_GRID_STATE = require("logic.hex_grid_state")
+local DECK = require("logic.deck")
 local GAME_PHASE = require("logic.enums.game_phase")
 local TRIGGER = require("logic.trigger")
 
@@ -43,6 +44,7 @@ function M.new()
 		players = { PLAYER.new() },
 		planet_parameters = planet_parameters,
 		milestones_awards = MA.new(),
+		deck = DECK.new(),
 		map = HEX_GRID_STATE.new(),
 	}, { __index = M })
 	
@@ -64,6 +66,13 @@ end
 
 function M:play_card(card, resource_distribution)
 	self:get_player():play_card(card, resource_distribution)
+end
+
+function M:draw_card(amount)
+	amount = amount or 1
+	for i = 1, amount do
+		self:get_player():add_card(self.deck:draw())
+	end
 end
 
 function M:skip_turn()
@@ -120,6 +129,19 @@ function M:tile_placed(tile_type, row, column)
 	end
 end
 
+
+function M:update_ui()
+	EVENT_REGISTRY.notify(C.UI_UPDATE_PLANET_PARAMETERS, self:get_planet():get())
+	EVENT_REGISTRY.notify(C.UI_UPDATE_MILESTONES_AWARDS, self:get_milestones_awards())
+	EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  self:get_player():get_actions() })
+	EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, self:get_player():get_resources())
+	
+	EVENT_REGISTRY.notify(C.PLAYER_TERRAFORM_RATING, { 
+		player_id = self:get_player():get_id(),
+		terraform_rating = self:get_player():get_terraform_rating()
+	})
+
+end
 
 
 return M
