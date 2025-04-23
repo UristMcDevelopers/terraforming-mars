@@ -47,6 +47,8 @@ function M.new()
 		deck = DECK.new(),
 		map = HEX_GRID_STATE.new(),
 	}, { __index = M })
+
+	default_game_state:draw_card(5)
 	
 	return default_game_state
 end

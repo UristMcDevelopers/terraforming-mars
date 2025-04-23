@@ -22,11 +22,15 @@ function M.new()
 			current = RESOURCES.new(),
 			income = RESOURCES.new(),
 		},
+		steel_worth = 2,
+		titanium_worth = 3,
 
 		temporary_hand = {}, --for effects like "choose one of", "buy at the start of round". can be moved to field "hand" 
-		hand = { _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
-		_card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
-		_card.new("Ants4", "ant desc4", 12) }, 
+		hand = { 
+		-- 	_card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
+		-- _card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
+		-- _card.new("Ants4", "ant desc4", 12) 
+	}, 
 		tags = {}, --played cards tags can be moved to played_cards as extra field
 		played_cards = {}, -- just for score system
 		available_actions = {

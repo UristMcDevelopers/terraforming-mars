@@ -121,35 +121,6 @@ nodes {
     y: 800.0
   }
   type: TYPE_TEMPLATE
-  id: "set_map_clickable"
-  inherit_alpha: true
-  template: "/main_menu_gui/button.gui"
-}
-nodes {
-  size {
-    x: 150.0
-    y: 30.0
-  }
-  type: TYPE_BOX
-  id: "set_map_clickable/button"
-  parent: "set_map_clickable"
-  overridden_fields: 4
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  text: "set_map_clickable"
-  id: "set_map_clickable/text"
-  parent: "set_map_clickable/button"
-  overridden_fields: 8
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 565.0
-    y: 770.0
-  }
-  type: TYPE_TEMPLATE
   id: "change_milestone"
   inherit_alpha: true
   template: "/main_menu_gui/button.gui"

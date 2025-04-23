@@ -2,10 +2,14 @@ local C = require "utils.message_ids"
 local EVENT_REGISTRY = require "utils.event_regisrty"
 local GAME_STATE = require "logic.game_state"
 
+local list_of_cards = require("data.cards.base.base_cards")
+local _card = require("logic.cards.card")
+
 local GameState
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	
 	GameState = GAME_STATE.new() --TODO add load from file
 
 	EVENT_REGISTRY.registry(C.UI_CLICK_AVAILABLE_ACTIONS, msg.url())

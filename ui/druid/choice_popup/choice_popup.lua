@@ -2,7 +2,7 @@ local UTILS = require("utils.helpers")
 local component = require("druid.component")
 local playble_action = require("ui.druid.playble_action.playble_action")
 local card_component = require("ui.druid.card.card")
-
+local const = require("druid.const")
 
 local M = component.create("choice_popup")
 
@@ -169,7 +169,9 @@ function M:add_card_element(card)
 		gui.play_flipbook(tag_node, tag)
 	end
 
-	gui.set_text(card_description, "card.card_description")
+	gui.set_text(card_description, card.description)
+	self.druid:new_text(card_description):set_text_adjust(const.TEXT_ADJUST.DOWNSCALE, 0.5)
+	
 
 	self.grid:add(root)
 	table.insert(self.created_nodes, root)

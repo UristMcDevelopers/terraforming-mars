@@ -21,6 +21,13 @@ function M.new(text, type, resource_type, amount, target)
 	}, { __index = M })
 end
 
+function M.increase_income(resource_type, amount)
+	return M.new(nil, ENUM_ACTION_EFFECT.INCOME, resource_type, amount, nil)
+end
+
+function M.get_resources(resource_type, amount)
+	return M.new(nil, ENUM_ACTION_EFFECT.RESOURCE, resource_type, amount, nil)
+end
 
 
 return M

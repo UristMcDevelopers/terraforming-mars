@@ -1,0 +1,149 @@
+{
+	"name" : "",
+	"description" : "",
+	"cost" : 10,
+	"card_type" : "GREEN/BLUE/RED",
+	"tags" : ["Animal", "Plant"], //MAX size 3
+	"requirements" : [
+		{
+			"_type" : "tag/planet_param/income",
+			//one of
+			"tag_type" : "Animal/Plant, etc.",
+			"resource_type" : "Steel/plant etc",
+			"planet_param_type" : "temperature/ocean/oxygen",
+			//one of
+			"more_or_equal" : 1,
+			"less_or_equal" : 1,
+		}
+	],
+	"effects" : [
+		{
+			"_type" : "OR",
+			"effect1" : {},
+			"effect2" : {},
+			"effect3" : {}, //Imported Hydrogen, Sabotage
+		},
+		{
+			"_type" : "RESOURCE/INCOME/PLANET_PARAM/RESOURCE_ON_CARD",
+			"resource_type" : "STEEL/GOLD etc, or OCEANS,TEMPERATURE,OXYGEN, or Microbs/animals, etc",
+			"amount" : 2,
+			"amount_calculated" : {
+				"per" : "Earth/city_tile/city_on_mars/event_played_in_game",
+				//per energy spend in spend effect? Power Infrastructure
+				"per_amount": 1
+			}
+			"target" : "THIS/OTHER/ANY", //not sure if needed
+		},
+		{
+			"_type" : "STEAL",
+			"resource_type" : "GOLD/STEEL",
+			"amount" : 2
+		},
+		{
+			"_type" : "PLACE_THE_TILE",
+			"tile_type" : "City, Greenary, Ocean, Special....",
+			"amount" : 2
+		},
+		{
+			"_type" : "DRAW_CARDS/GAIN_TERRAFORM_RATING",
+			"amount" : 1
+		},
+		{
+			"_type" : "DISCARD",
+			"amount" : 1
+		},
+		{
+			"_type" : "DRAW_CARDS_CHOOSE_SOME",
+			"to_buy": true,
+			"draw" : 4,
+			"choose" : 2,
+		},
+		{
+			"_type" : "REVEAL_TOP_CARD", //Search For Life
+			"do" : {
+				do something with card info
+			}
+		},
+		{
+			"_type" : "ADD_ACTION",
+			"action" : {
+				"spend": {//effect stucture},
+				"get": {//effect stucture},
+			},
+			"or_action" : {}
+		},
+		{
+			//only in blue spend effect
+			"_type" : "SPEND_RESOURCE_WITH_CHOICE",
+			"resource_type" : "STEEL/GOLD etc, or OCEANS,TEMPERATURE, or Microbs/animals, etc",
+			"can_use_steel" : true,
+			"can_use_titanium" : true,
+			"can_use_heat" : true,
+			"amount" : 2,
+			"target" : "THIS/OTHER/ANY", //not sure if needed
+		},
+		{
+			"_type" : "ON_EVENT",
+			"event_name": "OCEAN_TILE_PLACED/CITY_TILE_PLACED/CARD_WITH_TAG_PLAYED/EVENT_PLAYED/SPACE_EVENT_PLAYED",
+			"do" : {
+				//effect?
+				"optional" : true //Mars University
+			}
+		},
+
+		{
+			"_type": "BUFF",
+			"single_use": false,
+			"standart_projects" : false,
+			"cost_less_by": 2,
+			"with_tag" : "ANY?/Earth/Space"
+		}
+
+		//Unique behavior which does not fit in general structure
+		{
+			"_type" : "BUFF_ADAPTATION_TECHNOLOGY", //Effect: Your global requirements are +2 or -2 steps, your choice in each case.
+			"single_use": true //Special Design
+		},
+		{
+			"_type" : "SELL_CARDS",
+		},
+		{
+			"_type" : "BUFF_INCREASE_MINERALS_WORTH_BY_ONE",
+		},
+		{
+			"_type" : "Artificial Lake", //Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN
+		},
+		{
+			"_type" : "CEO's Favorite Project", //Add 1 resource to a card with at least 1 resource on it
+		},
+		{
+			"_type" : "Flooding" //Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.
+		},
+		{
+			"_type" : "Insulation" //Decrease your heat production any number of steps and increase your M€ production the same number of steps.
+		},
+		{
+			"_type" : "Land Claim" //Place your marker on a non-reserved area. Only you may place a tile there.
+			"Lava Flows", //Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.
+			"Mangrove", //Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.
+			"Mining Area", //Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.
+			"Mining Rights", //(Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.)
+			"Nitrogen-Rich Asteroid", //increase your plant production 1 step, OR 4 steps IF you have 3 plant tags.
+			"Olympus Conference", //check if can be implemented
+			"Protected Habitats", //Opponents may not remove your
+			"Protected Valley", //Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.
+			"Research", //Counts as playing 2 science cards
+			"Robotic Workforce", //Duplicate only the production box of one of your building cards.
+			"Urbanized Area", //Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.
+		},
+	],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "fixed/calculatable",
+		"amount" : 1,
+		"calcucate" : {
+			"per" : "token_name, tile_name, tag_name",
+			"per_amount"
+		}
+	}
+}

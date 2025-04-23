@@ -3,16 +3,24 @@ local CARD = require("logic.cards.card")
 local M = {}
 
 local function default_deck()
-	return {
-		CARD.new("Ants", "ant desc", 10), 
-		CARD.new("Ants2", "ant desc3", 11), 
-		CARD.new("Ants3", "ant desc3", 12), 
-		CARD.new("Ants4", "ant desc4", 12), 
-		CARD.new("Ants", "ant desc", 10), 
-		CARD.new("Ants2", "ant desc3", 11), 
-		CARD.new("Ants3", "ant desc3", 12), 
-		CARD.new("Ants4", "ant desc4", 12) 
-	}
+	local loaded_cards = {}
+	for _, filename in ipairs(require("data.cards.base.base_cards")) do
+		local js, error = sys.load_resource("/data/cards/base/" .. filename .. ".json")
+		pprint("card with name is loaded", filename, error)
+		local card_table = json.decode(js)
+		table.insert(loaded_cards, CARD.cast(card_table))
+	end
+	return loaded_cards
+	-- return {
+	-- 	CARD.new("Ants", "ant desc", 10), 
+	-- 	CARD.new("Ants2", "ant desc3", 11), 
+	-- 	CARD.new("Ants3", "ant desc3", 12), 
+	-- 	CARD.new("Ants4", "ant desc4", 12), 
+	-- 	CARD.new("Ants", "ant desc", 10), 
+	-- 	CARD.new("Ants2", "ant desc3", 11), 
+	-- 	CARD.new("Ants3", "ant desc3", 12), 
+	-- 	CARD.new("Ants4", "ant desc4", 12) 
+	-- }
 end
 
 function M.new(deck_cards, discard_cards)
