@@ -1,13 +1,11 @@
-local C = require "utils.message_ids"
-local actions = require "logic.action_state"
-local RESOURCES = require "logic.resources"
+local C = require("utils.message_ids")
+local actions = require("logic.action_state")
+local RESOURCES = require("logic.resources")
 local standart_projects = require("logic.actions.standarts.standart_projects")
 local _card = require("logic.cards.card")
 local EFFECT_TYPE = require("logic.enums.action_effect_type")
 local TARGET_TYPE = require("logic.enums.target_type")
 local EVENT_REGISTRY = require("utils.event_regisrty")
-
-
 
 local M = {}
 
@@ -25,12 +23,12 @@ function M.new()
 		steel_worth = 2,
 		titanium_worth = 3,
 
-		temporary_hand = {}, --for effects like "choose one of", "buy at the start of round". can be moved to field "hand" 
-		hand = { 
-		-- 	_card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
-		-- _card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12), 
-		-- _card.new("Ants4", "ant desc4", 12) 
-	}, 
+		temporary_hand = {}, --for effects like "choose one of", "buy at the start of round". can be moved to field "hand"
+		hand = {
+			-- 	_card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12),
+			-- _card.new("Ants4", "ant desc4", 12), _card.new("Ants", "ant desc", 10), _card.new("Ants2", "ant desc3", 11), _card.new("Ants3", "ant desc3", 12),
+			-- _card.new("Ants4", "ant desc4", 12)
+		},
 		tags = {}, --played cards tags can be moved to played_cards as extra field
 		played_cards = {}, -- just for score system
 		available_actions = {
@@ -107,11 +105,10 @@ function M:play_card(card, resource_distribution)
 	end
 
 	--TODO apply card effects
-	
 end
 
 function M:spend_action(played_action)
-	for index, value in ipairs(self.available_actions) do
+	for _, value in ipairs(self.available_actions) do
 		if value.id == played_action.id then
 			pprint("find played action", value)
 			value:effect_played()
@@ -119,8 +116,7 @@ function M:spend_action(played_action)
 	end
 	self.actions:spend_action()
 
-
-	--TODO think where to put this code for applying action effects 
+	--TODO think where to put this code for applying action effects
 	local type = played_action.spend.type
 	local resource_type = played_action.spend.resource_type
 	local amount = played_action.spend.amount
@@ -148,7 +144,7 @@ function M:spend_action(played_action)
 		amount = get_effect.amount
 		target = get_effect.target
 		print("get effect", type, resource_type, amount, target)
-		
+
 		if EFFECT_TYPE.RESOURCE == type then
 			self.resources.current:update_resource(resource_type, amount)
 		elseif EFFECT_TYPE.INCOME == type then
@@ -164,13 +160,11 @@ function M:spend_action(played_action)
 		elseif EFFECT_TYPE.SELL_CARDS == type then
 			--TODO give player multi choice of cards to sell
 		elseif EFFECT_TYPE.PLANET_PARAM == type then
-			EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, {[resource_type] = { times = amount }})
+			EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, { [resource_type] = { times = amount } })
 		elseif EFFECT_TYPE.PLACE_THE_TILE == type then
 			EVENT_REGISTRY.notify(C.GIVE_PLAYER_TO_PLACE_TILE, { tile_type = resource_type, player_color = self.color })
 		end
 	end
-
-
 end
 
 function M:skip_turn()
@@ -204,3 +198,4 @@ function M:is_ends_turn()
 end
 
 return M
+

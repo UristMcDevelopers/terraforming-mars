@@ -12,14 +12,14 @@ local function default_deck()
 	end
 	return loaded_cards
 	-- return {
-	-- 	CARD.new("Ants", "ant desc", 10), 
-	-- 	CARD.new("Ants2", "ant desc3", 11), 
-	-- 	CARD.new("Ants3", "ant desc3", 12), 
-	-- 	CARD.new("Ants4", "ant desc4", 12), 
-	-- 	CARD.new("Ants", "ant desc", 10), 
-	-- 	CARD.new("Ants2", "ant desc3", 11), 
-	-- 	CARD.new("Ants3", "ant desc3", 12), 
-	-- 	CARD.new("Ants4", "ant desc4", 12) 
+	-- 	CARD.new("Ants", "ant desc", 10),
+	-- 	CARD.new("Ants2", "ant desc3", 11),
+	-- 	CARD.new("Ants3", "ant desc3", 12),
+	-- 	CARD.new("Ants4", "ant desc4", 12),
+	-- 	CARD.new("Ants", "ant desc", 10),
+	-- 	CARD.new("Ants2", "ant desc3", 11),
+	-- 	CARD.new("Ants3", "ant desc3", 12),
+	-- 	CARD.new("Ants4", "ant desc4", 12)
 	-- }
 end
 
@@ -35,7 +35,6 @@ end
 function M:add_to_deck(card)
 	table.insert(self.cards, card)
 end
-
 
 function M:draw()
 	local size = #self.cards
@@ -53,5 +52,5 @@ function M:shuffle()
 	self.discard = {}
 end
 
-
 return M
+

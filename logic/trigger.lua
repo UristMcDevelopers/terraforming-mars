@@ -1,7 +1,9 @@
 local M = {}
 
 function M.new(key, value, callback)
-	callback = callback or function () print("trigger for key" .. key .. " value " .. value .. " called") end
+	callback = callback or function()
+		print("trigger for key" .. key .. " value " .. value .. " called")
+	end
 	return setmetatable({
 		callback = callback,
 		key = key,
@@ -34,3 +36,4 @@ function M:trigger_if_equal(key, value)
 end
 
 return M
+

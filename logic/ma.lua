@@ -15,3 +15,4 @@ function M:take(player_id)
 end
 
 return M
+

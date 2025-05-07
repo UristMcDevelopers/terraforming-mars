@@ -10,7 +10,7 @@ function M.new(name, desc, spend_effect, get_effect_list, is_standart_project)
 		description = desc,
 		spend = spend_effect,
 		get = get_effect_list,
-		
+
 		-- spend = {
 		-- 	text = "",
 		-- 	type = "NOTHING, RESOURCE, INCOME, RESOURCE_ON_CARD",
@@ -41,3 +41,4 @@ function M:is_available()
 end
 
 return M
+

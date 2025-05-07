@@ -19,7 +19,7 @@ function M:spend_action()
 		error("player played action but he doesn't have one")
 	elseif self.actions[1] == false and self.actions[2] == true then
 		self.actions[2] = false
-	else 
+	else
 		self.actions[1] = false
 	end
 end
@@ -44,3 +44,4 @@ function M:get_actions()
 end
 
 return M
+

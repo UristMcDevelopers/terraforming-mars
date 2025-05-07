@@ -19,14 +19,15 @@ end
 
 function M:update(map)
 	for resource_name, update_value in pairs(map) do
-		self[resource_name] = self[resource_name] + update_value 
+		self[resource_name] = self[resource_name] + update_value
 	end
 end
 
 function M:electricity_transfer_to_heat()
 	local transfer = self[C.RECOURCE_ELECTRICITY]
 	self[C.RECOURCE_ELECTRICITY] = 0
-	self[C.RECOURCE_HEAT] = self[C.RECOURCE_HEAT] + transfer 
+	self[C.RECOURCE_HEAT] = self[C.RECOURCE_HEAT] + transfer
 end
 
 return M
+

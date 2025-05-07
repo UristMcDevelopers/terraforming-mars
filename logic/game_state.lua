@@ -12,15 +12,15 @@ local TRIGGER = require("logic.trigger")
 local M = {}
 
 local function increase_income(recource_name)
-	EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { income_change = {[recource_name] = 1}})
+	EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { income_change = { [recource_name] = 1 } })
 end
 
 local function increase_planet_param(planet_param)
-	EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, {[planet_param] = { times = 1 }})
+	EVENT_REGISTRY.notify(C.INCREASE_PLANET_PARAMETER, { [planet_param] = { times = 1 } })
 end
 
 local function is_all_players_ends_round(self)
-	for player_index, player_state in ipairs(self.players) do
+	for _, player_state in ipairs(self.players) do
 		if player_state:is_ends_turn() == false then
 			return false
 		end
@@ -31,12 +31,20 @@ end
 function M.new()
 	local planet_parameters = PLANET_PARAMETERS.new()
 	planet_parameters:set_triggers(
-		TRIGGER.new(C.PLANET_TEMPERATURE, -24, function () increase_income(C.RECOURCE_HEAT) end),
-		TRIGGER.new(C.PLANET_TEMPERATURE, -20, function () increase_income(C.RECOURCE_HEAT) end),
-		TRIGGER.new(C.PLANET_TEMPERATURE, 0, function () increase_planet_param(C.PLANET_OCEANS) end), --TODO give player a choice where to place ocean
-		TRIGGER.new(C.PLANET_OXYGEN, 8, function () increase_planet_param(C.PLANET_TEMPERATURE) end)
+		TRIGGER.new(C.PLANET_TEMPERATURE, -24, function()
+			increase_income(C.RECOURCE_HEAT)
+		end),
+		TRIGGER.new(C.PLANET_TEMPERATURE, -20, function()
+			increase_income(C.RECOURCE_HEAT)
+		end),
+		TRIGGER.new(C.PLANET_TEMPERATURE, 0, function()
+			increase_planet_param(C.PLANET_OCEANS)
+		end), --TODO give player a choice where to place ocean
+		TRIGGER.new(C.PLANET_OXYGEN, 8, function()
+			increase_planet_param(C.PLANET_TEMPERATURE)
+		end)
 	)
-	
+
 	local default_game_state = setmetatable({
 		game_phase = GAME_PHASE.GAME_SET_UP_PHASE,
 		round = 1,
@@ -49,7 +57,7 @@ function M.new()
 	}, { __index = M })
 
 	default_game_state:draw_card(5)
-	
+
 	return default_game_state
 end
 
@@ -88,17 +96,17 @@ function M:skip_turn()
 		self.current_player_index = 1
 		if is_all_players_ends_round(self) then
 			--production phase
-			for player_index, player_state in ipairs(self.players) do
+			for _, player_state in ipairs(self.players) do
 				player_state:on_production_phase()
 			end
 			-- next round
 			self.round = self.round + 1
-			for player_index, player_state in ipairs(self.players) do
+			for _, player_state in ipairs(self.players) do
 				player_state:on_next_round()
 			end
 			print("round " .. self.round)
 		else
-			for player_index, player_state in ipairs(self.players) do
+			for _, player_state in ipairs(self.players) do
 				player_state:on_next_turn()
 			end
 		end
@@ -131,19 +139,17 @@ function M:tile_placed(tile_type, row, column)
 	end
 end
 
-
 function M:update_ui()
 	EVENT_REGISTRY.notify(C.UI_UPDATE_PLANET_PARAMETERS, self:get_planet():get())
 	EVENT_REGISTRY.notify(C.UI_UPDATE_MILESTONES_AWARDS, self:get_milestones_awards())
-	EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions =  self:get_player():get_actions() })
+	EVENT_REGISTRY.notify(C.UI_STATE_SET_ACTIONS, { actions = self:get_player():get_actions() })
 	EVENT_REGISTRY.notify(C.UI_UPDATE_RESOURCES, self:get_player():get_resources())
-	
-	EVENT_REGISTRY.notify(C.PLAYER_TERRAFORM_RATING, { 
-		player_id = self:get_player():get_id(),
-		terraform_rating = self:get_player():get_terraform_rating()
-	})
 
+	EVENT_REGISTRY.notify(C.PLAYER_TERRAFORM_RATING, {
+		player_id = self:get_player():get_id(),
+		terraform_rating = self:get_player():get_terraform_rating(),
+	})
 end
 
-
 return M
+

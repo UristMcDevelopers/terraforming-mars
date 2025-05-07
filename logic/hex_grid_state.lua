@@ -1,16 +1,17 @@
 local UTILS = require("utils.helpers")
-local GRID_UTILS = require "hex_grid.hex_grid_utils"
-local C = require "utils.message_ids"
+local GRID_UTILS = require("hex_grid.hex_grid_utils")
+local C = require("utils.message_ids")
 local EVENT_REGISTRY = require("utils.event_regisrty")
 
 local M = {}
 
 -- TODO вынести в файл все координаты и ресурс
-local default_ocean_coords = {[1] = {7}, [4] = {7,8,9}, [5] = {4,5,6}, [6] = {9}, [8] = {8}, [9] = {4,6,7}}
-local default_non_mars_coords = {[8] = {1}, [9] = {1}}
-local default_noctis_city = {[5] = {3}}
+local default_ocean_coords =
+	{ [1] = { 7 }, [4] = { 7, 8, 9 }, [5] = { 4, 5, 6 }, [6] = { 9 }, [8] = { 8 }, [9] = { 4, 6, 7 } }
+local default_non_mars_coords = { [8] = { 1 }, [9] = { 1 } }
+local default_noctis_city = { [5] = { 3 } }
 local default_placement_bonuses_coords = {
-	[1] = { 
+	[1] = {
 		[3] = { C.RECOURCE_STEEL },
 		[4] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
 		[7] = { C.RECOURCE_TITANIUM, C.RECOURCE_TITANIUM },
@@ -55,15 +56,15 @@ local default_placement_bonuses_coords = {
 		[8] = { C.RECOURCE_PLANT },
 		[9] = { C.RECOURCE_PLANT, C.RECOURCE_PLANT },
 	},
-	[7] = { 
+	[7] = {
 		[2] = { C.PLAYER_DRAW_CARD },
 		[8] = { C.RECOURCE_STEEL },
 	},
-	[8] = { 
+	[8] = {
 		[4] = { C.RECOURCE_STEEL },
 		[8] = { C.PLAYER_DRAW_CARD, C.PLAYER_DRAW_CARD },
 	},
-	[9] = { 
+	[9] = {
 		[3] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
 		[4] = { C.RECOURCE_STEEL, C.RECOURCE_STEEL },
 		[6] = { C.PLAYER_DRAW_CARD },
@@ -87,7 +88,7 @@ local function send_tile_bonus_resources(self, row, column)
 		if recource_type == C.PLAYER_DRAW_CARD then
 			EVENT_REGISTRY.notify(C.PLAYER_DRAW_CARD)
 		else
-			EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { current_change = {[recource_type] = 1 } })
+			EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { current_change = { [recource_type] = 1 } })
 		end
 	end
 end
@@ -100,7 +101,7 @@ function M:render_map_recources()
 				EVENT_REGISTRY.notify(C.MAP_SET_TILE_RECOURCES, {
 					row = row_index,
 					column = column_index,
-					resources = resource_list
+					resources = resource_list,
 				})
 			end
 		end
@@ -112,9 +113,9 @@ function M:render_map_oceans()
 		for k, column_index in pairs(column_indexes) do
 			EVENT_REGISTRY.notify(C.MAP_SET_TILE, {
 				tile_type = C.TILE_TYPE_EMPTY_OCEAN,
-				row = row_index, 
-				column = column_index, 
-				player_color = C.TRANSPARENT_COLOR
+				row = row_index,
+				column = column_index,
+				player_color = C.TRANSPARENT_COLOR,
 			})
 		end
 	end
@@ -144,7 +145,6 @@ function M:get_placement_bonuses_coords()
 	return self.placement_bonuses_coords or {}
 end
 
-
 function M:is_ocean_place(row, column)
 	return self.ocean_coords[row] and UTILS.array_has_value(self.ocean_coords[row], column)
 end
@@ -161,13 +161,12 @@ function M:is_tile_taken(row, column)
 	return self.placed_tiles_coords[row] and self.placed_tiles_coords[row][column]
 end
 
-
 function M:update_placed_tiles(row, column, player, tile_type)
 	local row_talbe = self.placed_tiles_coords[row]
 	local tile_info = { player = player, type = tile_type }
 	if row_talbe == nil then
 		self.placed_tiles_coords[row] = { [column] = tile_info }
-	else 
+	else
 		row_talbe[column] = tile_info
 	end
 end
@@ -189,10 +188,10 @@ function M:neighbor_tiles_count(row, column)
 	return cities, oceans
 end
 
--- TODO think on how to use it and properly validate tile placement actions 
+-- TODO think on how to use it and properly validate tile placement actions
 -- TODO what proper idea of how to return error
 --maybe just disable tiles where player can't place tile due to rules violations
--- TODO think on how to return events to send 
+-- TODO think on how to return events to send
 function M:set_with_validation(row, column, player, tile_type)
 	if self:is_tile_taken(row, column) then
 		error("tile is already taken")
@@ -217,10 +216,14 @@ function M:set_with_validation(row, column, player, tile_type)
 
 	if close_oceans > 0 then
 		print("neigbor oceans", close_oceans)
-		EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { current_change = {[C.RECOURCE_GOLD] = (close_oceans * 2) }})
+		EVENT_REGISTRY.notify(
+			C.PLAYER_RESOURCES_CHANGED,
+			{ current_change = { [C.RECOURCE_GOLD] = (close_oceans * 2) } }
+		)
 	end
-	
-	send_tile_bonus_resources(self, row, column) 
+
+	send_tile_bonus_resources(self, row, column)
 end
 
 return M
+

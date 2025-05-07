@@ -18,7 +18,7 @@ function M.new()
 			[C.AWARD_SCIENTIST] = ma.new(C.AWARD_SCIENTIST),
 			[C.AWARD_THERMALIST] = ma.new(C.AWARD_THERMALIST),
 			[C.AWARD_MINER] = ma.new(C.AWARD_MINER),
-		}
+		},
 	}, { __index = M })
 end
 
@@ -36,3 +36,4 @@ function M:take_milestone_or_award(name, player_id)
 end
 
 return M
+

@@ -55,7 +55,9 @@
 5. Score system
 
 ## next TODOs
-- Card structure
+- Add ui parametrazation for Card pop up
+- Add card effect apply
+- Add currency distribution choice on card play (like choosing steel instead of gold)
 - Show terraform rating at the start
 - Disable buttons which should not be clickable while placing tile/choosing in popup menu (maybe crate screen_manager which nows what disable on certain event)
 - add initial tests for logic

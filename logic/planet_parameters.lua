@@ -34,7 +34,7 @@ function M:increase(planet_param, times)
 		local new_value = self[planet_param] + increase_value
 		if new_value <= MAX_VALUES[planet_param] then
 			self[planet_param] = new_value
-			for index, trigger in ipairs(self.triggers or {}) do
+			for _, trigger in ipairs(self.triggers or {}) do
 				trigger:trigger_if_equal(planet_param, self[planet_param])
 			end
 			EVENT_REGISTRY.notify(C.INCREASE_TERRAFORM_RATING)
@@ -45,8 +45,9 @@ function M:increase(planet_param, times)
 end
 
 function M:set_triggers(...)
-	local list = {...}
+	local list = { ... }
 	self.triggers = list -- TODO add validation for list
 end
 
 return M
+
