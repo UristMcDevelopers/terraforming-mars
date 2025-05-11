@@ -1,0 +1,20 @@
+{
+	"name" : "Breathing Filters",
+	"description" : "Requires 7% oxygen.",
+	"cost" : 11,
+	"card_type" : "GREEN",
+	"tags" : ["Science"],
+	"requirements" : [
+		{
+			"_type" : "planet_param",
+			"planet_param_type" : "oxygen",
+			"more_or_equal" : 7
+		}
+	],
+	"effects" : [],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "fixed",
+		"amount" : 2
+	}
+}

@@ -17,9 +17,9 @@ function M:update_resource(resource_name, update_value)
 	self[resource_name] = self[resource_name] + update_value
 end
 
-function M:update(map)
+function M:update_all_resources(map)
 	for resource_name, update_value in pairs(map) do
-		self[resource_name] = self[resource_name] + update_value
+		self:update_resource(resource_name, update_value)
 	end
 end
 

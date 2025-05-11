@@ -1,0 +1,31 @@
+{
+	"name" : "Beam From A Thorium Asteroid",
+	"description" : "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.",
+	"cost" : 32,
+	"card_type" : "GREEN",
+	"tags" : ["Jupiter", "Space", "Electricity"],
+	"requirements" : [
+		{
+			"_type" : "tag",
+			"tag_type" : "Jupiter",
+			"more_or_equal" : 1
+		}
+	],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "heat",
+			"amount" : 3
+		},
+		{
+			"_type" : "INCOME",
+			"resource_type" : "electricity",
+			"amount" : 3
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "fixed",
+		"amount" : 1
+	}
+}

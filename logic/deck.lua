@@ -5,6 +5,7 @@ local M = {}
 local function default_deck()
 	local loaded_cards = {}
 	for _, filename in ipairs(require("data.cards.base.base_cards")) do
+		pprint("loading " .. filename)
 		local js, error = sys.load_resource("/data/cards/base/" .. filename .. ".json")
 		pprint("card with name is loaded", filename, error)
 		local card_table = json.decode(js)

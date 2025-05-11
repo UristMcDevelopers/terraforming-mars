@@ -1,0 +1,20 @@
+{
+	"name" : "Callisto Penal Mines",
+	"description" : "Increase your M€ production 3 steps.)",
+	"cost" : 24,
+	"card_type" : "GREEN",
+	"tags" : ["Jupiter", "Space"],
+	"requirements" : [],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "gold",
+			"amount" : 3
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "fixed",
+		"amount" : 2
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name" : "Asteroid Mining",
+	"description" : "Increase your titanium production 2 steps.",
+	"cost" : 30,
+	"card_type" : "GREEN",
+	"tags" : ["Jupiter", "Space"],
+	"requirements" : [],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "titanium",
+			"amount" : 2
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "fixed",
+		"amount" : 2
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"name" : "Bushes",
+	"description" : "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.",
+	"cost" : 10,
+	"card_type" : "GREEN",
+	"tags" : ["Plant"],
+	"requirements" : [
+		{
+			"_type" : "planet_param",
+			"planet_param_type" : "temperature",
+			"more_or_equal" : -10
+		}
+	],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "plant",
+			"amount" : 2
+		},
+		{
+			"_type" : "RESOURCE",
+			"resource_type" : "plant",
+			"amount" : 2
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {}
+}

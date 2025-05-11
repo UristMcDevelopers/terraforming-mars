@@ -1,0 +1,44 @@
+{
+	"name" : "Artificial Lake",
+	"description" : "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.)",
+	"cost" : 26,
+	"card_type" : "GREEN",
+	"tags" : ["City", "Building"],
+	"requirements" : [
+		{
+			"_type" : "planet_param",
+			"planet_param_type" : "ocean",
+			"more_or_equal" : 4
+		},
+		{
+			"_type" : "income",
+			"resource_type" : "electricity",
+			"more_or_equal" : 2
+		}
+	],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "electricity",
+			"amount" : -2
+		},
+		{
+			"_type" : "INCOME",
+			"resource_type" : "gold",
+			"amount" : 5
+		},
+		{
+			"_type" : "PLACE_THE_TILE",
+			"tile_type" : "Capital",
+			"amount" : 1
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {
+		"_type" : "calculated",
+		"calcucate" : {
+			"per" : "adjacent_ocean",
+			"per_amount": 1,
+		}
+	}
+}

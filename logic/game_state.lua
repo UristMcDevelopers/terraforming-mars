@@ -11,8 +11,9 @@ local TRIGGER = require("logic.trigger")
 
 local M = {}
 
-local function increase_income(recource_name)
-	EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { income_change = { [recource_name] = 1 } })
+local function increase_income(recource_name, amount)
+	amount = amount or {}
+	EVENT_REGISTRY.notify(C.PLAYER_RESOURCES_CHANGED, { income_change = { [recource_name] = amount } })
 end
 
 local function increase_planet_param(planet_param)
@@ -75,7 +76,17 @@ function M:spend_action(played_action)
 end
 
 function M:play_card(card, resource_distribution)
+	--TODO validate requirements
+	--TODO validate resources
 	self:get_player():play_card(card, resource_distribution)
+
+	--TODO apply card effects
+	for _, effect in ipairs(card.effects) do
+		if effect._type == "INCOME" then
+			print("INCOME")
+			increase_income(effect.resource_type, effect.amount)
+		end
+	end
 end
 
 function M:draw_card(amount)
@@ -152,4 +163,3 @@ function M:update_ui()
 end
 
 return M
-

@@ -8,7 +8,7 @@
 	"effects" : [
 		{
 			"_type" : "INCOME",
-			"resource_type" : "GOLD",
+			"resource_type" : "gold",
 			"amount" : 3
 		}
 	],

@@ -101,10 +101,8 @@ function M:play_card(card, resource_distribution)
 	table.remove(self.hand, card_index)
 	--remove resources
 	for resource_name, update_value in pairs(resource_distribution) do
-		self.resources.current:update_resource(resource_name, update_value)
+		self.resources.current:update_resource(resource_name, -update_value)
 	end
-
-	--TODO apply card effects
 end
 
 function M:spend_action(played_action)
@@ -184,8 +182,8 @@ function M:get_resources()
 end
 
 function M:update_resources(resource_event)
-	self.resources.current:update(resource_event.current_change or {})
-	self.resources.income:update(resource_event.income_change or {})
+	self.resources.current:update_all_resources(resource_event.current_change or {})
+	self.resources.income:update_all_resources(resource_event.income_change or {})
 end
 
 function M:on_production_phase()
@@ -198,4 +196,3 @@ function M:is_ends_turn()
 end
 
 return M
-

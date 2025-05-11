@@ -1,0 +1,20 @@
+{
+	"name" : "Cartel",
+	"description" : "Increase your M€ production 1 step for each Earth tag you have, including this.",
+	"cost" : 8,
+	"card_type" : "GREEN",
+	"tags" : ["Earth"],
+	"requirements" : [],
+	"effects" : [
+		{
+			"_type" : "INCOME",
+			"resource_type" : "electricity",
+			"amount_calculated" : {
+				"per" : "Earth",
+				"per_amount": 1
+			}
+		}
+	],
+	"tokens_on_card" : {},
+	"score" : {}
+}
