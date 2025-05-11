@@ -45,7 +45,7 @@ end
 
 local function apply_income(self)
 	self.resources.current:electricity_transfer_to_heat()
-	self.resources.current:update(self.resources.income)
+	self.resources.current:update_all_resources(self.resources.income)
 	self.resources.current:update_resource(C.RECOURCE_GOLD, self.terraform_rating)
 end
 
