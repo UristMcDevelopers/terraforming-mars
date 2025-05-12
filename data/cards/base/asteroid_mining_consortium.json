@@ -1,32 +1,34 @@
 {
-	"name" : "Asteroid Mining Consortium",
-	"description" : "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.",
-	"cost" : 13,
-	"card_type" : "GREEN",
-	"tags" : ["Jupiter"],
-	"requirements" : [
-		{
-			"_type" : "income",
-			"resource_type" : "titanium",
-			"more_or_equal" : 1
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "titanium",
-			"amount" : -1,
-			"target" : "OTHER",
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "titanium",
-			"amount" : 1
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {
-		"_type" : "fixed",
-		"amount" : 1
-	}
+  "name": "Asteroid Mining Consortium",
+  "description": "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.",
+  "cost": 13,
+  "card_type": "GREEN",
+  "tags": [
+    "Jupiter"
+  ],
+  "requirements": [
+    {
+      "_type": "income",
+      "resource_type": "titanium",
+      "more_or_equal": 1
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "titanium",
+      "amount": -1,
+      "target": "OTHER"
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "titanium",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 1
+  }
 }

@@ -1,26 +1,27 @@
 {
-	"name" : "Artificial Photosynthesis",
-	"description" : "Increase your plant production 1 step or your energy production 2 steps.",
-	"cost" : 12,
-	"card_type" : "GREEN",
-	"tags" : ["Science"],
-	"requirements" : [],
-	"effects" : [
-		{
-			"_type" : "OR",
-			"effect1" : {
-				"_type" : "INCOME",
-				"resource_type" : "plant",
-				"amount" : 1
-			},
-			"effect2" : {
-				"_type" : "INCOME",
-				"resource_type" : "electricity",
-				"amount" : 2
-			}
-		},
-
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Artificial Photosynthesis",
+  "description": "Increase your plant production 1 step or your energy production 2 steps.",
+  "cost": 12,
+  "card_type": "GREEN",
+  "tags": [
+    "Science"
+  ],
+  "requirements": [],
+  "effects": [
+    {
+      "_type": "OR",
+      "effect1": {
+        "_type": "INCOME",
+        "resource_type": "plant",
+        "amount": 1
+      },
+      "effect2": {
+        "_type": "INCOME",
+        "resource_type": "electricity",
+        "amount": 2
+      }
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }

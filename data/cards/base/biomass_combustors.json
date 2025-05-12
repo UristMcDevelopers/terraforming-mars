@@ -1,32 +1,35 @@
 {
-	"name" : "Biomass Combustors",
-	"description" : "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.)",
-	"cost" : 4,
-	"card_type" : "GREEN",
-	"tags" : ["Building", "Electricity"],
-	"requirements" : [
-		{
-			"_type" : "planet_param",
-			"planet_param_type" : "oxygen",
-			"more_or_equal" : 6
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "plant",
-			"amount" : -1,
-			"target" : "OTHER",
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "electricity",
-			"amount" : 2
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {
-		"_type" : "fixed",
-		"amount" : -1
-	}
+  "name": "Biomass Combustors",
+  "description": "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.)",
+  "cost": 4,
+  "card_type": "GREEN",
+  "tags": [
+    "Building",
+    "Electricity"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "oxygen",
+      "more_or_equal": 6
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "plant",
+      "amount": -1,
+      "target": "OTHER"
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "electricity",
+      "amount": 2
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": -1
+  }
 }

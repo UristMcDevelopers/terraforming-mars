@@ -1,39 +1,41 @@
 {
-	"name" : "Commercial District",
-	"description" : "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
-	"cost" : 16,
-	"card_type" : "GREEN",
-	"tags" : ["Building"],
-	"requirements" : [
-		{
-			"_type" : "income",
-			"resource_type" : "electricity",
-			"more_or_equal" : 1
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "electricity",
-			"amount" : -1
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "gold",
-			"amount" : 4
-		},
-		{
-			"_type" : "PLACE_THE_TILE",
-			"resource_type" : "COMMERCIAL_DISTRICT",
-			"amount" : 1
-		},
-	],
-	"tokens_on_card" : {},
-	"score" : {
-		"_type" : "calculated",
-		"calcucate" : {
-			"per" : "adjacent_city",
-			"per_amount": 1,
-		}
-	}
+  "name": "Commercial District",
+  "description": "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
+  "cost": 16,
+  "card_type": "GREEN",
+  "tags": [
+    "Building"
+  ],
+  "requirements": [
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "more_or_equal": 1
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "electricity",
+      "amount": -1
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "gold",
+      "amount": 4
+    },
+    {
+      "_type": "PLACE_THE_TILE",
+      "resource_type": "COMMERCIAL_DISTRICT",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "calculated",
+    "calcucate": {
+      "per": "adjacent_city",
+      "per_amount": 1
+    }
+  }
 }
