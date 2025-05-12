@@ -1,26 +1,28 @@
 {
-	"name" : "Artificial Lake",
-	"description" : "Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.",
-	"cost" : 15,
-	"card_type" : "GREEN",
-	"tags" : ["Building"],
-	"requirements" : [
-		{
-			"_type" : "planet_param",
-			"planet_param_type" : "temperature",
-			"more_or_equal" : -6
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "PLACE_THE_TILE",
-			"tile_type" : "Ocean",
-			"amount" : 1
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {
-		"_type" : "fixed",
-		"amount" : 1
-	}
+  "name": "Artificial Lake",
+  "description": "Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.",
+  "cost": 15,
+  "card_type": "GREEN",
+  "tags": [
+    "Building"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "temperature",
+      "more_or_equal": -6
+    }
+  ],
+  "effects": [
+    {
+      "_type": "PLACE_THE_TILE",
+      "tile_type": "Ocean",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 1
+  }
 }

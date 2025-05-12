@@ -1,27 +1,29 @@
 {
-	"name" : "Black Polar Dust",
-	"description" : "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.",
-	"cost" : 15,
-	"card_type" : "GREEN",
-	"tags" : ["Plant"],
-	"requirements" : [],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "gold",
-			"amount" : -2
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "heat",
-			"amount" : 3
-		},
-		{
-			"_type" : "PLACE_THE_TILE",
-			"tile_type" : "Ocean",
-			"amount" : 1
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Black Polar Dust",
+  "description": "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.",
+  "cost": 15,
+  "card_type": "GREEN",
+  "tags": [
+    "Plant"
+  ],
+  "requirements": [],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "gold",
+      "amount": -2
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "heat",
+      "amount": 3
+    },
+    {
+      "_type": "PLACE_THE_TILE",
+      "tile_type": "Ocean",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }

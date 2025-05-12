@@ -1,23 +1,25 @@
 {
-	"name" : "Archaebacteria",
-	"description" : "It must be -18 C or colder. Increase your plant production 1 step.",
-	"cost" : 6,
-	"card_type" : "GREEN",
-	"tags" : ["Microbe"],
-	"requirements" : [
-		{
-			"_type" : "planet_param",
-			"planet_param_type" : "temperature",
-			"less_or_equal" : -18
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "plant",
-			"amount" : 1
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Archaebacteria",
+  "description": "It must be -18 C or colder. Increase your plant production 1 step.",
+  "cost": 6,
+  "card_type": "GREEN",
+  "tags": [
+    "Microbe"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "temperature",
+      "less_or_equal": -18
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "plant",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }

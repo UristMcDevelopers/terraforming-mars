@@ -1,28 +1,30 @@
 {
-	"name" : "Carbonate Processing",
-	"description" : "Decrease your energy production 1 step and increase your heat production 3 steps.",
-	"cost" : 6,
-	"card_type" : "GREEN",
-	"tags" : ["Building"],
-	"requirements" : [
-		{
-			"_type" : "income",
-			"resource_type" : "electricity",
-			"more_or_equal" : 1
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "electricity",
-			"amount" : -1
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "heat",
-			"amount" : 3
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Carbonate Processing",
+  "description": "Decrease your energy production 1 step and increase your heat production 3 steps.",
+  "cost": 6,
+  "card_type": "GREEN",
+  "tags": [
+    "Building"
+  ],
+  "requirements": [
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "more_or_equal": 1
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "electricity",
+      "amount": -1
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "heat",
+      "amount": 3
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }

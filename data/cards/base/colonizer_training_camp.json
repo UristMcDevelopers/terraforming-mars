@@ -1,20 +1,23 @@
 {
-	"name" : "Colonizer Training Camp",
-	"description" : "Oxygen must be 5% or less.",
-	"cost" : 8,
-	"card_type" : "GREEN",
-	"tags" : ["Jupiter", "Building"],
-	"requirements" : [
-		{
-			"_type" : "planet_param",
-			"planet_param_type" : "oxygen",
-			"less_or_equal" : -5
-		}
-	],
-	"effects" : [],
-	"tokens_on_card" : {},
-	"score" : {
-		"_type" : "fixed",
-		"amount" : 2
-	}
+  "name": "Colonizer Training Camp",
+  "description": "Oxygen must be 5% or less.",
+  "cost": 8,
+  "card_type": "GREEN",
+  "tags": [
+    "Jupiter",
+    "Building"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "oxygen",
+      "less_or_equal": -5
+    }
+  ],
+  "effects": [],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 2
+  }
 }

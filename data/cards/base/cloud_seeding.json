@@ -1,34 +1,34 @@
 {
-	"name" : "Cloud Seeding",
-	"description" : "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.",
-	"cost" : 11,
-	"card_type" : "GREEN",
-	"tags" : [],
-	"requirements" : [
-		{
-			"_type" : "planet_param",
-			"planet_param_type" : "ocean",
-			"more_or_equal" : 3
-		}
-	],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "gold",
-			"amount" : 1
-		},
-		{
-			"_type" : "INCOME",
-			"resource_type" : "heat",
-			"amount" : -1,
-			"target" : "OTHER"
-		},
-		{
-			"_type" : "RESOURCE",
-			"resource_type" : "plant",
-			"amount" : 2
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Cloud Seeding",
+  "description": "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.",
+  "cost": 11,
+  "card_type": "GREEN",
+  "tags": [],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "ocean",
+      "more_or_equal": 3
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "gold",
+      "amount": 1
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "heat",
+      "amount": -1,
+      "target": "OTHER"
+    },
+    {
+      "_type": "RESOURCE",
+      "resource_type": "plant",
+      "amount": 2
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }

@@ -1,17 +1,19 @@
 {
-	"name" : "Acquired Company",
-	"description" : "Increase your M€ production 3 steps.",
-	"cost" : 10,
-	"card_type" : "GREEN",
-	"tags" : ["Earth"],
-	"requirements" : [],
-	"effects" : [
-		{
-			"_type" : "INCOME",
-			"resource_type" : "gold",
-			"amount" : 3
-		}
-	],
-	"tokens_on_card" : {},
-	"score" : {}
+  "name": "Acquired Company",
+  "description": "Increase your M€ production 3 steps.",
+  "cost": 10,
+  "card_type": "GREEN",
+  "tags": [
+    "Earth"
+  ],
+  "requirements": [],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "gold",
+      "amount": 3
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
 }
