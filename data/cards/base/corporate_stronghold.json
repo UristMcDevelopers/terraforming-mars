@@ -4,7 +4,8 @@
   "cost": 16,
   "card_type": "GREEN",
   "tags": [
-    "Building"
+    "Building",
+    "City"
   ],
   "requirements": [
     {
@@ -22,20 +23,17 @@
     {
       "_type": "INCOME",
       "resource_type": "gold",
-      "amount": 4
+      "amount": 3
     },
     {
       "_type": "PLACE_THE_TILE",
-      "tile_type": "COMMERCIAL_DISTRICT",
+      "tile_type": "CITY",
       "amount": 1
     }
   ],
   "tokens_on_card": {},
   "score": {
-    "_type": "calculated",
-    "calcucate": {
-      "per": "adjacent_city",
-      "per_amount": 1
-    }
+    "_type": "fixed",
+    "amount": -2
   }
 }

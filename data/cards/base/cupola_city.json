@@ -1,16 +1,22 @@
 {
   "name": "Commercial District",
-  "description": "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
+  "description": "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
   "cost": 16,
   "card_type": "GREEN",
   "tags": [
-    "Building"
+    "Building",
+    "City"
   ],
   "requirements": [
     {
       "_type": "income",
       "resource_type": "electricity",
       "more_or_equal": 1
+    },
+    {
+      "_type": "planet_param",
+      "planet_param_type": "oxygen",
+      "less_or_equal": 9
     }
   ],
   "effects": [
@@ -22,20 +28,14 @@
     {
       "_type": "INCOME",
       "resource_type": "gold",
-      "amount": 4
+      "amount": 3
     },
     {
       "_type": "PLACE_THE_TILE",
-      "tile_type": "COMMERCIAL_DISTRICT",
+      "tile_type": "CITY",
       "amount": 1
     }
   ],
   "tokens_on_card": {},
-  "score": {
-    "_type": "calculated",
-    "calcucate": {
-      "per": "adjacent_city",
-      "per_amount": 1
-    }
-  }
+  "score": {}
 }

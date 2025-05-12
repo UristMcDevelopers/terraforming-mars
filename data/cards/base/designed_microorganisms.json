@@ -1,0 +1,26 @@
+{
+  "name": "Designed Microorganisms",
+  "description": "It must be -14 C or colder. Increase your plant production 2 steps.",
+  "cost": 16,
+  "card_type": "GREEN",
+  "tags": [
+    "Science",
+    "Microbe"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "oxygen",
+      "less_or_equal": 14
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "plant",
+      "amount": 2
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
+}

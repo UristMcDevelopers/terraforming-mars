@@ -1,0 +1,49 @@
+{
+  "name": "Domed Crater",
+  "description": "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
+  "cost": 24,
+  "card_type": "GREEN",
+  "tags": [
+    "Building",
+    "City"
+  ],
+  "requirements": [
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "more_or_equal": 1
+    },
+    {
+      "_type": "planet_param",
+      "planet_param_type": "oxygen",
+      "less_or_equal": 7
+    }
+  ],
+  "effects": [
+    {
+      "_type": "INCOME",
+      "resource_type": "electricity",
+      "amount": -1
+    },
+    {
+      "_type": "INCOME",
+      "resource_type": "gold",
+      "amount": 3
+    },
+    {
+      "_type": "PLACE_THE_TILE",
+      "tile_type": "CITY",
+      "amount": 1
+    },
+    {
+      "_type": "RECOURCE",
+      "resource_type": "plant",
+      "amount": 3
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 1
+  }
+}

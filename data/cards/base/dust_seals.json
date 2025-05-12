@@ -1,0 +1,20 @@
+{
+  "name": "Dust Seals",
+  "description": "Requires 3 or less ocean tiles.",
+  "cost": 2,
+  "card_type": "GREEN",
+  "tags": [],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "ocean",
+      "less_or_equal": 3
+    }
+  ],
+  "effects": [],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 1
+  }
+}
