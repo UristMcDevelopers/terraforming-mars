@@ -1,0 +1,40 @@
+{
+  "name": "Eos Chasma National Park",
+  "description": "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.",
+  "cost": 16,
+  "card_type": "GREEN",
+  "tags": [
+    "Building",
+    "Plant"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "temperature",
+      "more_or_equal": -12
+    }
+  ],
+  "effects": [
+    {
+      "_type": "resource_on_card",
+      "resource_type": "animal",
+      "amount": 1,
+      "target": "ANY_ANIMAL_CARD"
+    },
+    {
+      "_type": "resource",
+      "resource_type": "plant",
+      "amount": 3
+    },
+    {
+      "_type": "income",
+      "resource_type": "gold",
+      "amount": 2
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 1
+  }
+}

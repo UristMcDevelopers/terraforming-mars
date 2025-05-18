@@ -1,0 +1,38 @@
+{
+  "name": "Farming",
+  "description": "Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.",
+  "cost": 16,
+  "card_type": "GREEN",
+  "tags": [
+    "Plant"
+  ],
+  "requirements": [
+    {
+      "_type": "planet_param",
+      "planet_param_type": "temperature",
+      "more_or_equal": 4
+    }
+  ],
+  "effects": [
+    {
+      "_type": "income",
+      "resource_type": "gold",
+      "amount": 2
+    },
+    {
+      "_type": "income",
+      "resource_type": "plant",
+      "amount": 2
+    },
+    {
+      "_type": "resource",
+      "resource_type": "plant",
+      "amount": 2
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": 2
+  }
+}

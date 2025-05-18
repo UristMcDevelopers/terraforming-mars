@@ -1,0 +1,28 @@
+{
+  "name": "Energy Tapping",
+  "description": "Decrease any energy production 1 step and increase your own 1 step.",
+  "cost": 3,
+  "card_type": "GREEN",
+  "tags": [
+    "Electricity"
+  ],
+  "requirements": [],
+  "effects": [
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "amount": -1,
+      "target": "OTHER"
+    },
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "amount": 1
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {
+    "_type": "fixed",
+    "amount": -1
+  }
+}

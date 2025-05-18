@@ -103,6 +103,8 @@ function M:play_card(card, resource_distribution)
 	for resource_name, update_value in pairs(resource_distribution) do
 		self.resources.current:update_resource(resource_name, -update_value)
 	end
+
+	self.actions:spend_action()
 end
 
 function M:spend_action(played_action)
@@ -177,6 +179,9 @@ function M:on_next_turn()
 	self.actions:on_next_turn()
 end
 
+function M:get_tag_amount(tag_name)
+	return self.tags[tag_name] or 0
+end
 function M:get_resources()
 	return self.resources
 end

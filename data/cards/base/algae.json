@@ -9,7 +9,7 @@
   "requirements": [
     {
       "_type": "planet_param",
-      "planet_param_type": "ocean",
+      "planet_param_type": "oceans",
       "more_or_equal": 5
     }
   ],

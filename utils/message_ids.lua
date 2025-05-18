@@ -20,12 +20,12 @@ M.PLANET_OXYGEN = "oxygen"
 M.PLANET_TEMPERATURE = "temperature"
 M.PLANET_OCEANS = "oceans"
 
-M.TILE_TYPE_EMPTY = "tile_type_empty"
-M.TILE_TYPE_EMPTY_OCEAN = "tile_type_empty_ocean"
-M.TILE_TYPE_CITY = "tile_type_city"
-M.TILE_TYPE_TREE = "tile_type_tree"
-M.TILE_TYPE_OCEAN = "tile_type_ocean"
-M.TILE_TYPE_SPECIAL = "tile_type_special"
+M.TILE_TYPE_EMPTY = "empty"
+M.TILE_TYPE_EMPTY_OCEAN = "empty_ocean"
+M.TILE_TYPE_CITY = "city"
+M.TILE_TYPE_TREE = "tree"
+M.TILE_TYPE_OCEAN = "ocean"
+M.TILE_TYPE_SPECIAL = "special"
 
 -- State events
 M.PLAYER_TERRAFORM_RATING = "terraform_rating"
@@ -66,11 +66,18 @@ M.UI_UPDATE_MILESTONES_AWARDS = "UI_UPDATE_MILESTONES_AWARDS"
 M.UI_UPDATE_PLANET_PARAMETERS = "UI_UPDATE_PLANET_PARAMETERS"
 M.UI_UPDATE_RESOURCES = "UI_UPDATE_RESOURCES"
 
+-- Gameplay events
+M.OCEAN_TILE_PLACED = "OCEAN_TILE_PLACED"
+M.CITY_TILE_PLACED = "CITY_TILE_PLACED"
+M.CARD_WITH_TAG_PLAYED = "CARD_WITH_TAG_PLAYED"
+M.EVENT_PLAYED = "EVENT_PLAYED"
+M.SPACE_EVENT_PLAYED = "SPACE_EVENT_PLAYED"
+
 -- System events
 M.HEX_GRID_COMPONENT_LOADED = "HEX_GRID_COMPONENT_LOADED"
 M.TERRAFORM_COMPONENT_LOADED = "TERRAFORM_COMPONENT_LOADED"
 
-M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it 
-
+M.REGISTRY = "registry" -- custom event used for regestry in any component to receive events from it
 
 return M
+

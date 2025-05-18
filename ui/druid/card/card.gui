@@ -221,6 +221,7 @@ nodes {
   text: "Description"
   font: "default"
   id: "card_description"
+  line_break: true
   parent: "card_content"
   inherit_alpha: true
 }

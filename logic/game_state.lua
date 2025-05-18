@@ -57,7 +57,7 @@ function M.new()
 		map = HEX_GRID_STATE.new(),
 	}, { __index = M })
 
-	default_game_state:draw_card(5)
+	default_game_state:draw_card(default_game_state.deck:size())
 
 	return default_game_state
 end
@@ -76,15 +76,55 @@ function M:spend_action(played_action)
 end
 
 function M:play_card(card, resource_distribution)
-	--TODO validate requirements
+	local is_requirements_meet = true
+	for _, req in ipairs(card.requirements) do
+		local req_type = string.lower(req._type)
+		local amount = 0
+		if req_type == "tag" then
+			amount = self:get_player():get_tag_amount(req.tag_type)
+		elseif req_type == "planet_param" then
+			amount = self:get_planet():get_amount(req.planet_param_type)
+		elseif req_type == "income" then
+			amount = self:get_player():get_resources().income[req.resource_type]
+		end
+		if
+			not (
+				(req.more_or_equal and req.more_or_equal <= amount)
+				or (req.less_or_equal and req.less_or_equal >= amount)
+			)
+		then
+			is_requirements_meet = false
+			-- pprint("requirements is not meet", req)
+		end
+	end
+
+	if not is_requirements_meet then
+		print("TODO add: skipping card play")
+	end
+
 	--TODO validate resources
 	self:get_player():play_card(card, resource_distribution)
 
-	--TODO apply card effects
 	for _, effect in ipairs(card.effects) do
-		if effect._type == "INCOME" then
-			print("INCOME")
-			increase_income(effect.resource_type, effect.amount)
+		local effect_type = string.lower(effect._type)
+		if effect_type == "income" then
+			self:get_player():update_resources({ income_change = { [effect.resource_type] = effect.amount } })
+		elseif effect_type == "resource" then
+			self:get_player():update_resources({ current_change = { [effect.resource_type] = effect.amount } })
+		elseif effect_type == "planet_param" then
+			self:get_planet():increase(effect.planet_param, effect.amount)
+		elseif effect_type == "place_the_tile" then
+			--TODO support amount of tiles by creating queue on ui?
+			EVENT_REGISTRY.notify(
+				C.GIVE_PLAYER_TO_PLACE_TILE,
+				{ tile_type = string.lower(effect.tile_type), player_color = self:get_player().color }
+			)
+		elseif effect_type == "draw_cards" then
+			self:draw_card(effect.amount)
+		elseif effect_type == "gain_terraform_rating" then
+			self:get_player():increase_terraform_rating(effect.amount)
+		elseif effect_type == "on_event" then
+			--TODO implement
 		end
 	end
 end

@@ -64,6 +64,7 @@ function on_message(self, message_id, message, sender)
 		
 	elseif message_id == hash(C.PLAYER_CHOSE_CARD_TO_PLAY) then
 		GameState:play_card(message.card, message.resource_distribution)
+    is_changed = true
 
 	elseif message_id == hash(C.TAKE_MILESTONE_OR_AWARD) then
 		GameState:take_milestone_or_award(message.name)
@@ -87,7 +88,4 @@ function on_message(self, message_id, message, sender)
 	end
 end
 
-function on_input(self, action_id, action)
-
-end
-
+function on_input(self, action_id, action) end

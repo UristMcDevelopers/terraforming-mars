@@ -53,5 +53,8 @@ function M:shuffle()
 	self.discard = {}
 end
 
-return M
+function M:size()
+	return #self.cards
+end
 
+return M

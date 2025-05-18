@@ -1,0 +1,22 @@
+{
+  "name": "Energy Saving",
+  "description": "Increase your energy production 1 step for each city tile in play.",
+  "cost": 15,
+  "card_type": "GREEN",
+  "tags": [
+    "Electricity"
+  ],
+  "requirements": [],
+  "effects": [
+    {
+      "_type": "income",
+      "resource_type": "electricity",
+      "amount_calculated": {
+        "per": "city_tile",
+        "per_amount": 1
+      }
+    }
+  ],
+  "tokens_on_card": {},
+  "score": {}
+}
