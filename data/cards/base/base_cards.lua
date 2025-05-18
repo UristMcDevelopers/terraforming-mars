@@ -5,7 +5,30 @@ return {
 	"algae",
 	"archaebacteria",
 	"artificial_lake", --TODO add validation for Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN
-
+	"artificial_photosynthesis", --TODO implement choice for effects
+	"asteroid_mining",
 	"asteroid_mining_consortium",
+	"beam_from_a_thorium_asteroid",
+	"biomass_combustors",
+	"black_polar_dust",
+	"breathing_filters",
+	"building_industries",
+	"bushes",
+	"callisto_penal_mines",
+	"capital",
+	"carbonate_processing",
+	"cartel",
+	"cloud_seeding",
+	"colonizer_training_camp",
+	"commercial_district",
+	"corporate_stronghold",
+	"cupola_city",
+	"deep_well_heating",
+	"designed_microorganisms",
+	"domed_crater",
+	"dust_seals",
+	"energy_saving",
+	"energy_tapping",
+	"eos_chasma_national_park",
+	"farming",
 }
-

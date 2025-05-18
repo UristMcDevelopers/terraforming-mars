@@ -31,6 +31,7 @@ function M:get_amount(planet_param_type)
 end
 
 function M:increase(planet_param, times)
+	assert(planet_param)
 	times = times or 1
 	local increase_value = (planet_param == C.PLANET_TEMPERATURE and 2) or 1
 

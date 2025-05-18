@@ -13,6 +13,7 @@ function M.new(text, type, resource_type, amount, target)
 		text = text,
 		type = type,
 		resource_type = resource_type,
+		planet_param_type = nil,
 		amount = amount,
 		target = target,
 	}, { __index = M })
@@ -27,4 +28,3 @@ function M.get_resources(resource_type, amount)
 end
 
 return M
-

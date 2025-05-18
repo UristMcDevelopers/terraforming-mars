@@ -108,13 +108,18 @@ function M:play_card(card, resource_distribution)
 	for _, effect in ipairs(card.effects) do
 		local effect_type = string.lower(effect._type)
 		if effect_type == "income" then
+			--TODO support target field
+			--TODO support amount_calculated
 			self:get_player():update_resources({ income_change = { [effect.resource_type] = effect.amount } })
 		elseif effect_type == "resource" then
+			--TODO support target field
+			--TODO support amount_calculated
 			self:get_player():update_resources({ current_change = { [effect.resource_type] = effect.amount } })
 		elseif effect_type == "planet_param" then
-			self:get_planet():increase(effect.planet_param, effect.amount)
+			self:get_planet():increase(effect.planet_param_type, effect.amount)
 		elseif effect_type == "place_the_tile" then
 			--TODO support amount of tiles by creating queue on ui?
+			--TODO support special tiles
 			EVENT_REGISTRY.notify(
 				C.GIVE_PLAYER_TO_PLACE_TILE,
 				{ tile_type = string.lower(effect.tile_type), player_color = self:get_player().color }
@@ -124,6 +129,13 @@ function M:play_card(card, resource_distribution)
 		elseif effect_type == "gain_terraform_rating" then
 			self:get_player():increase_terraform_rating(effect.amount)
 		elseif effect_type == "on_event" then
+			--TODO implement
+		elseif effect_type == "or" then
+			--TODO give player to choose which effect to play
+			-- 1. save card to game state as temp
+			-- 2. send 'choice' to player
+			-- 3. apply choice
+		elseif effect_type == "resource_on_card" then
 			--TODO implement
 		end
 	end

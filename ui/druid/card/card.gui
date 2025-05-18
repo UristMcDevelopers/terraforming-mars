@@ -53,6 +53,11 @@ nodes {
     x: 150.0
     y: 25.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "card_name"
   font: "default"
